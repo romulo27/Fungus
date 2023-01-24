@@ -35,6 +35,12 @@
 
 /datum/reagent/water/holywater/on_mob_life(mob/living/carbon/M)
 	. = ..()
+
+	// Make holy water nutritious for blessed blood users
+	if(HAS_TRAIT(M,TRAIT_BLESSED_BLOOD))
+		M.adjust_disgust(-2)
+		M.adjust_nutrition(2)
+
 	// Makes holy water disgusting and hungering for bloodfledges
 	// Directly antithetic to the effects of blood
 	if(HAS_TRAIT(M,TRAIT_BLOODFLEDGE))

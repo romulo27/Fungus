@@ -27,3 +27,4 @@
 
 #define TRAIT_NUDIST			"Nudist"
 
+#define TRAIT_BLESSED_BLOOD		"blessed_blood"

@@ -143,3 +143,133 @@
 	desc = "You are able to move about freely in pressurized low-gravity environments be it through the use of wings, magic, or some other physiological nonsense."
 	value = 1
 	mob_trait = TRAIT_FLUTTER
+
+/datum/quirk/blessed_blood
+	name = "Blessed Blood"
+	desc = "You have been fortified against the dark arts, and made pure by something greater yourself. Demonic forces cannot touch you, and holy ones will favor you. You may find even greater strength by further devoting yourself."
+	value = 1
+	mob_trait = TRAIT_BLESSED_BLOOD
+	gain_text = span_notice("A divine light smiles down upon you.")
+	lose_text = span_notice("You have forsaken the great gods...")
+	medical_record_text = "Patient emits a measurable amount of unidentified radiation. Consult a chaplain for advice."
+
+	// Halo overlay effect
+	var/mutable_appearance/quirk_halo
+
+	// Holy glow overlay effect
+	var/mutable_appearance/quirk_glow
+
+	// Emitted light effect
+	var/quirk_light
+
+/datum/quirk/blessed_blood/add()
+	// Define quirk mob
+	var/mob/living/carbon/human/quirk_mob = quirk_holder
+
+	// Give holy trait
+	ADD_TRAIT(quirk_mob, TRAIT_HOLY, "qurk_blessed_blood")
+
+/datum/quirk/blessed_blood/post_add()
+	// Define quirk mob
+	var/mob/living/carbon/human/quirk_mob = quirk_holder
+
+	// Define amount of holy points
+	var/holy_points
+
+	// Checks to add holy points
+
+	// Check for holy mind (Chaplain)
+	if(quirk_mob.mind && quirk_mob.mind.isholy)
+		// Add points
+		holy_points += 1
+
+	// Check for spiritual
+	if(HAS_TRAIT(quirk_mob, TRAIT_SPIRITUAL))
+		// Add points
+		holy_points += 1
+
+	// Checks for redeeming holy points
+	// These effects stack
+
+	// No holy points
+	if(!holy_points)
+		// Alert user in chat, then return
+		to_chat(quirk_holder, span_boldnotice("Your blessed blood feels weak... perhaps there\'s more you could\'ve done?"))
+		return
+
+	// Play holy noise
+	playsound(get_turf(quirk_mob), 'sound/effects/pray.ogg', 50, 0)
+
+	// Define blessing level message
+	var/message_points_level = "weak"
+
+	// Holy points of 1+
+	// Grants a halo
+	if(holy_points >= HOLY_LEVEL_HALO)
+		// Set halo overlay appearance
+		quirk_halo = quirk_halo || mutable_appearance('modular_splurt/icons/obj/clothing/head.dmi', "halo_gold", ABOVE_MOB_LAYER)
+
+		// Set halo offset
+		quirk_halo.pixel_y += 4
+
+		// Add halo to user
+		quirk_mob.add_overlay(quirk_halo)
+
+	// Holy points of 2+
+	// Grants a light emitting glow effect
+	if(holy_points >= HOLY_LEVEL_GLOW)
+		// Set glow overlay appearance
+		quirk_glow = quirk_glow || mutable_appearance('icons/effects/genetics.dmi', "servitude", -MUTATIONS_LAYER)
+
+		// Add glow to user
+		quirk_mob.add_overlay(quirk_glow)
+
+		// Add light effect
+		quirk_light = quirk_mob.mob_light(_color = LIGHT_COLOR_HOLY_MAGIC, _range = 2)
+
+		// Update message level
+		message_points_level = "moderate"
+
+		// Check for flutter quirk
+		// This is an ad-hoc solution for granting wings
+		if(HAS_TRAIT(quirk_mob, TRAIT_FLUTTER))
+			// Add one holy point
+			holy_points += 1
+
+	// Holy points of 3+
+	// Grants flight and angel wings
+	if(holy_points >= HOLY_LEVEL_WINGS)
+		// Define user's current wing status (taken from flightpotion)
+		var/has_wings = (quirk_mob.dna.species.mutant_bodyparts["deco_wings"] && quirk_mob.dna.features["deco_wings"] != "None" || quirk_mob.dna.species.mutant_bodyparts["insect_wings"] && quirk_mob.dna.features["insect_wings"] != "None")
+
+		// Assign wings if none exist
+		if(!has_wings)
+			quirk_mob.dna.features["deco_wings"] = "Angel"
+
+		// Define user's existing functional wings (taken from flightpotion)
+		var/has_functional_wings = (quirk_mob.dna.species.mutant_bodyparts["wings"] != null)
+
+		// Check if user already has functional wings
+		if(!has_functional_wings)
+			// Give functional wings
+			quirk_mob.dna.species.GiveSpeciesFlight(quirk_mob, FALSE)
+
+		// Update message level
+		message_points_level = "powerful"
+
+	// Alert user of blessed status
+	to_chat(quirk_holder, span_boldnotice("Your divine presence has empowered you with a [message_points_level] blessing!"))
+
+/datum/quirk/blessed_blood/remove()
+	// Define quirk mob
+	var/mob/living/carbon/human/quirk_mob = quirk_holder
+
+	// Remove holy trait
+	REMOVE_TRAIT(quirk_mob, TRAIT_HOLY, "qurk_blessed_blood")
+
+	// Remove overlays
+	quirk_holder.cut_overlay(quirk_halo)
+	quirk_holder.cut_overlay(quirk_glow)
+
+	// Remove light
+	qdel(quirk_light)
