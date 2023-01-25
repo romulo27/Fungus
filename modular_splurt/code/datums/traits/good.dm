@@ -146,7 +146,7 @@
 
 /datum/quirk/blessed_blood
 	name = "Blessed Blood"
-	desc = "You have been fortified against the dark arts, and made pure by something greater yourself. Demonic forces cannot touch you, and holy ones will favor you. You may find even greater strength by further devoting yourself."
+	desc = "You have been fortified against the dark arts, and made pure by something greater yourself. Demonic forces cannot touch you, and holy ones will favor you. A divine halo will hover over you at all times to show your purity. You could gain even more than that, if you have the right quirks."
 	value = 1
 	mob_trait = TRAIT_BLESSED_BLOOD
 	gain_text = span_notice("A divine light smiles down upon you.")
@@ -188,22 +188,22 @@
 		// Add points
 		holy_points += 1
 
+	// Check for pacifist and forced pacifism
+	if(HAS_TRAIT(quirk_mob, TRAIT_PACIFISM) &!jobban_isbanned(quirk_mob, "pacifist"))
+		// Add points
+		holy_points += 1
+
 	// Checks for redeeming holy points
 	// These effects stack
-
-	// No holy points
-	if(!holy_points)
-		// Alert user in chat, then return
-		to_chat(quirk_holder, span_boldnotice("Your blessed blood feels weak... perhaps there\'s more you could\'ve done?"))
-		return
 
 	// Play holy noise
 	playsound(get_turf(quirk_mob), 'sound/effects/pray.ogg', 50, 0)
 
-	// Define blessing level message
-	var/message_points_level = "weak"
+	// Define blessing level messages
+	var/message_points_level = "pathetic"
+	var/message_points_ending = "Your lack of faith deserves no better."
 
-	// Holy points of 1+
+	// Holy points of 0+
 	// Grants a halo
 	if(holy_points >= HOLY_LEVEL_HALO)
 		// Set halo overlay appearance
@@ -214,6 +214,23 @@
 
 		// Add halo to user
 		quirk_mob.add_overlay(quirk_halo)
+
+	// Holy points of 1+
+	// Grants cosmetic wings
+	if(holy_points >= HOLY_LEVEL_WINGS)
+		// Define user's current wing status (taken from flightpotion)
+		var/has_wings = (quirk_mob.dna.species.mutant_bodyparts["deco_wings"] && quirk_mob.dna.features["deco_wings"] != "None" || quirk_mob.dna.species.mutant_bodyparts["insect_wings"] && quirk_mob.dna.features["insect_wings"] != "None")
+
+		// Assign wings if none exist
+		if(!has_wings)
+			quirk_mob.dna.features["deco_wings"] = "Feathery"
+
+		// Update sprite
+		quirk_mob.update_body()
+
+		// Update message level
+		message_points_level = "weak"
+		message_points_ending = "Your faith lacks true devotion."
 
 	// Holy points of 2+
 	// Grants a light emitting glow effect
@@ -229,23 +246,11 @@
 
 		// Update message level
 		message_points_level = "moderate"
-
-		// Check for flutter quirk
-		// This is an ad-hoc solution for granting wings
-		if(HAS_TRAIT(quirk_mob, TRAIT_FLUTTER))
-			// Add one holy point
-			holy_points += 1
+		message_points_ending = "You've proven yourself worthy, but could still do more."
 
 	// Holy points of 3+
-	// Grants flight and angel wings
-	if(holy_points >= HOLY_LEVEL_WINGS)
-		// Define user's current wing status (taken from flightpotion)
-		var/has_wings = (quirk_mob.dna.species.mutant_bodyparts["deco_wings"] && quirk_mob.dna.features["deco_wings"] != "None" || quirk_mob.dna.species.mutant_bodyparts["insect_wings"] && quirk_mob.dna.features["insect_wings"] != "None")
-
-		// Assign wings if none exist
-		if(!has_wings)
-			quirk_mob.dna.features["deco_wings"] = "Angel"
-
+	// Grants flight
+	if(holy_points >= HOLY_LEVEL_FLIGHT)
 		// Define user's existing functional wings (taken from flightpotion)
 		var/has_functional_wings = (quirk_mob.dna.species.mutant_bodyparts["wings"] != null)
 
@@ -256,9 +261,10 @@
 
 		// Update message level
 		message_points_level = "powerful"
+		message_points_ending = "Your faith is absolute!"
 
-	// Alert user of blessed status
-	to_chat(quirk_holder, span_boldnotice("Your divine presence has empowered you with a [message_points_level] blessing!"))
+	// Alert user of blessed status and missed synergies
+	to_chat(quirk_holder, span_boldnotice("Your divine presence has empowered you with a [message_points_level] blessing. [message_points_ending]"))
 
 /datum/quirk/blessed_blood/remove()
 	// Define quirk mob
