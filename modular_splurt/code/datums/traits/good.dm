@@ -144,6 +144,13 @@
 	value = 1
 	mob_trait = TRAIT_FLUTTER
 
+/datum/quirk/cloth_eater
+	name = "Clothes Eater"
+	desc = "You can eat most apparel to gain a boost in mood, and to gain some nutrients. (Insects already have this.)"
+	value = 1
+	var/mood_category ="cloth_eaten"
+	mob_trait = TRAIT_CLOTH_EATER
+
 /datum/quirk/blessed_blood
 	name = "Blessed Blood"
 	desc = "You have been fortified against the dark arts, and made pure by something greater yourself. Demonic forces cannot touch you, and holy ones will favor you. A divine halo will hover over you at all times to show your purity. You could gain even more than that, if you have the right quirks."
