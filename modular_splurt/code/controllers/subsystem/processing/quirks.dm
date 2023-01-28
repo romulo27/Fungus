@@ -4,13 +4,27 @@
 	
 	// Prevent Blessed Blood with traditionally 'unholy' quirks
 	LAZYADD(quirk_blacklist, list(
+		// The paleblood curse
 		list("Blessed Blood","Cursed Blood"),
+
+		// To be removed in a future commit
 		list("Blessed Blood","Incubus"),
 		list("Blessed Blood","Succubus"),
+
+		// Vampires are traditionally harmed by anything holy
 		list("Blessed Blood","Bloodsucker Fledgling"),
+
+		// Werewolves are most often depicted as evil creatures harmed by anything holy
 		list("Blessed Blood","Werewolf"),
-		list("Blessed Blood","Gargoyle"),
+
+		// Gargoyles can be interpreted as holy protectors
+		//list("Blessed Blood","Gargoyle"),
+
+		// Seeking self-harm can be interpreted as immoral
+		// Wrath is one of the seven deadly sins
 		list("Blessed Blood","Masochism"),
+
+		// Causes rendering bugs
+		// Comment this out if the bug is fixed
 		list("Blessed Blood","Dullahan"),
-		//list("Blessed Blood","Rad Fiend"), // Doesn't exist yet
 		))

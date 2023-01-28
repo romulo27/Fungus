@@ -26,4 +26,6 @@
 #define TRAIT_FLUTTER			"flutter"
 #define TRAIT_NUDIST			"Nudist"
 #define TRAIT_CLOTH_EATER		"cloth_eater"
+
 #define TRAIT_BLESSED_BLOOD		"blessed_blood"
+#define TRAIT_BLESSED_GLOWING	"blessed_blood_glow"

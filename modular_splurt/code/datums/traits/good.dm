@@ -255,6 +255,9 @@
 		message_points_level = "moderate"
 		message_points_ending = "You've proven yourself worthy, but could still do more."
 
+		// Add trait for glow
+		ADD_TRAIT(quirk_mob, TRAIT_BLESSED_GLOWING, "qurk_blessed_blood")
+
 	// Holy points of 3+
 	// Grants flight
 	if(holy_points >= HOLY_LEVEL_FLIGHT)
@@ -277,12 +280,14 @@
 	// Define quirk mob
 	var/mob/living/carbon/human/quirk_mob = quirk_holder
 
-	// Remove holy trait
+	// Remove holy traits
 	REMOVE_TRAIT(quirk_mob, TRAIT_HOLY, "qurk_blessed_blood")
+	REMOVE_TRAIT(quirk_mob, TRAIT_BLESSED_GLOWING, "qurk_blessed_blood")
 
 	// Remove overlays
 	quirk_holder.cut_overlay(quirk_halo)
 	quirk_holder.cut_overlay(quirk_glow)
 
 	// Remove light
-	qdel(quirk_light)
+	if(quirk_light)
+		qdel(quirk_light)
