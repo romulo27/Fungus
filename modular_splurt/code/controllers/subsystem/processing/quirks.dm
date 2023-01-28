@@ -7,9 +7,9 @@
 		// The paleblood curse
 		list("Blessed Blood","Cursed Blood"),
 
-		// To be removed in a future commit
-		list("Blessed Blood","Incubus"),
-		list("Blessed Blood","Succubus"),
+		// What do you want, milk drinker?
+		//list("Blessed Blood","Incubus"),
+		//list("Blessed Blood","Succubus"),
 
 		// Vampires are traditionally harmed by anything holy
 		list("Blessed Blood","Bloodsucker Fledgling"),
