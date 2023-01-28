@@ -27,4 +27,7 @@
 		// Causes rendering bugs
 		// Comment this out if the bug is fixed
 		list("Blessed Blood","Dullahan"),
+
+		// Gluttony is one of the seven deadly sins
+		list("Blessed Blood","Overweight"),
 		))
