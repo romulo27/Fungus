@@ -18,7 +18,7 @@
 		if(HAS_TRAIT(user, TRAIT_BLESSED_GLOWING))
 			// Define ID card
 			var/obj/item/card/id/sinner_id = user.get_idcard()
-			
+
 			// Check if ID exists
 			if(!sinner_id)
 				return ..()
@@ -29,7 +29,7 @@
 			// Check if account exists
 			if(!sinner_account)
 				return ..()
-		
+
 			// Define payments account
 			var/datum/bank_account/paycheck_account = SSeconomy.get_dep_account(ACCOUNT_CAR)
 
@@ -44,7 +44,7 @@
 
 		// Remove blessed blood
 		user.remove_quirk(/datum/quirk/blessed_blood)
-	
+
 	// Return normally
 	. = ..()
 
@@ -79,7 +79,7 @@
 
 				// Remove blessed blood
 				holy_mover.remove_quirk(/datum/quirk/blessed_blood)
-	
+
 	// Return normally
 	. = ..()
 
@@ -98,7 +98,7 @@
 
 			// Remove blessed blood
 			sinner.remove_quirk(/datum/quirk/blessed_blood)
-	
+
 	// Return normally
 	. = ..()
 
@@ -115,7 +115,7 @@
 
 		// Warn user
 		// Based on Proverbs 14:30
-		to_chat(user, span_userdanger("As you wield the knife, you feel [diety_name] forsake you. A tranquil heart gives life to the flesh, but envy makes the bones rot.")) 
+		to_chat(user, span_userdanger("As you wield the knife, you feel [diety_name] forsake you. A tranquil heart gives life to the flesh, but envy makes the bones rot."))
 
 		// Check for high holiness level
 		// This penalty 'makes the bones rot'
@@ -125,6 +125,6 @@
 
 		// Remove blessed blood
 		user.remove_quirk(/datum/quirk/blessed_blood)
-	
+
 	// Return normally
 	. = ..()
