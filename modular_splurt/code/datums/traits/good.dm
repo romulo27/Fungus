@@ -162,7 +162,7 @@
 
 	// Halo overlay effect
 	var/mutable_appearance/quirk_halo
-	var/mutable_appearance/quirk_halo_emi
+	//var/mutable_appearance/quirk_halo_emi
 
 	// Holy glow overlay effect
 	var/mutable_appearance/quirk_glow
@@ -216,15 +216,15 @@
 	if(holy_points >= HOLY_LEVEL_HALO)
 		// Set halo overlay appearance
 		quirk_halo = quirk_halo || mutable_appearance('modular_splurt/icons/obj/clothing/head.dmi', "halo_gold", ABOVE_MOB_LAYER)
-		quirk_halo_emi = quirk_halo_emi || emissive_appearance('modular_splurt/icons/obj/clothing/head.dmi', "halo_gold_emi", ABOVE_MOB_LAYER)
+		//quirk_halo_emi = quirk_halo_emi || emissive_appearance('modular_splurt/icons/obj/clothing/head.dmi', "halo_gold_emi", ABOVE_MOB_LAYER)
 
 		// Set halo offset
 		quirk_halo.pixel_y += 4
-		quirk_halo_emi.pixel_y += 4
+		//quirk_halo_emi.pixel_y += 4
 
 		// Add halo to user
 		quirk_mob.add_overlay(quirk_halo)
-		quirk_mob.add_overlay(quirk_halo_emi)
+		//quirk_mob.add_overlay(quirk_halo_emi)
 
 	// Holy points of 1+
 	// Grants cosmetic wings
@@ -290,7 +290,7 @@
 
 	// Remove overlays
 	quirk_holder.cut_overlay(quirk_halo)
-	quirk_holder.cut_overlay(quirk_halo_emi)
+	//quirk_holder.cut_overlay(quirk_halo_emi)
 	quirk_holder.cut_overlay(quirk_glow)
 
 	// Remove light
