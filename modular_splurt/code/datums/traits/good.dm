@@ -189,17 +189,23 @@
 	// Check for holy mind (Chaplain)
 	if(quirk_mob.mind && quirk_mob.mind.isholy)
 		// Add points
-		holy_points += 1
+		holy_points++
 
 	// Check for spiritual
 	if(HAS_TRAIT(quirk_mob, TRAIT_SPIRITUAL))
 		// Add points
-		holy_points += 1
+		holy_points++
 
 	// Check for pacifist and forced pacifism
 	if(HAS_TRAIT(quirk_mob, TRAIT_PACIFISM) &!jobban_isbanned(quirk_mob, "pacifist"))
 		// Add points
-		holy_points += 1
+		holy_points++
+
+	// Check for friendly empath
+	// This is a dual check to prevent getting wings too easily
+	if(HAS_TRAIT(quirk_mob, TRAIT_FRIENDLY) && HAS_TRAIT(quirk_mob, TRAIT_EMPATH))
+		// Add points
+		holy_points++
 
 	// Checks for redeeming holy points
 	// These effects stack
