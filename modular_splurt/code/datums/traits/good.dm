@@ -184,6 +184,13 @@
 	// Define amount of holy points
 	var/holy_points
 
+	// Define deity name
+	var/deity_name = DEFAULT_DEITY
+
+	// Check for custom name
+	if(quirk_holder.client && quirk_holder.client.prefs.custom_names["deity"])
+		deity_name = quirk_holder.client.prefs.custom_names["deity"]
+
 	// Checks to add holy points
 
 	// Check for holy mind (Chaplain)
@@ -215,7 +222,7 @@
 
 	// Define blessing level messages
 	var/message_points_level = "pathetic"
-	var/message_points_ending = "Your lack of faith deserves no better."
+	var/message_points_ending = "Your lack of faith deserves no better. [deity_name] would be ashamed of you."
 
 	// Holy points of 0+
 	// Grants a halo
@@ -247,7 +254,7 @@
 
 		// Update message level
 		message_points_level = "weak"
-		message_points_ending = "Your faith lacks true devotion."
+		message_points_ending = "Your faith lacks true devotion. [deity_name] deserves better."
 
 	// Holy points of 2+
 	// Grants a light emitting glow effect
@@ -263,7 +270,7 @@
 
 		// Update message level
 		message_points_level = "moderate"
-		message_points_ending = "You've proven yourself worthy, but could still do more."
+		message_points_ending = "You've proven yourself worthy to [deity_name], but could still do more."
 
 		// Add trait for glow
 		ADD_TRAIT(quirk_mob, TRAIT_BLESSED_GLOWING, "qurk_blessed_blood")
@@ -280,11 +287,11 @@
 			quirk_mob.dna.species.GiveSpeciesFlight(quirk_mob, FALSE)
 
 		// Update message level
-		message_points_level = "powerful"
-		message_points_ending = "Your faith is absolute!"
+		message_points_level = "divine"
+		message_points_ending = "Your faith is absolute! [deity_name] is truly proud of you!"
 
 	// Alert user of blessed status and missed synergies
-	to_chat(quirk_holder, span_boldnotice("Your divine presence has empowered you with a [message_points_level] blessing. [message_points_ending]"))
+	to_chat(quirk_holder, span_boldnotice("[deity_name] has empowered you with a [message_points_level] blessing. [message_points_ending]"))
 
 /datum/quirk/blessed_blood/remove()
 	// Define quirk mob
