@@ -10,8 +10,8 @@
 			diety_name = user.client.prefs.custom_names["deity"]
 
 		// Warn user
-		// Based on Matthew 6:19-20
-		to_chat(user, span_userdanger("As your hand touches the lever, you feel [diety_name] forsake you. Your treasures will live in the flesh, where moth and rust destroy and where thieves break in and steal."))
+		// Based on Matthew 6:19-20 and Matthew 6:24
+		to_chat(user, span_userdanger("As your hand touches the lever, you feel [diety_name] forsake you. Your treasures will live in the flesh, where moth and rust destroy and where thieves break in and steal. No one can serve two masters, for either he will hate the one and love the other, or he will be devoted to the one and despise the other. You cannot serve [diety_name] and money."))
 
 		// Check for high holiness level
 		// This penalty transfers all money to cargo, then deletes the account

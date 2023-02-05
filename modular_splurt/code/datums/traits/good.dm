@@ -221,8 +221,8 @@
 	playsound(get_turf(quirk_mob), 'sound/effects/pray.ogg', 50, 0)
 
 	// Define blessing level messages
-	var/message_points_level = "pathetic"
-	var/message_points_ending = "Your lack of faith deserves no better. [deity_name] would be ashamed of you."
+	// Default message based on Isaiah 29:13 and Hebrews 11:6
+	var/message_points_level = "You honor honor [deity_name] with your words, but your heart remains distant. Your faith is nothing but corporate-made rules learned by rote. Without faith, it is impossible to please [deity_name]."
 
 	// Holy points of 0+
 	// Grants a halo
@@ -253,8 +253,8 @@
 		quirk_mob.update_body()
 
 		// Update message level
-		message_points_level = "weak"
-		message_points_ending = "Your faith lacks true devotion. [deity_name] deserves better."
+		// Based on James 1:22
+		message_points_level = "Do not merely listen to the word, and so deceive yourself. Do as [deity_name] commands."
 
 	// Holy points of 2+
 	// Grants a light emitting glow effect
@@ -269,8 +269,8 @@
 		quirk_light = quirk_mob.mob_light(_color = LIGHT_COLOR_HOLY_MAGIC, _range = 2)
 
 		// Update message level
-		message_points_level = "moderate"
-		message_points_ending = "You've proven yourself worthy to [deity_name], but could still do more."
+		// Based on Matthew 6:33 and James 5:16
+		message_points_level = "You sought first the kingdom of [deity_name] and its righteousness, and its blessings have been added to you. The prayer of a righteous person has great power as it is working."
 
 		// Add trait for glow
 		ADD_TRAIT(quirk_mob, TRAIT_BLESSED_GLOWING, "qurk_blessed_blood")
@@ -287,11 +287,11 @@
 			quirk_mob.dna.species.GiveSpeciesFlight(quirk_mob, FALSE)
 
 		// Update message level
-		message_points_level = "divine"
-		message_points_ending = "Your faith is absolute! [deity_name] is truly proud of you!"
+		// Based on John 5:24
+		message_points_level = "Truly, truly, you have heard the word of [deity_name] and believe They who sent you eternal life. You will not come into judgment, but pass from death to life!"
 
 	// Alert user of blessed status and missed synergies
-	to_chat(quirk_holder, span_boldnotice("[deity_name] has empowered you with a [message_points_level] blessing. [message_points_ending]"))
+	to_chat(quirk_holder, span_boldnotice(message_points_level))
 
 /datum/quirk/blessed_blood/remove()
 	// Define quirk mob
@@ -309,3 +309,14 @@
 	// Remove light
 	if(quirk_light)
 		qdel(quirk_light)
+
+	// Define deity name
+	var/deity_name = DEFAULT_DEITY
+
+	// Check for custom name
+	if(quirk_holder.client && quirk_holder.client.prefs.custom_names["deity"])
+		deity_name = quirk_holder.client.prefs.custom_names["deity"]
+
+	// Display removal message
+	// Based on Titus 1:16
+	to_chat(quirk_holder, span_boldwarning("You claimed to know [deity_name], but by your actions denied Them. You are detestable, disobedient, and unfit for doing anything good."))
