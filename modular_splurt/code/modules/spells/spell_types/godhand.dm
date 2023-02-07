@@ -102,7 +102,7 @@
 	// Check if target is alive
 	if(spell_target.stat != DEAD)
 		// Fully heal
-		spell_target.fully_heal()
+		spell_target.fully_heal(TRUE)
 
 		// Log interaction
 		spell_target.log_message("fully healed by [user]'s divine touch.", LOG_ADMIN)
@@ -122,7 +122,7 @@
 	// Target is not alive
 	else
 		// Revive with full heal
-		spell_target.revive(TRUE, FALSE)
+		spell_target.revive(TRUE, TRUE)
 
 		// Play gasp emote
 		spell_target.emote("gasp")
