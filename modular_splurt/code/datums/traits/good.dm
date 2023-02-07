@@ -287,8 +287,18 @@
 			quirk_mob.dna.species.GiveSpeciesFlight(quirk_mob, FALSE)
 
 		// Update message level
+		// Based on Isaiah 55:7
+		message_points_level = "Let the wicked crew forsake their way, and the unrighteous spessmen their thoughts; let them return to [deity_name], that compassion may be given, and [deity_name] will abundantly pardon."
+
+	// Holy points of 4+
+	// Grants a touch revival ability
+	if(holy_points >= HOLY_LEVEL_TOUCH)
+		// Add blessed touch spell
+		quirk_mob.AddSpell(new /obj/effect/proc_holder/spell/targeted/touch/blessed_hand(src))
+
+		// Update message level
 		// Based on John 5:24
-		message_points_level = "Truly, truly, you have heard the word of [deity_name] and believe They who sent you eternal life. You will not come into judgment, but pass from death to life!"
+		message_points_level = "Truly, truly, you have heard the word of [deity_name] and believe They who sent you eternal life. Your kin will not come into judgment, but pass from death to life!"
 
 	// Alert user of blessed status and missed synergies
 	to_chat(quirk_holder, span_boldnotice(message_points_level))
@@ -310,6 +320,9 @@
 	if(quirk_light)
 		qdel(quirk_light)
 
+	// Remove blessed touch spell
+	quirk_mob.RemoveSpell(/obj/effect/proc_holder/spell/targeted/touch/blessed_hand)
+
 	// Define deity name
 	var/deity_name = DEFAULT_DEITY
 
@@ -319,4 +332,4 @@
 
 	// Display removal message
 	// Based on Titus 1:16
-	to_chat(quirk_holder, span_boldwarning("You claimed to know [deity_name], but by your actions denied Them. You are detestable, disobedient, and unfit for doing anything good."))
+	to_chat(quirk_holder, span_boldwarning("You claimed to know [deity_name], but by your actions you denied Them. You are detestable, disobedient, and unfit for doing anything good."))

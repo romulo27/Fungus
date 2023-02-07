@@ -4772,6 +4772,8 @@
 #include "modular_splurt\code\modules\smithing\finished_items.dm"
 #include "modular_splurt\code\modules\smithing\smithed_items.dm"
 #include "modular_splurt\code\modules\spell\spell_types\conjure.dm"
+#include "modular_splurt\code\modules\spells\spell_types\godhand.dm"
+#include "modular_splurt\code\modules\spells\spell_types\touch_attacks.dm"
 #include "modular_splurt\code\modules\surgery\bodyparts\_bodyparts.dm"
 #include "modular_splurt\code\modules\surgery\organs\augments_arms.dm"
 #include "modular_splurt\code\modules\surgery\organs\augments_eyes.dm"
