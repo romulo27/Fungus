@@ -290,6 +290,16 @@
 		// Add trait for glow
 		ADD_TRAIT(quirk_mob, TRAIT_BLESSED_GLOWING, "qurk_blessed_blood")
 
+	// Higher point values temporarily disabled
+	// Use the Divine Prayer Altar instead
+
+	if(holy_points >= HOLY_LEVEL_FLIGHT)
+		message_points_level = "Let the wicked crew forsake their way, and the unrighteous spessmen their thoughts; let them return to [deity_name], that compassion may be given, and [deity_name] will abundantly pardon."
+
+	if(holy_points >= HOLY_LEVEL_TOUCH)
+		message_points_level = "Truly, truly, you have heard the word of [deity_name] and believe They who sent you eternal life. Your kin will not come into judgment, but pass from death to life!"
+
+	/*
 	// Holy points of 3+
 	// Grants flight
 	if(holy_points >= HOLY_LEVEL_FLIGHT)
@@ -314,6 +324,7 @@
 		// Update message level
 		// Based on John 5:24
 		message_points_level = "Truly, truly, you have heard the word of [deity_name] and believe They who sent you eternal life. Your kin will not come into judgment, but pass from death to life!"
+	*/
 
 	// Alert user of blessed status and missed synergies
 	to_chat(quirk_holder, span_boldnotice(message_points_level))
