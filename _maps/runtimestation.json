@@ -4,5 +4,6 @@
     "map_file": "runtimestation.dmm",
 	"shuttles": {
 	    "cargo": "cargo_delta"
-    }
+    },
+	"minetype":"none"
 }
