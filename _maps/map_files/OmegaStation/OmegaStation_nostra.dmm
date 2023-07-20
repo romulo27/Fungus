@@ -1891,9 +1891,9 @@
 /turf/open/floor/plating,
 /area/maintenance/disposal)
 "adx" = (
-/obj/item/clothing/suit/space/orange,
-/obj/item/clothing/head/helmet/space/orange,
-/obj/structure/loot_pile/maint,
+/obj/item/tank/internals/emergency_oxygen/double,
+/obj/item/clothing/suit/space/nasavoid/old,
+/obj/item/clothing/head/helmet/space/nasavoid/old,
 /turf/open/floor/plating,
 /area/asteroid/nearstation)
 "ady" = (
@@ -2341,7 +2341,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plasteel,
+/turf/closed/mineral/random/labormineral,
 /area/asteroid/nearstation)
 "aem" = (
 /obj/structure/chair/stool,
@@ -4328,6 +4328,8 @@
 /area/maintenance/fore)
 "ahH" = (
 /obj/item/pickaxe/emergency,
+/obj/effect/landmark/start/assistant,
+/obj/structure/glowshroom/glowcap,
 /turf/open/floor/plating{
 	icon_state = "panelscorched"
 	},
@@ -15229,6 +15231,15 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 8
 	},
+/obj/item/kirbyplants/photosynthetic,
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
 /turf/open/floor/fakespace,
 /area/service/bar/atrium)
 "azk" = (
@@ -22420,7 +22431,6 @@
 /turf/open/floor/plasteel/white,
 /area/asteroid/nearstation)
 "aLb" = (
-/obj/structure/barricade/wooden,
 /obj/effect/decal/cleanable/blood/gibs/xeno,
 /turf/open/floor/plating,
 /area/asteroid/nearstation)
@@ -22966,9 +22976,6 @@
 /turf/open/floor/plasteel/dark,
 /area/engineering/main)
 "aMe" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
-	dir = 9
-	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg3"
 	},
@@ -23052,9 +23059,6 @@
 /turf/open/floor/plasteel/dark,
 /area/medical/paramedic)
 "aMq" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 4
-	},
 /obj/item/shard,
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
@@ -36956,10 +36960,9 @@
 /turf/open/floor/plating,
 /area/asteroid/nearstation)
 "bly" = (
-/obj/structure/barricade/wooden,
 /obj/effect/decal/cleanable/glass,
 /obj/item/shard,
-/turf/closed/mineral/random/labormineral,
+/turf/open/floor/plating/asteroid/airless,
 /area/asteroid/nearstation)
 "blz" = (
 /obj/machinery/computer/slot_machine,
@@ -37285,7 +37288,7 @@
 /obj/item/xenos_claw,
 /obj/effect/decal/cleanable/blood/gibs/xeno,
 /obj/item/shard,
-/turf/closed/mineral/random/labormineral,
+/turf/open/floor/plating/asteroid/airless,
 /area/asteroid/nearstation)
 "bmg" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -37315,9 +37318,21 @@
 /turf/open/floor/plating,
 /area/maintenance/port)
 "bmj" = (
-/obj/structure/barricade/wooden,
-/turf/open/floor/plating/asteroid/airless,
-/area/asteroid/nearstation)
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/structure/cable/white{
+	icon_state = "1-2"
+	},
+/obj/item/kirbyplants/photosynthetic,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 1
+	},
+/obj/structure/window/reinforced,
+/turf/open/floor/fakespace,
+/area/service/bar/atrium)
 "bmk" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -46436,6 +46451,15 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/engineering/atmos)
+"oul" = (
+/obj/structure/fluff/drake_statue,
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 1
+	},
+/obj/structure/window/reinforced,
+/turf/open/floor/fakespace,
+/area/service/bar/atrium)
 "ouz" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 4
@@ -46977,8 +47001,7 @@
 /area/commons/fitness/pool)
 "pHH" = (
 /obj/machinery/atmospherics/components/binary/valve{
-	dir = 4;
-	name = "port to mix"
+	dir = 4
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -47569,6 +47592,10 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/explab)
+"rnu" = (
+/obj/machinery/atmospherics/components/binary/valve,
+/turf/open/floor/plating/asteroid/airless,
+/area/asteroid/nearstation)
 "rqE" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 8
@@ -50840,6 +50867,12 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /turf/closed/wall/r_wall,
 /area/maintenance/disposal/incinerator)
+"uvu" = (
+/obj/machinery/atmospherics/components/binary/valve{
+	dir = 4
+	},
+/turf/open/floor/plating/asteroid/airless,
+/area/asteroid/nearstation)
 "uxh" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable/white{
@@ -50971,6 +51004,10 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/science/xenobiology)
+"uLo" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/closed/mineral/random/labormineral,
+/area/asteroid/nearstation)
 "uMH" = (
 /obj/structure/lattice,
 /turf/closed/mineral/random/labormineral,
@@ -66150,7 +66187,7 @@ aac
 aad
 aad
 aac
-aZj
+aac
 aac
 iYB
 aad
@@ -66662,7 +66699,7 @@ aaa
 aac
 aac
 boc
-aZj
+aac
 aac
 aac
 bnu
@@ -66918,7 +66955,7 @@ aaa
 aaa
 aac
 aac
-aZj
+aac
 aac
 aac
 aDf
@@ -67174,7 +67211,7 @@ aaa
 aaa
 aaa
 aac
-aZj
+aac
 aad
 aac
 aZj
@@ -67186,7 +67223,7 @@ ahu
 ahu
 aad
 aad
-aac
+bfi
 pgy
 aDO
 aGy
@@ -67443,9 +67480,9 @@ blb
 bkX
 bld
 bly
-bmj
+iYB
 ael
-bqL
+uLo
 bbI
 aIG
 aJR
@@ -67701,7 +67738,7 @@ bmp
 ble
 bmf
 aLb
-bqL
+uLo
 aEb
 bqL
 aIH
@@ -67956,7 +67993,7 @@ ahu
 ahu
 ahu
 blx
-aac
+aad
 aad
 pgy
 aGn
@@ -68213,7 +68250,7 @@ ahu
 aad
 ahu
 aac
-aac
+iYB
 aad
 bfi
 ahu
@@ -70019,8 +70056,8 @@ aac
 ahu
 aJT
 aff
-aac
-aac
+uvu
+rnu
 adY
 aSC
 aUL
@@ -70787,7 +70824,7 @@ aad
 aac
 aac
 aac
-aZj
+aac
 aWR
 aWQ
 aLF
@@ -71300,9 +71337,9 @@ aac
 aac
 aac
 aac
-aZj
 aac
-aZj
+aac
+aac
 aac
 aMi
 aff
@@ -71556,13 +71593,13 @@ aad
 aad
 aac
 aac
-aZj
-aZj
+aac
+aac
 aTS
 aac
 boc
 aac
-aZj
+aac
 aad
 aad
 aad
@@ -71812,7 +71849,7 @@ aad
 aad
 aad
 aTS
-aZj
+aac
 aac
 aac
 aac
@@ -72324,9 +72361,9 @@ aac
 aac
 aac
 aac
-aZj
 aac
-aZj
+aac
+aac
 aac
 aad
 aad
@@ -72579,7 +72616,7 @@ aac
 aac
 aac
 aac
-aZj
+aac
 boc
 aac
 aac
@@ -93923,7 +93960,7 @@ azg
 azg
 aBL
 ayL
-azg
+bmj
 azg
 aAk
 aBi
@@ -94180,7 +94217,7 @@ axX
 axX
 axX
 bmV
-axX
+oul
 azM
 aAl
 axX
