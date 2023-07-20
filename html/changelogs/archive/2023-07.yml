@@ -13,3 +13,41 @@
       brig medbay. Should be a functional map now.
   Zattarra:
   - tweak: Allows uparmoured items to hold items like their vest counterparts.
+2023-07-12:
+  SandPoot:
+  - tweak: How to grab small people and certain simple mobs is now explained on the
+      screen hints, if you have them verbose that is.
+  - code_imp: Applied COMPARE_SIZES macro to the micro code.
+2023-07-14:
+  BongaTheProto:
+  - config: rbmk meltdowns are now toggleable
+2023-07-15:
+  BongaTheProto:
+  - bugfix: Fixes mannitol sending chastity messages unnecesarily
+  KeplerWasTaken:
+  - rscadd: A new way to say hello to someone
+  - rscadd: A new way to say sorry to someone
+  - rscadd: A new way to ask for help from someone
+  - rscadd: A new way to thank someone
+  - rscadd: A new way to compliment someone, maybe sarcastically
+  PhazeJump:
+  - bugfix: fixed the techpriest robes, now modular (mostly, as much as I could make
+      it modular)
+2023-07-17:
+  KeplerWasTaken:
+  - rscadd: Breasted Funclaw
+  - rscadd: Mommy Funclaw
+  - tweak: Funclaw lewd noises are now muted by disallowed lewd sounds
+  LeChatGuid2:
+  - tweak: Modified flavor_text.dm to make OOC notes always visible
+2023-07-18:
+  AshTheDerg:
+  - rscadd: Peacekeeper Choice Beacon
+  - rscadd: Preparation for map additions
+  - rscdel: Tasers from Peacekeepers
+  - tweak: Peacekeeper access
+  - tweak: Peacekeeper supervision
+  - bugfix: CogStation
+  Vhariik:
+  - rscadd: Layenia Station and it's contents (walls, floors and decals)
+  - tweak: Fixed firing pins
