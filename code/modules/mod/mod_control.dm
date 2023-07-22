@@ -59,9 +59,9 @@
 	/// Power usage of the MOD.
 	var/cell_drain = DEFAULT_CHARGE_DRAIN
 	/// Slowdown of the MOD when not active.
-	var/slowdown_inactive = 2
+	var/slowdown_inactive = 0
 	/// Slowdown of the MOD when active.
-	var/slowdown_active = 1
+	var/slowdown_active = 0
 	/// How long this MOD takes each part to seal.
 	var/activation_step_time = MOD_ACTIVATION_STEP_TIME
 	/// MOD cell.
