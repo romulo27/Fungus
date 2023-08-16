@@ -254,12 +254,14 @@
 /obj/machinery/biogenerator,
 /obj/machinery/power/apc{
 	desc = "An apc for biogenerator. Who even knew that this exist in reality.";
-	name = "Biogenerator APC"
+	name = "Biogenerator APC";
+	pixel_y = -25
 	},
 /obj/effect/turf_decal/tile/green,
 /obj/effect/turf_decal/tile/green{
 	dir = 1
 	},
+/obj/structure/cable/white,
 /turf/open/floor/plasteel/dark,
 /area/service/hydroponics)
 "bd" = (
@@ -532,6 +534,9 @@
 /obj/structure/table,
 /obj/effect/turf_decal/tile/green{
 	dir = 1
+	},
+/obj/structure/cable/white{
+	icon_state = "1-2"
 	},
 /turf/open/floor/plasteel/dark,
 /area/service/hydroponics)
@@ -3547,7 +3552,8 @@
 	},
 /obj/item/reagent_containers/glass/bucket,
 /obj/machinery/power/apc/auto_name/east{
-	areastring = "/area/hydroponics"
+	areastring = "/area/hydroponics";
+	pixel_x = 25
 	},
 /obj/structure/cable/white{
 	icon_state = "0-8"
@@ -4436,7 +4442,7 @@
 	name = "holodeck shutters"
 	},
 /turf/open/floor/plating,
-/area/commons/fitness)
+/area/holodeck/rec_center)
 "rG" = (
 /obj/structure/railing,
 /obj/effect/turf_decal/stripes/line{
@@ -8992,6 +8998,9 @@
 /obj/effect/turf_decal/tile/green{
 	dir = 1
 	},
+/obj/structure/cable/white{
+	icon_state = "1-2"
+	},
 /turf/open/floor/plasteel/dark,
 /area/service/hydroponics)
 "Kv" = (
@@ -12000,6 +12009,14 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/processing)
+"XP" = (
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "holodeck";
+	name = "holodeck shutters"
+	},
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/holodeck/rec_center)
 "XQ" = (
 /obj/structure/lattice,
 /obj/item/stack/cable_coil/random,
@@ -12272,6 +12289,12 @@
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
+	},
+/obj/structure/cable/white{
+	icon_state = "2-4"
+	},
+/obj/structure/cable/white{
+	icon_state = "2-8"
 	},
 /turf/open/floor/plasteel/dark,
 /area/service/hydroponics)
@@ -53247,9 +53270,9 @@ rE
 rE
 rE
 rE
-Ls
-Ls
-Ls
+XP
+XP
+XP
 rE
 rE
 JU
@@ -54791,7 +54814,7 @@ IB
 ho
 Nf
 IB
-Ls
+XP
 rE
 rE
 JU
