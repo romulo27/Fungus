@@ -30,9 +30,9 @@
 	/// How much battery power the MOD uses by just being on
 	var/cell_drain = DEFAULT_CHARGE_DRAIN
 	/// Slowdown of the MOD when not active.
-	var/slowdown_inactive = 1.25
+	var/slowdown_inactive = 0
 	/// Slowdown of the MOD when active.
-	var/slowdown_active = 0.75
+	var/slowdown_active = 0
 	/// Theme used by the MOD TGUI.
 	var/ui_theme = "ntos"
 	/// List of inbuilt modules. These are different from the pre-equipped suits, you should mainly use these for unremovable modules with 0 complexity.
@@ -96,8 +96,8 @@
 	resistance_flags = FIRE_PROOF
 	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
 	siemens_coefficient = 0
-	slowdown_inactive = 1.5
-	slowdown_active = 1
+	slowdown_inactive = 0
+	slowdown_active = 0
 	skins = list(
 		"engineering" = list(
 			HELMET_LAYER = NECK_LAYER,
@@ -131,8 +131,8 @@
 	armor = list(MELEE = 10, BULLET = 5, LASER = 10, ENERGY = 15, BOMB = 10, BIO = 100, FIRE = 100, ACID = 75, WOUND = 10, RAD = 0)
 	resistance_flags = FIRE_PROOF
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
-	slowdown_inactive = 1.5
-	slowdown_active = 1
+	slowdown_inactive = 0
+	slowdown_active = 0
 	skins = list(
 		"atmospheric" = list(
 			HELMET_LAYER = NECK_LAYER,
@@ -168,8 +168,8 @@
 	resistance_flags = FIRE_PROOF
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	siemens_coefficient = 0
-	slowdown_inactive = 1
-	slowdown_active = 0.5
+	slowdown_inactive = 0
+	slowdown_active = 0
 	inbuilt_modules = list(/obj/item/mod/module/magboot/advanced)
 	skins = list(
 		"advanced" = list(
@@ -238,8 +238,8 @@
 	default_skin = "medical"
 	armor = list(MELEE = 5, BULLET = 5, LASER = 5, ENERGY = 5, BOMB = 10, BIO = 100, FIRE = 60, ACID = 75, WOUND = 5, RAD = 0)
 	cell_drain = DEFAULT_CHARGE_DRAIN * 1.5
-	slowdown_inactive = 1
-	slowdown_active = 0.5
+	slowdown_inactive = 0
+	slowdown_active = 0
 	skins = list(
 		"medical" = list(
 			HELMET_LAYER = NECK_LAYER,
@@ -297,8 +297,8 @@
 	resistance_flags = FIRE_PROOF|ACID_PROOF
 	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
 	cell_drain = DEFAULT_CHARGE_DRAIN * 1.5
-	slowdown_inactive = 0.75
-	slowdown_active = 0.25
+	slowdown_inactive = 0
+	slowdown_active = 0
 	inbuilt_modules = list(/obj/item/mod/module/quick_carry/advanced)
 	skins = list(
 		"rescue" = list(
@@ -334,8 +334,8 @@
 	resistance_flags = FIRE_PROOF|ACID_PROOF
 	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
 	complexity_max = DEFAULT_MAX_COMPLEXITY + 5
-	slowdown_inactive = 2
-	slowdown_active = 1.5
+	slowdown_inactive = 0
+	slowdown_active = 0
 	inbuilt_modules = list(/obj/item/mod/module/reagent_scanner/advanced)
 	skins = list(
 		"research" = list(
@@ -369,8 +369,8 @@
 	armor = list(MELEE = 15, BULLET = 15, LASER = 15, ENERGY = 15, BOMB = 25, BIO = 100, FIRE = 75, ACID = 75, WOUND = 15, RAD = 0)
 	siemens_coefficient = 0
 	complexity_max = DEFAULT_MAX_COMPLEXITY - 5
-	slowdown_inactive = 1
-	slowdown_active = 0.5
+	slowdown_inactive = 0
+	slowdown_active = 0
 	skins = list(
 		"security" = list(
 			HELMET_LAYER = null,
@@ -407,8 +407,8 @@
 	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
 	siemens_coefficient = 0
 	complexity_max = DEFAULT_MAX_COMPLEXITY - 5
-	slowdown_inactive = 0.75
-	slowdown_active = 0.25
+	slowdown_inactive = 0
+	slowdown_active = 0
 	skins = list(
 		"safeguard" = list(
 			HELMET_LAYER = null,
@@ -443,8 +443,8 @@
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	siemens_coefficient = 0
 	complexity_max = DEFAULT_MAX_COMPLEXITY + 5
-	slowdown_inactive = 0.75
-	slowdown_active = 0.25
+	slowdown_inactive = 0
+	slowdown_active = 0
 	skins = list(
 		"magnate" = list(
 			HELMET_LAYER = NECK_LAYER,
@@ -477,8 +477,8 @@
 	default_skin = "cosmohonk"
 	armor = list(MELEE = 5, BULLET = 5, LASER = 20, ENERGY = 20, BOMB = 10, BIO = 100, FIRE = 60, ACID = 30, WOUND = 5, RAD = 0)
 	cell_drain = DEFAULT_CHARGE_DRAIN * 0.25
-	slowdown_inactive = 1.75
-	slowdown_active = 1.25
+	slowdown_inactive = 0
+	slowdown_active = 0
 	skins = list(
 		"cosmohonk" = list(
 			HELMET_LAYER = NECK_LAYER,
@@ -512,8 +512,8 @@
 	armor = list(MELEE = 15, BULLET = 20, LASER = 15, ENERGY = 15, BOMB = 35, BIO = 100, FIRE = 50, ACID = 90, WOUND = 25, RAD = 0)
 	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
 	siemens_coefficient = 0
-	slowdown_inactive = 1
-	slowdown_active = 0.5
+	slowdown_inactive = 0
+	slowdown_active = 0
 	ui_theme = "syndicate"
 	inbuilt_modules = list()
 	skins = list(
@@ -550,8 +550,8 @@
 	resistance_flags = FIRE_PROOF|ACID_PROOF
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	siemens_coefficient = 0
-	slowdown_inactive = 0.75
-	slowdown_active = 0.25
+	slowdown_inactive = 0
+	slowdown_active = 0
 	ui_theme = "syndicate"
 	inbuilt_modules = list()
 	skins = list(
@@ -589,8 +589,8 @@
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	siemens_coefficient = 0
 	complexity_max = DEFAULT_MAX_COMPLEXITY - 5
-	slowdown_inactive = 0.75
-	slowdown_active = 0.25
+	slowdown_inactive = 0
+	slowdown_active = 0
 	ui_theme = "wizard"
 	inbuilt_modules = list(/obj/item/mod/module/anti_magic/wizard)
 	skins = list(
@@ -625,8 +625,8 @@
 	armor = list(MELEE = 20, BULLET = 5, LASER = 10, ENERGY = 10, BOMB = 50, BIO = 100, FIRE = 100, ACID = 75, WOUND = 5, RAD = 0)
 	resistance_flags = FIRE_PROOF
 	complexity_max = DEFAULT_MAX_COMPLEXITY + 10
-	slowdown_inactive = 2.5
-	slowdown_active = 2
+	slowdown_inactive = 0
+	slowdown_active = 0
 	ui_theme = "hackerman"
 	inbuilt_modules = list(/obj/item/mod/module/kinesis)
 	skins = list(
@@ -662,7 +662,7 @@
 	resistance_flags = FIRE_PROOF
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	siemens_coefficient = 0
-	slowdown_inactive = 0.5
+	slowdown_inactive = 0
 	slowdown_active = 0
 	skins = list(
 		"responsory" = list(
@@ -755,7 +755,7 @@
 	resistance_flags = FIRE_PROOF|ACID_PROOF
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	siemens_coefficient = 0
-	slowdown_inactive = 0.5
+	slowdown_inactive = 0
 	slowdown_active = 0
 	skins = list(
 		"corporate" = list(
@@ -791,7 +791,7 @@
 	resistance_flags = FIRE_PROOF|ACID_PROOF
 	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
 	complexity_max = 50
-	slowdown_inactive = 0.5
+	slowdown_inactive = 0
 	slowdown_active = 0
 	skins = list(
 		"debug" = list(

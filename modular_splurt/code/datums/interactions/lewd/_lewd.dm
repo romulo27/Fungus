@@ -209,11 +209,9 @@
 	if(!message)
 		return ..()
 	if(gender == MALE)
-		playlewdinteractionsound(loc, pick('modular_sand/sound/interactions/final_m1.ogg',
-							'modular_sand/sound/interactions/final_m2.ogg',
-							'modular_sand/sound/interactions/final_m3.ogg',
-							'modular_sand/sound/interactions/final_m4.ogg',
-							'modular_sand/sound/interactions/final_m5.ogg'), 90, 1, 0)
+		playlewdinteractionsound(loc, pick('modular_splurt/sound/voice/moan_m1.ogg',
+							'modular_splurt/sound/voice/moan_m2.ogg',
+							'modular_splurt/sound/voice/moan_m3.ogg'), 90, 1, 0)
 	else if(gender == FEMALE)
 		playlewdinteractionsound(loc, pick('modular_sand/sound/interactions/final_f1.ogg',
 							'modular_sand/sound/interactions/final_f2.ogg',
