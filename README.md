@@ -1,9 +1,5 @@
-## S.P.L.U.R.T. Station 13
-Based and maintained from Sandstorm Station 13, which is based and maintained from Citadel, which is based and mantained from /tg/station. (yup)
-
-[![CI Suite](https://github.com/SPLURT-Station/S.P.L.U.R.T-Station-13/workflows/CI%20Suite/badge.svg)](https://github.com/SPLURT-Station/S.P.L.U.R.T-Station-13//actions?query=workflow%3A%22CI+Suite%22)
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/SPLURT-Station/S.P.L.U.R.T-Station-13.svg)](http://isitmaintained.com/project/SPLURT-Station/S.P.L.U.R.T-Station-13 "Percentage of issues still open")
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/SPLURT-Station/S.P.L.U.R.T-Station-13.svg)](http://isitmaintained.com/project/SPLURT-Station/S.P.L.U.R.T-Station-13 "Average time to resolve an issue")
+## Maconha Station 13
+Based and maintained Splurt, which is a hellhole based from Sandstorm Station 13, which is based and maintained from Citadel, which is based and mantained from /tg/station. (Send help)
 
 [![forthebadge](http://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/pretty-risque.svg)](https://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](http://forthebadge.com) [![forinfinityandbyond](https://user-images.githubusercontent.com/5211576/29499758-4efff304-85e6-11e7-8267-62919c3688a9.gif)](https://www.reddit.com/r/SS13/comments/5oplxp/what_is_the_main_problem_with_byond_as_an_engine/dclbu1a)
 
