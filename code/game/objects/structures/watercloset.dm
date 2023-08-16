@@ -561,6 +561,17 @@
 		to_chat(user, "<span class='warning'>Someone's already washing here!</span>")
 		return
 
+	if(istype(O, /obj/item/trash/plate))
+		user.visible_message(span_notice("[user] starts to wash the  [O] in the sink..."), span_notice("You start washing the [O]..."))
+		if(!(O.use_tool(src, user, 40, volume=50)))
+			return FALSE
+		if (prob(5))
+			to_chat(user, span_notice("You finish washing the [O], it poof's out of existance!"))
+		else
+			to_chat(user, span_notice("You finish washing the [O]"))
+		qdel(O)
+		return TRUE
+
 	if(istype(O, /obj/item/reagent_containers))
 		var/obj/item/reagent_containers/RG = O
 		if(RG.is_refillable())
