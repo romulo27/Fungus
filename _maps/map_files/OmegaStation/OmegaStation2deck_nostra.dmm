@@ -10186,17 +10186,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/entry)
-"PJ" = (
-/obj/machinery/light{
-	dir = 4;
-	light_color = "#e8eaff"
-	},
-/obj/effect/turf_decal/trimline/brown/filled/line{
-	dir = 4
-	},
-/obj/effect/turf_decal/delivery,
-/turf/open/floor/plasteel/dark,
-/area/cargo/storage)
 "PK" = (
 /obj/structure/lattice/catwalk,
 /turf/closed/wall/r_wall,
@@ -62241,7 +62230,7 @@ ta
 to
 Et
 tl
-PJ
+CK
 nX
 CK
 ZY
