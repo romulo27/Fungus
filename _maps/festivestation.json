@@ -10,5 +10,6 @@
     },
 	"traits": [
 		{ "Weather_Icestorm":true }
-	]
+	],
+	"minetype":"none"
 }

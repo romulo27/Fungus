@@ -12,5 +12,6 @@
 		"/datum/job/hos": [27],
 		"/datum/job/officer": [27],
 		"/datum/job/detective": [27]
-	}
+	},
+	"minetype":"none"
 }
