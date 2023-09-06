@@ -1,0 +1,1152 @@
+/atom/proc/JoinPlayerHere(mob/M, buckle)
+/atom/proc/build_appearance_list(old_overlays)
+/atom/proc/cut_overlays()
+/atom/proc/cut_overlay(list/overlays)
+/atom/proc/add_overlay(list/overlays)
+/atom/proc/copy_overlays(atom/other, cut_old)	//copys our_overlays from another atom
+/atom/proc/remove_from_cache()
+/atom/proc/check_obscured(datum/sun/sun, distance = OCCLUSION_DISTANCE)
+/atom/proc/Beam(atom/BeamTarget,icon_state="b_beam",icon='icons/effects/beam.dmi',time=50, maxdistance=10,beam_type=/obj/effect/ebeam,beam_sleep_time = 3)
+/atom/movable/screen/cinematic
+/atom/movable/screen/combattoggle
+/atom/movable/screen/combattoggle/Click()
+/atom/movable/screen/combattoggle/update_icon_state()
+/atom/movable/screen/combattoggle/update_overlays()
+/atom/movable/fov_holder
+/atom/movable/fov_holder/ConveyorMove()
+/atom/movable/fov_holder/has_gravity(turf/T)
+/atom/movable/fov_holder/ex_act(severity, target, origin)
+/atom/movable/fov_holder/singularity_act()
+/atom/movable/fov_holder/singularity_pull()
+/atom/movable/fov_holder/blob_act()
+/atom/movable/fov_holder/onTransitZ()
+/atom/movable/fov_holder/forceMove(atom/destination, no_tp=FALSE, harderforce = FALSE)
+/atom/movable/fov_holder/Destroy(force = FALSE)
+/atom/movable/proc/orbit(atom/A, radius = 10, clockwise = FALSE, rotation_speed = 20, rotation_segments = 36, pre_rotation = TRUE)
+/atom/movable/proc/stop_orbit(datum/component/orbiter/orbits)
+/atom/proc/transfer_observers_to(atom/target)
+/atom/movable/proc/simple_rotate_clockwise()
+/atom/movable/proc/simple_rotate_counterclockwise()
+/atom/movable/proc/simple_rotate_flip()
+/atom/proc/mat_update_desc(/datum/material/mat)
+/atom/proc/register_context()
+/atom/proc/add_context(
+/atom/movable/screen/alert/status_effect/shadow_mend
+/atom/movable/screen/alert/status_effect/void_price
+/atom/movable/screen/alert/status_effect/vanguard
+/atom/movable/screen/alert/status_effect/vanguard/MouseEntered(location,control,params)
+/atom/movable/screen/alert/status_effect/inathneqs_endowment
+/atom/movable/screen/alert/status_effect/power_regen
+/atom/movable/screen/alert/status_effect/his_grace
+/atom/movable/screen/alert/status_effect/his_grace/MouseEntered(location,control,params)
+/atom/movable/screen/alert/status_effect/wish_granters_gift
+/atom/movable/screen/alert/status_effect/blooddrunk
+/atom/movable/screen/alert/status_effect/fleshmend
+/atom/movable/screen/alert/status_effect/regenerative_core
+/atom/movable/screen/alert/status_effect/panacea
+/atom/movable/screen/alert/status_effect/crucible_soul
+/atom/movable/screen/alert/status_effect/duskndawn
+/atom/movable/screen/alert/status_effect/marshal
+/atom/movable/screen/alert/status_effect/asleep
+/atom/movable/screen/alert/status_effect/stasis
+/atom/movable/screen/alert/status_effect/mesmerized
+/atom/movable/screen/alert/status_effect/his_wrath
+/atom/movable/screen/alert/status_effect/belligerent
+/atom/movable/screen/alert/status_effect/kindle
+/atom/movable/screen/alert/status_effect/ichorial_stain
+/atom/movable/screen/alert/status_effect/strandling
+/atom/movable/screen/alert/status_effect/strandling/Click(location, control, params)
+/atom/movable/screen/alert/status_effect/trance
+/atom/movable/screen/alert/status_effect/dna_melt
+/atom/movable/screen/alert/status_effect/freon
+/atom/movable/screen/alert/status_effect/in_love
+/atom/movable/screen/alert/status_effect
+/atom/movable/screen/alert/status_effect/determined
+/atom/movable/screen/alert/status_effect/limp
+/atom/movable/screen/alert/status_effect/wound
+/atom/movable/screen/alert/status_effect/wound/Click()
+/atom/proc/attempt_wire_interaction(mob/user)
+/atom
+/atom/New(loc, ...)
+/atom/proc/Initialize(mapload, ...)
+/atom/proc/LateInitialize()
+/atom/proc/ComponentInitialize()
+/atom/Destroy()
+/atom/proc/check_projectile_ricochet(obj/item/projectile/P)
+/atom/proc/handle_ricochet(obj/item/projectile/P)
+/atom/proc/CanPass(atom/movable/mover, turf/target)
+/atom/proc/CanAllowThrough(atom/movable/mover, turf/target)
+/atom/proc/onCentCom()
+/atom/proc/onSyndieBase()
+/atom/proc/onAwayMission()
+/atom/proc/attack_hulk(mob/living/carbon/human/user, does_attack_animation = FALSE)
+/atom/proc/CheckParts(list/parts_list)
+/atom/proc/update_multiz(prune_on_fail = FALSE)
+/atom/proc/assume_air(datum/gas_mixture/giver)
+/atom/proc/assume_air_moles(datum/gas_mixture/giver, moles)
+/atom/proc/assume_air_ratio(datum/gas_mixture/giver, ratio)
+/atom/proc/remove_air(amount)
+/atom/proc/remove_air_ratio(ratio)
+/atom/proc/transfer_air(datum/gas_mixture/taker, amount)
+/atom/proc/transfer_air_ratio(datum/gas_mixture/taker, ratio)
+/atom/proc/return_air()
+/atom/proc/check_eye(mob/user)
+/atom/proc/Bumped(atom/movable/AM)
+/atom/proc/is_open_container()
+/atom/proc/is_injectable(allowmobs = TRUE)
+/atom/proc/is_drawable(allowmobs = TRUE)
+/atom/proc/is_refillable()
+/atom/proc/is_drainable()
+/atom/proc/AllowDrop()
+/atom/proc/CheckExit()
+/atom/proc/HasProximity(atom/movable/AM as mob|obj)
+/atom/proc/emp_act(severity)
+/atom/proc/bullet_act(obj/item/projectile/P, def_zone, piercing_hit = FALSE)
+/atom/proc/shove_act(mob/living/target, mob/living/user)
+/atom/proc/in_contents_of(container)//can take class or object instance as argument
+/atom/proc/get_examine_name(mob/user)
+/atom/proc/get_examine_string(mob/user, thats = FALSE)
+/atom/proc/examine(mob/user)
+/atom/proc/examine_more(mob/user)
+/atom/proc/update_appearance(updates=ALL)
+/atom/proc/update_name(updates=ALL)
+/atom/proc/update_desc(updates=ALL)
+/atom/proc/update_icon(updates=ALL)
+/atom/proc/update_icon_state()
+/atom/proc/update_overlays()
+/atom/proc/relaymove(mob/living/user)
+/atom/proc/contents_explosion(severity, target, origin)
+/atom/proc/ex_act(severity, target, origin)
+/atom/proc/wave_explode(power, datum/wave_explosion/explosion, dir)
+/atom/proc/wave_ex_act(power, datum/wave_explosion/explosion, dir)
+/atom/proc/blob_act(obj/structure/blob/B)
+/atom/proc/fire_act(exposed_temperature, exposed_volume)
+/atom/proc/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
+/atom/proc/hitby_react(atom/movable/AM)
+/atom/proc/handle_slip(mob/living/carbon/C, knockdown_amount, obj/O, lube)
+/atom/proc/transfer_mob_blood_dna(mob/living/L)
+/atom/proc/transfer_blood_dna(list/blood_dna, list/datum/disease/diseases)
+/atom/proc/add_mob_blood(mob/living/M)
+/atom/proc/add_blood_DNA(list/blood_dna, list/datum/disease/diseases)
+/atom/proc/blood_DNA_to_color()
+/atom/proc/blood_DNA_to_blend()
+/atom/proc/clean_blood()
+/atom/proc/wash_cream()
+/atom/proc/isinspace()
+/atom/proc/handle_fall()
+/atom/proc/singularity_act()
+/atom/proc/singularity_pull(obj/singularity/S, current_size)
+/atom/proc/acid_act(acidpwr, acid_volume)
+/atom/proc/emag_act()
+/atom/proc/rad_act(strength)
+/atom/proc/narsie_act()
+/atom/proc/ratvar_act()
+/atom/proc/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
+/atom/proc/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
+/atom/proc/zap_act(power, zap_flags, shocked_targets)
+/atom/proc/storage_contents_dump_act(obj/item/storage/src_object, mob/user)
+/atom/proc/component_storage_contents_dump_act(datum/component/storage/src_object, mob/user)
+/atom/proc/get_dumping_location(obj/item/storage/source,mob/user)
+/atom/proc/handle_atom_del(atom/A)
+/atom/proc/HandleTurfChange(turf/T)
+/atom/proc/get_remote_view_fullscreens(mob/user)
+/atom/proc/update_remote_sight(mob/living/user)
+/atom/proc/setDir(newdir, ismousemovement=FALSE)
+/atom/proc/on_log(login)
+/atom/proc/add_atom_colour(coloration, colour_priority)
+/atom/proc/remove_atom_colour(colour_priority, coloration)
+/atom/proc/update_atom_colour()
+/atom/vv_edit_var(var_name, var_value)
+/atom/vv_get_dropdown()
+/atom/vv_do_topic(list/href_list)
+/atom/vv_get_header()
+/atom/proc/drop_location()
+/atom/proc/vv_auto_rename(newname)
+/atom/Entered(atom/movable/AM, atom/oldLoc)
+/atom/Exit(atom/movable/AM, atom/newLoc)
+/atom/Exited(atom/movable/AM, atom/newLoc)
+/atom/proc/return_temperature()
+/atom/proc/tool_act(mob/living/user, obj/item/I, tool_type)
+/atom/proc/crowbar_act(mob/living/user, obj/item/I)
+/atom/proc/multitool_act(mob/living/user, obj/item/I)
+/atom/proc/multitool_check_buffer(user, obj/item/I, silent = FALSE)
+/atom/proc/screwdriver_act(mob/living/user, obj/item/I)
+/atom/proc/wrench_act(mob/living/user, obj/item/I)
+/atom/proc/wirecutter_act(mob/living/user, obj/item/I)
+/atom/proc/welder_act(mob/living/user, obj/item/I)
+/atom/proc/analyzer_act(mob/living/user, obj/item/I)
+/atom/proc/GenerateTag()
+/atom/proc/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override=FALSE)
+/atom/proc/log_message(message, message_type, color=null, log_globally=TRUE)
+/atom/proc/log_talk(message, message_type, tag=null, log_globally=TRUE, forced_by=null)
+/atom/proc/add_filter(name,priority,list/params)
+/atom/proc/update_filters()
+/atom/proc/transition_filter(name, time, list/new_params, easing, loop, parallel = TRUE)
+/atom/proc/change_filter_priority(name, new_priority)
+/atom/proc/get_filter(name)
+/atom/proc/remove_filter(name_or_names)
+/atom/proc/clear_filters()
+/atom/proc/intercept_zImpact(atom/movable/AM, levels = 1)
+/atom/proc/set_custom_materials(list/materials, multiplier = 1)
+/atom/proc/has_gravity(turf/T)
+/atom/proc/rust_heretic_act()
+/atom/proc/setOpened()
+/atom/proc/setClosed()
+/atom/MouseEntered(location, control, params)
+/atom/movable
+/atom/movable/Initialize(mapload)
+/atom/movable/Destroy(force)
+/atom/movable/proc/update_emissive_block()
+/atom/movable/update_overlays()
+/atom/movable/proc/can_zFall(turf/source, levels = 1, turf/target, direction)
+/atom/movable/proc/onZImpact(turf/T, levels)
+/atom/movable/proc/can_zTravel(turf/destination, direction)
+/atom/movable/vv_edit_var(var_name, var_value, massedit)
+/atom/movable/proc/start_pulling(atom/movable/AM, state, force = move_force, supress_message = FALSE)
+/atom/movable/proc/stop_pulling()
+/atom/movable/proc/set_pulledby(new_pulledby)
+/atom/movable/proc/Move_Pulled(atom/A)
+/atom/movable/proc/recursive_pulled_glidesize_update()
+/atom/movable/proc/check_pulling()
+/atom/movable/proc/set_glide_size(target = 8, recursive = TRUE)
+/atom/movable/proc/set_anchored(anchorvalue)
+/atom/movable/proc/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+/atom/movable/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked, datum/thrownthing/throwingdatum)
+/atom/movable/proc/safe_throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG, gentle = FALSE)
+/atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG, gentle = FALSE, quickstart = TRUE)
+/atom/movable/proc/force_pushed(atom/movable/pusher, force = MOVE_FORCE_DEFAULT, direction)
+/atom/movable/proc/force_push(atom/movable/AM, force = move_force, direction, silent = FALSE)
+/atom/movable/proc/move_crush(atom/movable/AM, force = move_force, direction, silent = FALSE)
+/atom/movable/proc/move_crushed(atom/movable/pusher, force = MOVE_FORCE_DEFAULT, direction)
+/atom/movable/CanAllowThrough(atom/movable/mover, turf/target)
+/atom/movable/proc/CanPassThrough(atom/blocker, turf/target, blocker_opinion)
+/atom/movable/proc/on_exit_storage(datum/component/storage/concrete/S) // rename S to master_storage
+/atom/movable/proc/on_enter_storage(datum/component/storage/concrete/S)
+/atom/movable/proc/get_spacemove_backup()
+/atom/movable/proc/relay_container_resist(mob/living/user, obj/O)
+/atom/movable/proc/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+/atom/movable/proc/do_item_attack_animation(atom/A, visual_effect_icon, obj/item/used_item)
+/atom/movable/vv_get_dropdown()
+/atom/movable/proc/ex_check(ex_id)
+/atom/movable/proc/float(on, throw_override)
+/atom/movable/proc/get_language_holder(get_minds = TRUE)
+/atom/movable/proc/grant_language(language, understood = TRUE, spoken = TRUE, source = LANGUAGE_ATOM)
+/atom/movable/proc/grant_all_languages(understood = TRUE, spoken = TRUE, grant_omnitongue = TRUE, source = LANGUAGE_MIND)
+/atom/movable/proc/remove_language(language, understood = TRUE, spoken = TRUE, source = LANGUAGE_ALL)
+/atom/movable/proc/remove_all_languages(source = LANGUAGE_ALL, remove_omnitongue = FALSE)
+/atom/movable/proc/add_blocked_language(language, source = LANGUAGE_ATOM)
+/atom/movable/proc/remove_blocked_language(language, source = LANGUAGE_ATOM)
+/atom/movable/proc/has_language(language, spoken = FALSE)
+/atom/movable/proc/can_speak_language(language)
+/atom/movable/proc/could_speak_language(language)
+/atom/movable/proc/get_selected_language()
+/atom/movable/proc/get_random_understood_language()
+/atom/movable/proc/get_random_spoken_language()
+/atom/movable/proc/copy_languages(from_holder, source_override)
+/atom/movable/proc/update_atom_languages()
+/atom/movable/proc/set_bark(id)
+/atom/movable/proc/ConveyorMove(movedir)
+/atom/movable/proc/get_cell()
+/atom/movable/proc/can_be_pulled(user, grab_state, force)
+/atom/movable/proc/setGrabState(newstate)
+/atom/movable/Move(atom/newloc, direct=0, glide_size_override = 0)
+/atom/movable/proc/abstract_move(atom/new_loc)
+/atom/movable/Move(atom/newloc, direct, glide_size_override = 0)
+/atom/movable/proc/handle_buckled_mob_movement(newloc, direct, glide_size_override)
+/atom/movable/proc/Moved(atom/OldLoc, Dir, Forced = FALSE)
+/atom/movable/Cross(atom/movable/AM)
+/atom/movable/Crossed(atom/movable/AM, oldloc)
+/atom/movable/Uncross(atom/movable/AM, atom/newloc)
+/atom/movable/Uncrossed(atom/movable/AM)
+/atom/movable/Bump(atom/A)
+/atom/movable/proc/onTransitZ(old_z,new_z)
+/atom/movable/proc/setMovetype(newval)
+/atom/movable/proc/forceMove(atom/destination)
+/atom/movable/proc/moveToNullspace()
+/atom/movable/proc/doMove(atom/destination)
+/atom/movable/proc/Process_Spacemove(movement_dir = 0)
+/atom/movable/proc/newtonian_move(direction)
+/atom/movable/proc/say(message, bubble_type, var/list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
+/atom/movable/proc/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode, atom/movable/source)
+/atom/movable/proc/bark(list/hearers, distance, volume, pitch, queue_time)
+/atom/movable/proc/can_speak()
+/atom/movable/proc/send_speech(message, range = 7, atom/movable/source = src, bubble_type, list/spans, datum/language/message_language = null, message_mode)
+/atom/movable/proc/compose_message(atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mode, face_name = FALSE, atom/movable/source)
+/atom/movable/proc/compose_track_href(atom/movable/speaker, message_langs, raw_message, radio_freq)
+/atom/movable/proc/compose_job(atom/movable/speaker, message_langs, raw_message, radio_freq)
+/atom/movable/proc/say_mod(input, message_mode)
+/atom/movable/proc/say_quote(input, list/spans=list(speech_span), message_mode)
+/atom/movable/proc/say_emphasis(input)
+/atom/movable/proc/quoteless_say_quote(input, list/spans = list(speech_span), message_mode)
+/atom/movable/proc/lang_treat(atom/movable/speaker, datum/language/language, raw_message, list/spans, message_mode, no_quote = FALSE)
+/atom/movable/proc/attach_spans(input, list/spans)
+/atom/movable/proc/GetVoice()
+/atom/movable/proc/IsVocal()
+/atom/movable/proc/get_alt_name()
+/atom/movable/proc/GetJob() //Get a job, you lazy butte
+/atom/movable/proc/GetSource()
+/atom/movable/proc/GetRadio()
+/atom/movable/virtualspeaker
+/atom/movable/virtualspeaker/Initialize(mapload, atom/movable/M, radio)
+/atom/movable/virtualspeaker/GetJob()
+/atom/movable/virtualspeaker/GetSource()
+/atom/movable/virtualspeaker/GetRadio()
+/atom/movable/proc/machine_wash(obj/machinery/washing_machine/WM)
+/atom/proc/auto_turn()
+/atom/movable
+/atom/movable/on_attack_hand(mob/living/user, act_intent = user.a_intent, unarmed_attack_flags)
+/atom/movable/MouseDrop_T(mob/living/M, mob/living/user)
+/atom/movable/proc/has_buckled_mobs()
+/atom/movable/proc/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE)
+/atom/movable/proc/unbuckle_mob(mob/living/buckled_mob, force=FALSE)
+/atom/movable/proc/unbuckle_all_mobs(force=FALSE)
+/atom/movable/proc/post_buckle_mob(mob/living/M)
+/atom/movable/proc/post_unbuckle_mob(mob/living/M)
+/atom/movable/proc/user_buckle_mob(mob/living/M, mob/user, check_loc = TRUE)
+/atom/movable/proc/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
+/atom/movable/proc/precise_user_unbuckle_mob(mob/user)
+/atom/proc/on_unset_machine(mob/user)
+/atom/movable/summon_weapon_effect
+/atom/movable/summon_weapon_effect/Destroy()
+/atom/movable/summon_weapon_effect/proc/Lock(atom/target)
+/atom/movable/summon_weapon_effect/proc/Release()
+/atom/movable/summon_weapon_effect/proc/Update()
+/atom/proc/transfer_ai(interaction, mob/user, mob/living/silicon/ai/AI, obj/item/aicard/card)
+/atom/movable/openspace_backdrop
+/atom/proc/investigate_log(message, subject)
+/atom/movable/proc/admin_teleport(atom/new_location, message = TRUE)
+/atom/proc/_contents()
+/atom/movable/screen/bloodsucker
+/atom/movable/screen/bloodsucker/proc/clear()
+/atom/movable/screen/bloodsucker/proc/update_counter(value, valuecolor)
+/atom/movable/screen/bloodsucker/blood_counter
+/atom/movable/screen/bloodsucker/blood_counter/update_counter(value, valuecolor)
+/atom/movable/screen/bloodsucker/rank_counter
+/atom/movable/screen/bloodsucker/rank_counter/update_counter(value, valuecolor)
+/atom/movable/screen/bloodsucker/sunlight_counter
+/atom/movable/screen/bloodsucker/sunlight_counter/update_counter(value, valuecolor)
+/atom/movable/screen/alert/status_effect/agent_pinpointer/hunter_edition
+/atom/movable/screen/alert/status_effect/agent_pinpointer/vassal_edition
+/atom/movable/screen/alert/status_effect/agent_pinpointer/changeling
+/atom/movable/proc/procure_gateway(mob/living/invoker, time_duration, gateway_uses, two_way)
+/atom/movable/proc/power_drain(clockcult_user, drain_weapons = FALSE, recursive = FALSE, drain_amount = MIN_CLOCKCULT_POWER) //This proc as of now is only in use for void volt and transmission sigils
+/atom/proc/fabrication_vals(mob/living/user, obj/item/clockwork/replica_fabricator/fabricator, silent)
+/atom/proc/consume_visual(obj/item/clockwork/replica_fabricator/fabricator, power_amount)
+/atom/movable/screen/alert/status_effect/wraith_spectacles
+/atom/movable/screen/alert/status_effect/wraith_spectacles/MouseEntered(location,control,params)
+/atom/proc/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/atom/movable/proc/IntegrateAmount()
+/atom/movable/screen/alert/status_effect/agent_pinpointer
+/atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/atom/var/CanAtmosPass = ATMOS_PASS_YES
+/atom/var/CanAtmosPassVertical = ATMOS_PASS_YES
+/atom/proc/CanAtmosPass(turf/T)
+/atom/movable/proc/BlockThermalConductivity() // Objects that don't let heat through.
+/atom/proc/air_update_turf(command = 0)
+/atom/movable/proc/move_update_air(turf/T)
+/atom/proc/atmos_spawn_air(text) //because a lot of people loves to copy paste awful code lets just make an easy proc to spawn your plasma fires
+/atom/movable/var/pressure_resistance = 10
+/atom/movable/var/last_high_pressure_movement_air_cycle = 0
+/atom/movable/proc/experience_pressure_difference(pressure_difference, direction, pressure_resistance_prob_delta = 0, throw_target)
+/atom/proc/balloon_alert(mob/viewer, text)
+/atom/proc/balloon_alert_to_viewers(message, self_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs)
+/atom/proc/balloon_alert_perform(mob/viewer, text)
+/atom/movable/screen/buildmode
+/atom/movable/screen/buildmode/New(bld)
+/atom/movable/screen/buildmode/Destroy()
+/atom/movable/screen/buildmode/mode
+/atom/movable/screen/buildmode/mode/Click(location, control, params)
+/atom/movable/screen/buildmode/mode/update_icon_state()
+/atom/movable/screen/buildmode/help
+/atom/movable/screen/buildmode/help/Click(location, control, params)
+/atom/movable/screen/buildmode/bdir
+/atom/movable/screen/buildmode/bdir/update_icon_state()
+/atom/movable/screen/buildmode/bdir/Click()
+/atom/movable/screen/buildmode/modeswitch
+/atom/movable/screen/buildmode/modeswitch/New(bld, mt)
+/atom/movable/screen/buildmode/modeswitch/Click()
+/atom/movable/screen/buildmode/dirswitch
+/atom/movable/screen/buildmode/dirswitch/New(bld, dir)
+/atom/movable/screen/buildmode/dirswitch/Click()
+/atom/movable/screen/buildmode/quit
+/atom/movable/screen/buildmode/quit/Click()
+/atom/movable/screen/chronos_target
+/atom/movable/screen/chronos_target/New(loc, var/mob/living/carbon/human/user)
+/atom/proc/add_fibers(mob/living/carbon/human/M)
+/atom/proc/add_hiddenprint(mob/living/M)
+/atom/proc/add_fingerprint(mob/living/M, ignoregloves = FALSE)
+/atom/proc/transfer_fingerprints_to(atom/A)
+/atom/proc/fry(cook_time = 30) //you can truly fry anything
+/atom/movable/keyLoop(client/user)
+/atom/movable/emissive_blocker
+/atom/movable/emissive_blocker/Initialize(mapload, source)
+/atom/movable/emissive_blocker/ex_act(severity, target, origin)
+/atom/movable/emissive_blocker/singularity_act()
+/atom/movable/emissive_blocker/singularity_pull()
+/atom/movable/emissive_blocker/blob_act()
+/atom/movable/emissive_blocker/onTransitZ()
+/atom/movable/emissive_blocker/forceMove(atom/destination, no_tp=FALSE, harderforce = FALSE)
+/atom
+/atom/proc/set_light(var/l_range, var/l_power, var/l_color = NONSENSICAL_VALUE)
+/atom/proc/update_light()
+/atom/movable/Destroy()
+/atom/proc/set_opacity(var/new_opacity)
+/atom/movable/Moved(atom/OldLoc, Dir)
+/atom/vv_edit_var(var_name, var_value)
+/atom/proc/flash_lighting_fx(_range = FLASH_LIGHT_RANGE, _power = FLASH_LIGHT_POWER, _color = LIGHT_COLOR_WHITE, _duration = FLASH_LIGHT_DURATION, _reset_lighting = TRUE)
+/atom/proc/set_light_power(new_power)
+/atom/proc/set_light_range(new_range)
+/atom/proc/set_light_color(new_color)
+/atom/proc/set_light_on(new_value)
+/atom/proc/set_light_flags(new_value)
+/atom/proc/get_save_vars()
+/atom
+/atom/proc/prepare_huds()
+/atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, ignored_mobs, mob/target, target_message, omni = FALSE, runechat_popup, rune_msg)
+/atom/proc/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message, ignored_mobs, runechat_popup, rune_msg) //SKYRAT CHANGE
+/atom/proc/hasSiliconAccessInArea(mob/user, flags = PRIVILEGES_SILICON)
+/atom/movable
+/atom/movable/proc/process_yelling(list/already_heard, rendered, atom/movable/speaker, datum/language/message_language, message, list/spans, message_mode, obj/source)
+/atom/proc/update_pipe_vision(atom/new_loc = null)
+/atom/movable/screen/movable/pic_in_pic/ai
+/atom/movable/screen/movable/pic_in_pic/ai/Initialize(mapload)
+/atom/movable/screen/movable/pic_in_pic/ai/Destroy()
+/atom/movable/screen/movable/pic_in_pic/ai/Click()
+/atom/movable/screen/movable/pic_in_pic/ai/make_backgrounds()
+/atom/movable/screen/movable/pic_in_pic/ai/add_background()
+/atom/movable/screen/movable/pic_in_pic/ai/set_view_size(width, height, do_refresh = TRUE)
+/atom/movable/screen/movable/pic_in_pic/ai/set_view_center(atom/target, do_refresh = TRUE)
+/atom/movable/screen/movable/pic_in_pic/ai/refresh_view()
+/atom/movable/screen/movable/pic_in_pic/ai/proc/highlight()
+/atom/movable/screen/movable/pic_in_pic/ai/proc/unhighlight()
+/atom/movable/screen/movable/pic_in_pic/ai/proc/set_ai(mob/living/silicon/ai/new_ai)
+/atom/proc/move_camera_by_click()
+/atom/movable/screen/seedling
+/atom/movable/screen/alert/status_effect/ice_block_talisman
+/atom/proc/ninjadrain_act(obj/item/clothing/suit/space/space_ninja/ninja_suit, mob/living/carbon/human/ninja, obj/item/clothing/gloves/space_ninja/ninja_gloves)
+/atom/proc/animate_atom_living(var/mob/living/owner = null)
+/atom/proc/fire_nuclear_particle(angle = rand(0,360)) //used by fusion to fire random nuclear particles. Fires one particle in a random direction.
+/atom/proc/create_reagents(max_vol, flags, new_value)
+/atom/movable/proc/CanEnterDisposals()
+/atom/movable/proc/pipe_eject(direction)
+/atom/movable/screen/alert/status_effect/rainbow_protection
+/atom/movable/screen/alert/status_effect/slimeskin
+/atom/movable/screen/alert/status_effect/freon/stasis
+/atom/movable/screen/alert/status_effect/clone_decay
+/atom/movable/screen/alert/status_effect/bloodchill
+/atom/movable/screen/alert/status_effect/bloodchill
+/atom/movable/screen/alert/status_effect/bonechill
+/atom/movable/screen/alert/status_effect/bluespaceslime
+/atom/movable/proc/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)
+/atom/movable/proc/onShuttleMove(turf/newT, turf/oldT, list/movement_force, move_dir, obj/docking_port/stationary/old_dock, obj/docking_port/mobile/moving_dock)
+/atom/movable/proc/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
+/atom/movable/proc/lateShuttleMove(turf/oldT, list/movement_force, move_dir)
+/atom/proc/shuttleRotate(rotation, params=ROTATE_DIR|ROTATE_SMOOTH|ROTATE_OFFSET)
+/atom/movable/proc/get_tooltip_data()
+/atom/movable/MouseEntered(location, control, params)
+/atom/movable/MouseExited(location, control, params)
+/atom/movable/ref_holder
+/atom/movable/ref_holder/Destroy()
+/atom/movable/ref_test
+/atom/movable/ref_test/Destroy(force)
+/atom/proc/mech_melee_attack(obj/vehicle/sealed/mecha/mecha_attacker)
+/atom
+/atom/proc/vars_to_save()
+/atom/proc/map_important_vars()
+/atom/serialize()
+/atom/deserialize(var/list/data)
+/atom/proc/Adjacent(atom/neighbor) // basic inheritance, unused
+/atom/movable/Adjacent(var/atom/neighbor)
+/atom/proc/attack_ai(mob/user)
+/atom/proc/AICtrlClick()
+/atom/proc/AIAltClick(mob/living/silicon/ai/user)
+/atom/proc/AIShiftClick()
+/atom/proc/AICtrlShiftClick()
+/atom/Click(location,control,params)
+/atom/DblClick(location,control,params)
+/atom/MouseWheel(delta_x,delta_y,location,control,params)
+/atom/proc/IsObscured()
+/atom/movable/proc/CanReach(atom/ultimate_target, obj/item/tool, view_only = FALSE)
+/atom/movable/proc/DirectAccess()
+/atom/proc/canReachInto(atom/user, atom/target, list/next, view_only, obj/item/tool)
+/atom/proc/AllowClick()
+/atom/proc/MiddleClick(mob/M as mob)
+/atom/proc/ShiftClick(mob/user)
+/atom/proc/attempt_examinate(mob/user)
+/atom/proc/CtrlRightClickOn(atom/A, params)
+/atom/proc/CtrlClick(mob/user)
+/atom/proc/AltClick(mob/user)
+/atom/proc/AltClickNoInteract(mob/user, atom/A)
+/atom/proc/CtrlShiftClick(mob/user)
+/atom/proc/BorgCtrlShiftClick(mob/living/silicon/robot/user) //forward to human click if not overridden
+/atom/proc/BorgShiftClick(mob/living/silicon/robot/user) //forward to human click if not overridden
+/atom/proc/BorgCtrlClick(mob/living/silicon/robot/user) //forward to human click if not overridden
+/atom/proc/BorgAltClick(mob/living/silicon/robot/user)
+/atom/proc/attack_robot(mob/user)
+/atom/MouseDrop(atom/over, src_location, over_location, src_control, over_control, params)
+/atom/proc/MouseDrop_T(atom/dropping, mob/user)
+/atom/proc/IsAutoclickable()
+/atom/movable/screen/IsAutoclickable()
+/atom/movable/screen/click_catcher/IsAutoclickable()
+/atom/proc/attackby(obj/item/W, mob/user, params)
+/atom/movable/proc/attacked_by()
+/atom/proc/attack_ghost(mob/dead/observer/user)
+/atom/proc/attack_hand(mob/user, act_intent = user.a_intent, attackchain_flags)
+/atom/proc/on_attack_hand(mob/user, act_intent = user.a_intent, unarmed_attack_flags)
+/atom/proc/_try_interact(mob/user)
+/atom/proc/can_interact(mob/user)
+/atom/ui_status(mob/user)
+/atom/movable/can_interact(mob/user)
+/atom/proc/interact(mob/user)
+/atom/proc/attack_animal(mob/user)
+/atom/proc/attack_paw(mob/user)
+/atom/proc/attack_alien(mob/living/carbon/alien/user)
+/atom/proc/attack_larva(mob/user)
+/atom/proc/attack_slime(mob/user)
+/atom/proc/attack_drone(mob/living/simple_animal/drone/user)
+/atom/proc/altattackby(obj/item/W, mob/user, params)
+/atom/proc/alt_attack_hand(mob/user)
+/atom/proc/attack_tk(mob/user)
+/atom/proc/attack_self_tk(mob/user)
+/atom/movable/screen/movable/action_button
+/atom/movable/screen/movable/action_button/proc/can_use(mob/user)
+/atom/movable/screen/movable/action_button/MouseDrop(over_object)
+/atom/movable/screen/movable/action_button/Click(location,control,params)
+/atom/movable/screen/movable/action_button/hide_toggle
+/atom/movable/screen/movable/action_button/hide_toggle/Initialize(mapload)
+/atom/movable/screen/movable/action_button/hide_toggle/Click(location,control,params)
+/atom/movable/screen/movable/action_button/hide_toggle/AltClick(mob/user)
+/atom/movable/screen/movable/action_button/hide_toggle/proc/InitialiseIcon(datum/hud/owner_hud)
+/atom/movable/screen/movable/action_button/hide_toggle/update_overlays()
+/atom/movable/screen/movable/action_button/MouseEntered(location,control,params)
+/atom/movable/screen/movable/action_button/MouseExited()
+/atom/movable/screen/ai
+/atom/movable/screen/ai/Click()
+/atom/movable/screen/ai/aicore
+/atom/movable/screen/ai/aicore/Click()
+/atom/movable/screen/ai/camera_list
+/atom/movable/screen/ai/camera_list/Click()
+/atom/movable/screen/ai/camera_track
+/atom/movable/screen/ai/camera_track/Click()
+/atom/movable/screen/ai/camera_light
+/atom/movable/screen/ai/camera_light/Click()
+/atom/movable/screen/ai/crew_monitor
+/atom/movable/screen/ai/crew_monitor/Click()
+/atom/movable/screen/ai/crew_manifest
+/atom/movable/screen/ai/crew_manifest/Click()
+/atom/movable/screen/ai/alerts
+/atom/movable/screen/ai/alerts/Click()
+/atom/movable/screen/ai/announcement
+/atom/movable/screen/ai/announcement/Click()
+/atom/movable/screen/ai/call_shuttle
+/atom/movable/screen/ai/call_shuttle/Click()
+/atom/movable/screen/ai/state_laws
+/atom/movable/screen/ai/state_laws/Click()
+/atom/movable/screen/ai/pda_msg_send
+/atom/movable/screen/ai/pda_msg_send/Click()
+/atom/movable/screen/ai/pda_msg_show
+/atom/movable/screen/ai/pda_msg_show/Click()
+/atom/movable/screen/ai/image_take
+/atom/movable/screen/ai/image_take/Click()
+/atom/movable/screen/ai/image_view
+/atom/movable/screen/ai/image_view/Click()
+/atom/movable/screen/ai/sensors
+/atom/movable/screen/ai/sensors/Click()
+/atom/movable/screen/ai/multicam
+/atom/movable/screen/ai/multicam/Click()
+/atom/movable/screen/ai/add_multicam
+/atom/movable/screen/ai/add_multicam/Click()
+/atom/movable/screen/alert
+/atom/movable/screen/alert/MouseEntered(location,control,params)
+/atom/movable/screen/alert/MouseExited()
+/atom/movable/screen/alert/not_enough_oxy
+/atom/movable/screen/alert/too_much_oxy
+/atom/movable/screen/alert/not_enough_nitro
+/atom/movable/screen/alert/too_much_nitro
+/atom/movable/screen/alert/not_enough_co2
+/atom/movable/screen/alert/too_much_co2
+/atom/movable/screen/alert/not_enough_tox
+/atom/movable/screen/alert/too_much_tox
+/atom/movable/screen/alert/not_enough_ch4
+/atom/movable/screen/alert/too_much_ch4
+/atom/movable/screen/alert/not_enough_ch3br
+/atom/movable/screen/alert/too_much_ch3br
+/atom/movable/screen/alert/fat
+/atom/movable/screen/alert/hungry
+/atom/movable/screen/alert/thirsty
+/atom/movable/screen/alert/starving
+/atom/movable/screen/alert/dehydrated
+/atom/movable/screen/alert/gross
+/atom/movable/screen/alert/verygross
+/atom/movable/screen/alert/disgusted
+/atom/movable/screen/alert/hot
+/atom/movable/screen/alert/cold
+/atom/movable/screen/alert/sweat
+/atom/movable/screen/alert/shiver
+/atom/movable/screen/alert/lowpressure
+/atom/movable/screen/alert/highpressure
+/atom/movable/screen/alert/blind
+/atom/movable/screen/alert/high
+/atom/movable/screen/alert/mind_control
+/atom/movable/screen/alert/mind_control/Click()
+/atom/movable/screen/alert/hypnosis
+/atom/movable/screen/alert/drunk //Not implemented
+/atom/movable/screen/alert/embeddedobject
+/atom/movable/screen/alert/embeddedobject/Click()
+/atom/movable/screen/alert/weightless
+/atom/movable/screen/alert/highgravity
+/atom/movable/screen/alert/veryhighgravity
+/atom/movable/screen/alert/fire
+/atom/movable/screen/alert/fire/Click()
+/atom/movable/screen/alert/give // information set when the give alert is made
+/atom/movable/screen/alert/give/proc/setup(mob/living/carbon/taker, mob/living/carbon/offerer, obj/item/receiving)
+/atom/movable/screen/alert/give/Click(location, control, params)
+/atom/movable/screen/alert/give/proc/handle_transfer()
+/atom/movable/screen/alert/give/proc/check_in_range(atom/taker)
+/atom/movable/screen/alert/give/highfive/setup(mob/living/carbon/taker, mob/living/carbon/offerer, obj/item/receiving)
+/atom/movable/screen/alert/give/highfive/handle_transfer()
+/atom/movable/screen/alert/give/highfive/proc/too_slow_p1()
+/atom/movable/screen/alert/give/highfive/proc/too_slow_p2()
+/atom/movable/screen/alert/give/highfive/proc/check_fake_out(datum/source, mob/user, list/examine_list)
+/atom/movable/screen/alert/give/secret_handshake
+/atom/movable/screen/alert/give/secret_handshake/setup(mob/living/carbon/taker, mob/living/carbon/offerer, obj/item/receiving)
+/atom/movable/screen/alert/alien_tox
+/atom/movable/screen/alert/alien_fire
+/atom/movable/screen/alert/alien_vulnerable
+/atom/movable/screen/alert/nofactory
+/atom/movable/screen/alert/bloodsense
+/atom/movable/screen/alert/bloodsense/Initialize(mapload)
+/atom/movable/screen/alert/bloodsense/Destroy()
+/atom/movable/screen/alert/bloodsense/process()
+/atom/movable/screen/alert/clockwork
+/atom/movable/screen/alert/clockwork/infodump
+/atom/movable/screen/alert/clockwork/infodump/MouseEntered(location,control,params)
+/atom/movable/screen/alert/cancharge
+/atom/movable/screen/alert/canstealth
+/atom/movable/screen/alert/instealth
+/atom/movable/screen/alert/nocell
+/atom/movable/screen/alert/emptycell
+/atom/movable/screen/alert/lowcell
+/atom/movable/screen/alert/etherealcharge
+/atom/movable/screen/alert/ethereal_overcharge
+/atom/movable/screen/alert/hacked
+/atom/movable/screen/alert/locked
+/atom/movable/screen/alert/newlaw
+/atom/movable/screen/alert/hackingapc
+/atom/movable/screen/alert/hackingapc/Click()
+/atom/movable/screen/alert/low_mech_integrity
+/atom/movable/screen/alert/notify_cloning
+/atom/movable/screen/alert/notify_cloning/Click()
+/atom/movable/screen/alert/notify_action
+/atom/movable/screen/alert/notify_action/Click()
+/atom/movable/screen/alert/restrained/buckled
+/atom/movable/screen/alert/restrained/handcuffed
+/atom/movable/screen/alert/restrained/legcuffed
+/atom/movable/screen/alert/restrained/Click()
+/atom/movable/screen/alert/restrained/buckled/Click()
+/atom/movable/screen/alert/shoes/untied
+/atom/movable/screen/alert/shoes/knotted
+/atom/movable/screen/alert/shoes/Click()
+/atom/movable/screen/alert/Click(location, control, params)
+/atom/movable/screen/alert/Destroy()
+/atom/movable/screen/alien
+/atom/movable/screen/alien/leap
+/atom/movable/screen/alien/leap/Click()
+/atom/movable/screen/alien/plasma_display
+/atom/movable/screen/alien/alien_queen_finder
+/atom/movable/screen/blob
+/atom/movable/screen/blob/MouseEntered(location,control,params)
+/atom/movable/screen/blob/MouseExited()
+/atom/movable/screen/blob/BlobHelp
+/atom/movable/screen/blob/BlobHelp/Click()
+/atom/movable/screen/blob/JumpToNode
+/atom/movable/screen/blob/JumpToNode/Click()
+/atom/movable/screen/blob/JumpToCore
+/atom/movable/screen/blob/JumpToCore/MouseEntered(location,control,params)
+/atom/movable/screen/blob/JumpToCore/Click()
+/atom/movable/screen/blob/Blobbernaut
+/atom/movable/screen/blob/Blobbernaut/Click()
+/atom/movable/screen/blob/ResourceBlob
+/atom/movable/screen/blob/ResourceBlob/Click()
+/atom/movable/screen/blob/NodeBlob
+/atom/movable/screen/blob/NodeBlob/Click()
+/atom/movable/screen/blob/FactoryBlob
+/atom/movable/screen/blob/FactoryBlob/Click()
+/atom/movable/screen/blob/ReadaptStrain
+/atom/movable/screen/blob/ReadaptStrain/MouseEntered(location,control,params)
+/atom/movable/screen/blob/ReadaptStrain/Click()
+/atom/movable/screen/blob/RelocateCore
+/atom/movable/screen/blob/RelocateCore/Click()
+/atom/movable/screen/marauder
+/atom/movable/screen/marauder/emerge
+/atom/movable/screen/marauder/emerge/Click()
+/atom/movable/screen/credit
+/atom/movable/screen/credit/Initialize(mapload, credited, client/P, icon/I)
+/atom/movable/screen/credit/Destroy()
+/atom/movable/screen/credit/proc/FadeOut()
+/atom/movable/screen/wanted
+/atom/movable/screen/wanted/New()
+/atom/movable/screen/wanted/Initialize(mapload)
+/atom/movable/screen/wanted/MouseEntered(location,control,params)
+/atom/movable/screen/wanted/MouseExited()
+/atom/movable/screen/wanted/update_icon_state()
+/atom/movable/screen/ghost
+/atom/movable/screen/ghost/MouseEntered()
+/atom/movable/screen/ghost/jumptomob
+/atom/movable/screen/ghost/jumptomob/Click()
+/atom/movable/screen/ghost/orbit
+/atom/movable/screen/ghost/orbit/Click()
+/atom/movable/screen/ghost/reenter_corpse
+/atom/movable/screen/ghost/reenter_corpse/Click()
+/atom/movable/screen/ghost/teleport
+/atom/movable/screen/ghost/teleport/Click()
+/atom/movable/screen/ghost/spawners
+/atom/movable/screen/ghost/spawners/Click()
+/atom/movable/screen/guardian
+/atom/movable/screen/guardian/Manifest
+/atom/movable/screen/guardian/Manifest/Click()
+/atom/movable/screen/guardian/Recall
+/atom/movable/screen/guardian/Recall/Click()
+/atom/movable/screen/guardian/ToggleMode
+/atom/movable/screen/guardian/ToggleMode/Click()
+/atom/movable/screen/guardian/ToggleMode/Inactive
+/atom/movable/screen/guardian/ToggleMode/Assassin
+/atom/movable/screen/guardian/Communicate
+/atom/movable/screen/guardian/Communicate/Click()
+/atom/movable/screen/guardian/ToggleLight
+/atom/movable/screen/guardian/ToggleLight/Click()
+/atom/movable/screen/human
+/atom/movable/screen/human/toggle
+/atom/movable/screen/human/toggle/Click()
+/atom/movable/screen/human/toggle/extra
+/atom/movable/screen/human/toggle/extra/Click()
+/atom/movable/screen/human/equip
+/atom/movable/screen/human/equip/Click()
+/atom/movable/screen/devil
+/atom/movable/screen/devil/soul_counter
+/atom/movable/screen/devil/soul_counter/proc/update_counter(souls = 0)
+/atom/movable/screen/devil/soul_counter/proc/clear()
+/atom/movable/screen/ling
+/atom/movable/screen/ling/sting
+/atom/movable/screen/ling/sting/Click()
+/atom/movable/screen/ling/chems
+/atom/movable/screen/synth
+/atom/movable/screen/synth/proc/clear()
+/atom/movable/screen/synth/proc/update_counter(mob/living/carbon/human/owner)
+/atom/movable/screen/synth/coolant_counter
+/atom/movable/screen/synth/coolant_counter/update_counter(mob/living/carbon/owner)
+/atom/movable/screen/synth/coolant_counter/examine(mob/user)
+/atom/movable/screen/synth/coolant_counter/proc/jam(amount, cap = 20)
+/atom/movable/screen/map_view
+/atom/movable/screen/background
+/atom/movable/screen/proc/set_position(x, y, px = 0, py = 0)
+/atom/movable/screen/proc/fill_rect(x1, y1, x2, y2)
+/atom/movable/screen/movable
+/atom/movable/screen/movable/snap
+/atom/movable/screen/movable/MouseDrop(over_object, src_location, over_location, src_control, over_control, params)
+/atom/movable/screen/lobby
+/atom/movable/screen/lobby/proc/SlowInit()
+/atom/movable/screen/lobby/background
+/atom/movable/screen/lobby/button
+/atom/movable/screen/lobby/button/Click(location, control, params)
+/atom/movable/screen/lobby/button/MouseEntered(location,control,params)
+/atom/movable/screen/lobby/button/MouseExited()
+/atom/movable/screen/lobby/button/update_icon(updates)
+/atom/movable/screen/lobby/button/proc/set_button_status(status)
+/atom/movable/screen/lobby/button/character_setup
+/atom/movable/screen/lobby/button/character_setup/Click(location, control, params)
+/atom/movable/screen/lobby/button/ready
+/atom/movable/screen/lobby/button/ready/Initialize(mapload)
+/atom/movable/screen/lobby/button/ready/proc/hide_ready_button()
+/atom/movable/screen/lobby/button/ready/proc/show_ready_button()
+/atom/movable/screen/lobby/button/ready/Click(location, control, params)
+/atom/movable/screen/lobby/button/join
+/atom/movable/screen/lobby/button/join/Initialize(mapload)
+/atom/movable/screen/lobby/button/join/Click(location, control, params)
+/atom/movable/screen/lobby/button/join/proc/show_join_button()
+/atom/movable/screen/lobby/button/join/proc/hide_join_button()
+/atom/movable/screen/lobby/button/observe
+/atom/movable/screen/lobby/button/observe/Initialize(mapload)
+/atom/movable/screen/lobby/button/observe/Click(location, control, params)
+/atom/movable/screen/lobby/button/observe/proc/enable_observing()
+/atom/movable/screen/lobby/button/settings
+/atom/movable/screen/lobby/button/settings/Click(location, control, params)
+/atom/movable/screen/lobby/button/changelog_button
+/atom/movable/screen/lobby/button/crew_manifest
+/atom/movable/screen/lobby/button/crew_manifest/Click(location, control, params)
+/atom/movable/screen/lobby/button/changelog_button/Click(location, control, params)
+/atom/movable/screen/lobby/button/poll
+/atom/movable/screen/lobby/button/poll/SlowInit(mapload)
+/atom/movable/screen/lobby/button/poll/update_overlays()
+/atom/movable/screen/lobby/button/poll/Click(location, control, params)
+/atom/movable/screen/movable/pic_in_pic
+/atom/movable/screen/movable/pic_in_pic/Initialize(mapload)
+/atom/movable/screen/movable/pic_in_pic/Destroy()
+/atom/movable/screen/movable/pic_in_pic/component_click(atom/movable/screen/component_button/component, params)
+/atom/movable/screen/movable/pic_in_pic/proc/make_backgrounds()
+/atom/movable/screen/movable/pic_in_pic/proc/add_buttons()
+/atom/movable/screen/movable/pic_in_pic/proc/add_background()
+/atom/movable/screen/movable/pic_in_pic/proc/set_view_size(width, height, do_refresh = TRUE)
+/atom/movable/screen/movable/pic_in_pic/proc/set_view_center(atom/target, do_refresh = TRUE)
+/atom/movable/screen/movable/pic_in_pic/proc/refresh_view()
+/atom/movable/screen/movable/pic_in_pic/proc/get_visible_turfs()
+/atom/movable/screen/movable/pic_in_pic/proc/show_to(client/C)
+/atom/movable/screen/movable/pic_in_pic/proc/unshow_to(client/C)
+/atom/movable/screen/plane_master
+/atom/movable/screen/plane_master/proc/Show(override)
+/atom/movable/screen/plane_master/proc/Hide(override)
+/atom/movable/screen/plane_master/proc/backdrop(mob/mymob)
+/atom/movable/screen/plane_master/openspace
+/atom/movable/screen/plane_master/openspace/Initialize(mapload)
+/atom/movable/screen/plane_master/proc/outline(_size, _color)
+/atom/movable/screen/plane_master/proc/shadow(_size, _offset = 0, _x = 0, _y = 0, _color = "#04080FAA")
+/atom/movable/screen/plane_master/floor
+/atom/movable/screen/plane_master/wall
+/atom/movable/screen/plane_master/wall/backdrop(mob/mymob)
+/atom/movable/screen/plane_master/above_wall
+/atom/movable/screen/plane_master/above_wall/Initialize(mapload)
+/atom/movable/screen/plane_master/above_wall/backdrop(mob/mymob)
+/atom/movable/screen/plane_master/game_world
+/atom/movable/screen/plane_master/game_world/Initialize(mapload)
+/atom/movable/screen/plane_master/game_world/backdrop(mob/mymob)
+/atom/movable/screen/plane_master/field_of_vision
+/atom/movable/screen/plane_master/field_of_vision/Initialize(mapload)
+/atom/movable/screen/plane_master/field_of_vision_blocker
+/atom/movable/screen/plane_master/field_of_vision_visual
+/atom/movable/screen/plane_master/field_of_vision_visual/Initialize(mapload)
+/atom/movable/screen/plane_master/lighting
+/atom/movable/screen/plane_master/lighting/backdrop(mob/mymob)
+/atom/movable/screen/plane_master/lighting/Initialize(mapload)
+/atom/movable/screen/plane_master/emissive
+/atom/movable/screen/plane_master/emissive/Initialize(mapload)
+/atom/movable/screen/plane_master/parallax
+/atom/movable/screen/plane_master/parallax_white
+/atom/movable/screen/plane_master/camera_static
+/atom/movable/screen/plane_master/chat_messages
+/atom/movable/screen/radial
+/atom/movable/screen/radial/slice
+/atom/movable/screen/radial/slice/MouseEntered(location, control, params)
+/atom/movable/screen/radial/slice/MouseExited(location, control, params)
+/atom/movable/screen/radial/slice/Click(location, control, params)
+/atom/movable/screen/radial/center
+/atom/movable/screen/radial/center/MouseEntered(location, control, params)
+/atom/movable/screen/radial/center/MouseExited(location, control, params)
+/atom/movable/screen/radial/center/Click(location, control, params)
+/atom/movable/screen/radial/persistent/center
+/atom/movable/screen/radial/persistent/center/Click(location, control, params)
+/atom/movable/screen/radial/persistent/center/MouseEntered(location, control, params)
+/atom/movable/screen/radial/persistent/center/MouseExited(location, control, params)
+/atom/movable/screen/robot
+/atom/movable/screen/robot/module
+/atom/movable/screen/robot/Click()
+/atom/movable/screen/robot/module/Click()
+/atom/movable/screen/robot/module1
+/atom/movable/screen/robot/module1/Click()
+/atom/movable/screen/robot/module2
+/atom/movable/screen/robot/module2/Click()
+/atom/movable/screen/robot/module3
+/atom/movable/screen/robot/module3/Click()
+/atom/movable/screen/robot/radio
+/atom/movable/screen/robot/radio/Click()
+/atom/movable/screen/robot/store
+/atom/movable/screen/robot/store/Click()
+/atom/movable/screen/robot/lamp
+/atom/movable/screen/robot/lamp/Click()
+/atom/movable/screen/robot/lamp/update_icon()
+/atom/movable/screen/robot/lamp/Destroy()
+/atom/movable/screen/robot/alerts
+/atom/movable/screen/robot/alerts/Click()
+/atom/movable/screen/robot/thrusters
+/atom/movable/screen/robot/thrusters/Click()
+/atom/movable/screen/robot/sensors
+/atom/movable/screen/robot/sensors/Click()
+/atom/movable/screen/robot/modPC
+/atom/movable/screen/robot/modPC/Destroy()
+/atom/movable/screen/robot/modPC/Click()
+/atom/movable/screen/robot/pda_msg_send
+/atom/movable/screen/robot/pda_msg_send/Click()
+/atom/movable/screen/robot/pda_msg_show
+/atom/movable/screen/robot/pda_msg_show/Click()
+/atom/movable/screen/screentip
+/atom/movable/screen/screentip/Initialize(mapload, _hud)
+/atom/movable/screen/screentip/proc/update_view(datum/source)
+/atom/movable/screen
+/atom/movable/screen/Destroy()
+/atom/movable/screen/examine(mob/user)
+/atom/movable/screen/orbit()
+/atom/movable/screen/proc/component_click(atom/movable/screen/component_button/component, params)
+/atom/movable/screen/text
+/atom/movable/screen/swap_hand
+/atom/movable/screen/swap_hand/Click()
+/atom/movable/screen/craft
+/atom/movable/screen/area_creator
+/atom/movable/screen/area_creator/Click()
+/atom/movable/screen/language_menu
+/atom/movable/screen/language_menu/Click()
+/atom/movable/screen/inventory
+/atom/movable/screen/inventory/Click(location, control, params)
+/atom/movable/screen/inventory/MouseEntered(location, control, params)
+/atom/movable/screen/inventory/MouseExited()
+/atom/movable/screen/inventory/update_icon_state()
+/atom/movable/screen/inventory/proc/add_overlays()
+/atom/movable/screen/inventory/hand
+/atom/movable/screen/inventory/hand/update_overlays()
+/atom/movable/screen/inventory/hand/Click(location, control, params)
+/atom/movable/screen/drop
+/atom/movable/screen/drop/Click()
+/atom/movable/screen/act_intent
+/atom/movable/screen/act_intent/Click(location, control, params)
+/atom/movable/screen/act_intent/segmented/Click(location, control, params)
+/atom/movable/screen/act_intent/alien
+/atom/movable/screen/act_intent/robot
+/atom/movable/screen/internals
+/atom/movable/screen/internals/Click()
+/atom/movable/screen/mov_intent
+/atom/movable/screen/mov_intent/Initialize(mapload)
+/atom/movable/screen/mov_intent/Click()
+/atom/movable/screen/mov_intent/update_icon_state()
+/atom/movable/screen/mov_intent/proc/toggle(mob/user)
+/atom/movable/screen/pull
+/atom/movable/screen/pull/Click()
+/atom/movable/screen/pull/update_icon_state()
+/atom/movable/screen/resist
+/atom/movable/screen/resist/Click()
+/atom/movable/screen/rest
+/atom/movable/screen/rest/Click()
+/atom/movable/screen/rest/update_icon_state()
+/atom/movable/screen/throw_catch
+/atom/movable/screen/throw_catch/Click()
+/atom/movable/screen/zone_sel
+/atom/movable/screen/zone_sel/Click(location, control,params)
+/atom/movable/screen/zone_sel/MouseEntered(location, control, params)
+/atom/movable/screen/zone_sel/MouseMove(location, control, params)
+/atom/movable/screen/zone_sel/MouseExited(location, control, params)
+/atom/movable/screen/zone_sel/proc/get_zone_at(icon_x, icon_y)
+/atom/movable/screen/zone_sel/proc/set_selected_zone(choice, mob/user)
+/atom/movable/screen/zone_sel/update_overlays()
+/atom/movable/screen/zone_sel/alien
+/atom/movable/screen/zone_sel/robot
+/atom/movable/screen/flash
+/atom/movable/screen/damageoverlay
+/atom/movable/screen/healths
+/atom/movable/screen/healths/alien
+/atom/movable/screen/healths/robot
+/atom/movable/screen/healths/blob
+/atom/movable/screen/healths/blob/naut
+/atom/movable/screen/healths/blob/naut/core
+/atom/movable/screen/healths/guardian
+/atom/movable/screen/healths/clock
+/atom/movable/screen/healths/clock/gear
+/atom/movable/screen/healths/revenant
+/atom/movable/screen/healths/construct
+/atom/movable/screen/healths/lavaland_elite
+/atom/movable/screen/healthdoll
+/atom/movable/screen/healthdoll/Click()
+/atom/movable/screen/healthdoll/living
+/atom/movable/screen/mood
+/atom/movable/screen/mood/attack_tk()
+/atom/movable/screen/splash
+/atom/movable/screen/splash/New(client/C, visible, use_previous_title) //TODO: Make this use INITIALIZE_IMMEDIATE, except its not easy
+/atom/movable/screen/splash/proc/Fade(out, qdel_after = TRUE)
+/atom/movable/screen/splash/Destroy()
+/atom/movable/screen/component_button
+/atom/movable/screen/component_button/Initialize(mapload, atom/movable/screen/parent)
+/atom/movable/screen/component_button/Click(params)
+/atom/movable/screen/combo
+/atom/movable/screen/combo/proc/clear_streak()
+/atom/movable/screen/combo/update_icon_state(streak = "")
+/atom/movable/screen/swarmer
+/atom/movable/screen/swarmer/FabricateTrap
+/atom/movable/screen/swarmer/FabricateTrap/Click()
+/atom/movable/screen/swarmer/Barricade
+/atom/movable/screen/swarmer/Barricade/Click()
+/atom/movable/screen/swarmer/Replicate
+/atom/movable/screen/swarmer/Replicate/Click()
+/atom/movable/screen/swarmer/RepairSelf
+/atom/movable/screen/swarmer/RepairSelf/Click()
+/atom/movable/screen/swarmer/ToggleLight
+/atom/movable/screen/swarmer/ToggleLight/Click()
+/atom/movable/screen/swarmer/ContactSwarmers
+/atom/movable/screen/swarmer/ContactSwarmers/Click()
+/atom/movable/screen/action_bar
+/atom/movable/screen/action_bar/Destroy()
+/atom/movable/screen/action_bar/proc/mark_dirty()
+/atom/movable/screen/action_bar/process()
+/atom/movable/screen/action_bar/proc/update_to_mob(mob/living/L)
+/atom/movable/screen/action_bar/clickdelay
+/atom/movable/screen/action_bar/clickdelay/Initialize(mapload)
+/atom/movable/screen/action_bar/clickdelay/update_to_mob(mob/living/L)
+/atom/movable/screen/action_bar/resistdelay
+/atom/movable/screen/action_bar/resistdelay/update_to_mob(mob/living/L)
+/atom/movable/screen/mov_intent
+/atom/movable/screen/sprintbutton
+/atom/movable/screen/sprintbutton/Click()
+/atom/movable/screen/sprintbutton/update_icon_state()
+/atom/movable/screen/sprintbutton/update_overlays()
+/atom/movable/screen/sprint_buffer
+/atom/movable/screen/sprint_buffer/Click()
+/atom/movable/screen/sprint_buffer/proc/update_to_mob(mob/living/L)
+/atom/movable/screen/staminas
+/atom/movable/screen/staminas/Click(location,control,params)
+/atom/movable/screen/staminas/update_icon_state()
+/atom/movable/screen/staminas/update_overlays()
+/atom/movable/screen/staminabuffer
+/atom/movable/screen/staminabuffer/proc/mark_dirty()
+/atom/movable/screen/staminabuffer/process()
+/atom/movable/screen/staminabuffer/Destroy()
+/atom/movable/screen/staminabuffer/proc/update_to_mob()
+/atom/movable/screen/storage
+/atom/movable/screen/storage/Initialize(mapload, new_master)
+/atom/movable/screen/storage/Click(location, control, params)
+/atom/movable/screen/storage/boxes
+/atom/movable/screen/storage/close
+/atom/movable/screen/storage/close/Click()
+/atom/movable/screen/storage/left
+/atom/movable/screen/storage/right
+/atom/movable/screen/storage/continuous
+/atom/movable/screen/storage/volumetric_box
+/atom/movable/screen/storage/volumetric_box/Initialize(mapload, new_master, obj/item/our_item)
+/atom/movable/screen/storage/volumetric_box/Destroy()
+/atom/movable/screen/storage/volumetric_box/Click(location, control, params)
+/atom/movable/screen/storage/volumetric_box/MouseDrop(atom/over, src_location, over_location, src_control, over_control, params)
+/atom/movable/screen/storage/volumetric_box/MouseExited(location, control, params)
+/atom/movable/screen/storage/volumetric_box/MouseEntered(location, control, params)
+/atom/movable/screen/storage/volumetric_box/proc/on_item_mouse_enter()
+/atom/movable/screen/storage/volumetric_box/proc/on_item_mouse_exit()
+/atom/movable/screen/storage/volumetric_box/proc/makeItemInactive()
+/atom/movable/screen/storage/volumetric_box/proc/makeItemActive()
+/atom/movable/screen/storage/volumetric_box/center
+/atom/movable/screen/storage/volumetric_box/center/Initialize(mapload, new_master, our_item)
+/atom/movable/screen/storage/volumetric_box/center/Destroy()
+/atom/movable/screen/storage/volumetric_box/center/proc/on_screen_objects()
+/atom/movable/screen/storage/volumetric_box/center/proc/set_pixel_size(pixels)
+/atom/movable/screen/storage/volumetric_box/center/makeItemInactive()
+/atom/movable/screen/storage/volumetric_box/center/makeItemActive()
+/atom/movable/screen/storage/volumetric_edge
+/atom/movable/screen/storage/volumetric_edge/Initialize(mapload, master, our_item)
+/atom/movable/screen/storage/volumetric_edge/Click(location, control, params)
+/atom/movable/screen/storage/volumetric_edge/MouseDrop(atom/over, src_location, over_location, src_control, over_control, params)
+/atom/movable/screen/storage/volumetric_edge/MouseExited(location, control, params)
+/atom/movable/screen/storage/volumetric_edge/MouseEntered(location, control, params)
+/atom/movable/screen/storage/volumetric_edge/stored_left
+/atom/movable/screen/storage/volumetric_edge/stored_right
+/atom/movable/screen/storage/item_holder
+/atom/movable/screen/storage/item_holder/Initialize(mapload, new_master, obj/item/I)
+/atom/movable/screen/storage/item_holder/Destroy()
+/atom/movable/screen/storage/item_holder/Click(location, control, params)
+/atom/movable/screen/voretoggle
+/atom/movable/screen/voretoggle/Click()
+/atom/movable/screen/voretoggle/update_icon_state()
+/atom
+/atom/proc/remove_alt_appearance(key)
+/atom/proc/add_alt_appearance(type, key, ...)
+/atom/proc/add_to_all_human_data_huds()
+/atom/proc/remove_from_all_data_huds()
+/atom/movable/screen/click_catcher
+/atom/movable/screen/click_catcher/proc/UpdateFill(view_size_x = 15, view_size_y = 15)
+/atom/movable/screen/click_catcher/proc/UpdateFill(view_size_x, view_size_y)
+/atom/movable/screen/click_catcher/Click(location, control, params)
+/atom/movable/screen/click_catcher/proc/Parse(scr_loc, turf/origin, client/C)
+/atom/movable/screen/fullscreen
+/atom/movable/screen/fullscreen/proc/SetSeverity(severity)
+/atom/movable/screen/fullscreen/proc/SetView(client_view)
+/atom/movable/screen/fullscreen/proc/ShouldShow(mob/M)
+/atom/movable/screen/fullscreen/Destroy()
+/atom/movable/screen/fullscreen/scaled
+/atom/movable/screen/fullscreen/scaled/SetView(client_view)
+/atom/movable/screen/fullscreen/scaled/brute
+/atom/movable/screen/fullscreen/scaled/oxy
+/atom/movable/screen/fullscreen/scaled/crit
+/atom/movable/screen/fullscreen/scaled/crit/vision
+/atom/movable/screen/fullscreen/scaled/blind
+/atom/movable/screen/fullscreen/scaled/curse
+/atom/movable/screen/fullscreen/scaled/impaired
+/atom/movable/screen/fullscreen/scaled/emergency_meeting
+/atom/movable/screen/fullscreen/tiled/blurry
+/atom/movable/screen/fullscreen/tiled/flash
+/atom/movable/screen/fullscreen/tiled/flash/static
+/atom/movable/screen/fullscreen/tiled/high
+/atom/movable/screen/fullscreen/tiled/color_vision
+/atom/movable/screen/fullscreen/tiled/color_vision/green
+/atom/movable/screen/fullscreen/tiled/color_vision/red
+/atom/movable/screen/fullscreen/tiled/color_vision/blue
+/atom/movable/screen/fullscreen/tiled/cinematic_backdrop
+/atom/movable/screen/fullscreen/special/lighting_backdrop
+/atom/movable/screen/fullscreen/special/lighting_backdrop/lit
+/atom/movable/screen/fullscreen/special/lighting_backdrop/unlit
+/atom/movable/screen/fullscreen/special/see_through_darkness
+/atom/movable/screen/parallax_vis
+/atom/movable/screen/parallax_layer
+/atom/movable/screen/parallax_layer/proc/ResetPosition(x, y)
+/atom/movable/screen/parallax_layer/proc/RelativePosition(x, y, rel_x, rel_y)
+/atom/movable/screen/parallax_layer/proc/SetView(client_view = world.view, force_update = FALSE)
+/atom/movable/screen/parallax_layer/proc/ShouldSee(client/C, atom/location)
+/atom/movable/screen/parallax_layer/proc/GetOverlays()
+/atom/movable/screen/parallax_layer/proc/Clone()
+/atom/movable/screen/parallax_layer/proc/default_x()
+/atom/movable/screen/parallax_layer/proc/default_y()
+/atom/movable/screen/parallax_layer/proc/QueueLoop(delay, speed, matrix/translate_matrix, matrix/target_matrix)
+/atom/movable/screen/parallax_layer/proc/_loop(speed, matrix/translate_matrix = matrix(1, 0, 0, 0, 1, 480), matrix/target_matrix = matrix())
+/atom/movable/screen/parallax_layer/proc/CancelAnimation()
+/atom/movable/screen/parallax_layer/space/layer_1
+/atom/movable/screen/parallax_layer/space/layer_2
+/atom/movable/screen/parallax_layer/space/layer_3
+/atom/movable/screen/parallax_layer/space/random
+/atom/movable/screen/parallax_layer/space/random/space_gas
+/atom/movable/screen/parallax_layer/space/random/asteroids
+/atom/movable/screen/parallax_layer/space/planet
+/atom/movable/screen/parallax_layer/space/planet/ShouldSee(client/C, atom/location)
+/atom/proc/DrawPixelOn(colour, drawX, drawY)
+/atom/var/smooth = SMOOTH_FALSE
+/atom/var/top_left_corner
+/atom/var/top_right_corner
+/atom/var/bottom_left_corner
+/atom/var/bottom_right_corner
+/atom/var/list/canSmoothWith = null // TYPE PATHS I CAN SMOOTH WITH~~~~~ If this is null and atom is smooth, it smooths only with itself
+/atom/movable/var/can_be_unanchored = FALSE
+/atom/proc/diagonal_smooth(adjacencies)
+/atom/proc/clear_smooth_overlays()
+/atom/proc/replace_smooth_overlays(nw, ne, sw, se)
+/atom/proc/shake_animation(var/intensity = 8) //Makes the object visibly shake
+/atom/proc/GetAllContents(var/T)
+/atom/proc/GetAllContentsIgnoring(list/ignore_typecache)
+/atom/proc/contains(var/atom/A)
+/atom/proc/Shake(pixelshiftx = 15, pixelshifty = 15, duration = 250)
+/atom/proc/do_jiggle(targetangle = 25, timer = 20)
+/atom/proc/do_squish(squishx = 1.2, squishy = 0.6, timer = 20)
+/atom/movable/proc/vector_translate(var/datum/vector/V, var/delay)
+/atom/proc/get_translated_turf(var/datum/vector/V)
+/atom/proc/SpinAnimation(speed = 10, loops = -1, clockwise = 1, segments = 3, parallel = TRUE)
+/atom
+/atom/proc/get_fake_z()
+/atom/movable/screen/alert/status_effect/argent
+/atom/emag_act()
+/atom/movable/screen/chronos_target
+/atom/movable/screen/chronos_target/New(loc, var/mob/living/carbon/human/user)
+/atom/movable/screen/hunger
+/atom/movable/screen/thirst
+/atom/movable/screen/healthdoll/Click(location, control, params)
+/atom/movable/screen/sanity
+/atom/movable/screen/alert/status_effect/pregnancy
+/atom/movable/screen/alert/status_effect/lactation
+/atom
+/atom/log_message(message, message_type, color=null, log_globally=TRUE) //This is only a "temporal" measure until cit and tg decide to fix their shit
+/atom/movable/Initialize(mapload)
+/atom/movable/Destroy()
+/atom/movable/proc/handle_special_bark(atom/movable/source, list/hearers, distance, volume, pitch)
+/atom/movable/bark(list/hearers, distance, volume, pitch)
+/atom/proc/add_cum_overlay() //This can go in a better spot, for now its here.
+/atom/proc/wash_cum()
+/atom/movable/screen/arousal
+/atom/movable/screen/arousal/Initialize(mapload, mob/living/carbon/human/owner)
+/atom/movable/screen/arousal/Click()
+/atom/movable/screen/arousal/proc/update_lust(mob/living/carbon/human/source)
+/atom/attack_ghost(mob/dead/observer/user)
+/atom/movable/screen/lobby/button/Click(location, control, params)
+/atom/movable/screen/healths/qareen
+/atom/movable/screen/navigate
+/atom/movable/screen/navigate/Click()
+/atom/movable/screen/fullscreen/ivanov_display
+/atom/movable/proc/transformation_animation(result_appearance,time = 3 SECONDS,transform_overlay,reset_after=TRUE)
+/atom/movable/proc/_reset_transformation_animation(filter_index)
+/atom/proc/do_twist(targetangle = 45, timer = 20)
