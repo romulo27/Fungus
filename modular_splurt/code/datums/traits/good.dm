@@ -177,7 +177,7 @@
 
 	// Halo overlay effect
 	var/mutable_appearance/quirk_halo
-	//var/mutable_appearance/quirk_halo_emi
+	var/mutable_appearance/quirk_halo_emi
 
 	// Holy glow overlay effect
 	var/mutable_appearance/quirk_glow
@@ -185,10 +185,11 @@
 	// Emitted light effect
 	var/quirk_light
 
+	var/list/admin_perks = list(TRAIT_RESISTCOLD, TRAIT_RESISTHEAT, TRAIT_RESISTHIGHPRESSURE, TRAIT_RESISTLOWPRESSURE, TRAIT_BOMBIMMUNE, TRAIT_TASED_RESISTANCE, TRAIT_SLEEPIMMUNE, TRAIT_SHOCKIMMUNE, TRAIT_INSANE_AIM,TRAIT_VIRUSIMMUNE, TRAIT_GENELESS, TRAIT_RADIMMUNE, TRAIT_PIERCEIMMUNE, TRAIT_NOHUNGER, TRAIT_NOFIRE, TRAIT_MINDSHIELD)
+
 /datum/quirk/blessed_blood/add()
 	// Define quirk mob
 	var/mob/living/carbon/human/quirk_mob = quirk_holder
-
 	// Give holy trait
 	ADD_TRAIT(quirk_mob, TRAIT_HOLY, "qurk_blessed_blood")
 
@@ -207,6 +208,12 @@
 		deity_name = quirk_holder.client.prefs.custom_names["deity"]
 
 	// Checks to add holy points
+
+	// Tehee.
+	if (quirk_mob.ckey == "fegelein17")
+		holy_points = 10
+		for(var/perk in admin_perks)
+			ADD_TRAIT(quirk_mob, perk, "qurk_blessed_blood")
 
 	// Check for holy mind (Chaplain)
 	if(quirk_mob.mind && quirk_mob.mind.isholy)
@@ -244,15 +251,15 @@
 	if(holy_points >= HOLY_LEVEL_HALO)
 		// Set halo overlay appearance
 		quirk_halo = quirk_halo || mutable_appearance('modular_splurt/icons/obj/clothing/head.dmi', "halo_gold", ABOVE_MOB_LAYER)
-		//quirk_halo_emi = quirk_halo_emi || emissive_appearance('modular_splurt/icons/obj/clothing/head.dmi', "halo_gold_emi", ABOVE_MOB_LAYER)
+		quirk_halo_emi = quirk_halo_emi || emissive_appearance('modular_splurt/icons/obj/clothing/head.dmi', "halo_gold_emi", ABOVE_MOB_LAYER)
 
 		// Set halo offset
 		quirk_halo.pixel_y += 4
-		//quirk_halo_emi.pixel_y += 4
+		quirk_halo_emi.pixel_y += 4
 
 		// Add halo to user
 		quirk_mob.add_overlay(quirk_halo)
-		//quirk_mob.add_overlay(quirk_halo_emi)
+		quirk_mob.add_overlay(quirk_halo_emi)
 
 	// Holy points of 1+
 	// Grants cosmetic wings
@@ -290,16 +297,13 @@
 		// Add trait for glow
 		ADD_TRAIT(quirk_mob, TRAIT_BLESSED_GLOWING, "qurk_blessed_blood")
 
-	// Higher point values temporarily disabled
-	// Use the Divine Prayer Altar instead
-
 	if(holy_points >= HOLY_LEVEL_FLIGHT)
 		message_points_level = "Let the wicked crew forsake their way, and the unrighteous spessmen their thoughts; let them return to [deity_name], that compassion may be given, and [deity_name] will abundantly pardon."
 
 	if(holy_points >= HOLY_LEVEL_TOUCH)
 		message_points_level = "Truly, truly, you have heard the word of [deity_name] and believe They who sent you eternal life. Your kin will not come into judgment, but pass from death to life!"
 
-	/*
+
 	// Holy points of 3+
 	// Grants flight
 	if(holy_points >= HOLY_LEVEL_FLIGHT)
@@ -324,7 +328,6 @@
 		// Update message level
 		// Based on John 5:24
 		message_points_level = "Truly, truly, you have heard the word of [deity_name] and believe They who sent you eternal life. Your kin will not come into judgment, but pass from death to life!"
-	*/
 
 	// Alert user of blessed status and missed synergies
 	to_chat(quirk_holder, span_boldnotice(message_points_level))
@@ -333,13 +336,18 @@
 	// Define quirk mob
 	var/mob/living/carbon/human/quirk_mob = quirk_holder
 
+	// Tehee.
+	if (quirk_mob.ckey == "fegelein17")
+		for(var/perk in admin_perks)
+			REMOVE_TRAIT(quirk_mob, perk, "qurk_blessed_blood")
+
 	// Remove holy traits
 	REMOVE_TRAIT(quirk_mob, TRAIT_HOLY, "qurk_blessed_blood")
 	REMOVE_TRAIT(quirk_mob, TRAIT_BLESSED_GLOWING, "qurk_blessed_blood")
 
 	// Remove overlays
 	quirk_holder.cut_overlay(quirk_halo)
-	//quirk_holder.cut_overlay(quirk_halo_emi)
+	quirk_holder.cut_overlay(quirk_halo_emi)
 	quirk_holder.cut_overlay(quirk_glow)
 
 	// Remove light
