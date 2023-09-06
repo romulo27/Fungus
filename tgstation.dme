@@ -4849,7 +4849,6 @@
 #include "modular_splurt\code\modules\power\cell.dm"
 #include "modular_splurt\code\modules\power\reactor\fluffed.dm"
 #include "modular_splurt\code\modules\power\reactor\rbmk.dm"
-#include "modular_splurt\code\modules\power\supermatter\supermatter.dm"
 #include "modular_splurt\code\modules\projectiles\modpins.dm"
 #include "modular_splurt\code\modules\projectiles\ammunition\ballistic\pistol.dm"
 #include "modular_splurt\code\modules\projectiles\ammunition\ballistic\smg.dm"

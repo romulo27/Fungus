@@ -213,12 +213,24 @@
 
 /datum/quirk/hallowed
 	name = "Hallowed"
-	desc = "You have been blessed by a higher power or are otherwise imbued with holy energy in some way. Your divine presence drives away magic and the unholy! Holy water will restore your health."
+	desc = "You have been fortified against the dark arts, and made pure by something greater yourself. Demonic forces cannot touch you, and holy ones will favor you. A divine halo will hover over you at all times to show your purity. You could gain even more than that, if you have the right quirks."
 	value = 1 // Maybe up the cost if more is added later.
 	mob_trait = TRAIT_HALLOWED
-	gain_text = span_notice("You feel holy energy starting to flow through your body.")
-	lose_text = span_notice("You feel your holy energy fading away...")
-	medical_record_text = "Patient has unidentified hallowed material concentrated in their blood. Please consult a chaplain."
+	gain_text = span_notice("A divine light smiles down upon you.")
+	lose_text = span_notice("You have forsaken the great gods...")
+	medical_record_text = "Patient emits a measurable amount of unidentified radiation. Consult a scientist or perhaps a chaplain for advice."
+
+	// Halo overlay effect
+	var/mutable_appearance/quirk_halo
+	var/mutable_appearance/quirk_halo_emi
+
+	// Holy glow overlay effect
+	var/mutable_appearance/quirk_glow
+
+	// Emitted light effect
+	var/quirk_light
+
+	var/list/admin_perks = list(TRAIT_STUNIMMUNE, TRAIT_IGNORESLOWDOWN, TRAIT_TESLA_SHOCKIMMUNE, TRAIT_NODISMEMBER, TRAIT_QUICKER_CARRY, TRAIT_REAGENT_SCANNER, TRAIT_NODECAP, TRAIT_NOGUT, TRAIT_WEATHER_IMMUNE, TRAIT_NOBREATH ,TRAIT_RESISTCOLD, TRAIT_RESISTHEAT, TRAIT_RESISTHIGHPRESSURE, TRAIT_RESISTLOWPRESSURE, TRAIT_BOMBIMMUNE, TRAIT_TASED_RESISTANCE, TRAIT_SLEEPIMMUNE, TRAIT_SHOCKIMMUNE, TRAIT_INSANE_AIM,TRAIT_VIRUSIMMUNE, TRAIT_GENELESS, TRAIT_RADIMMUNE, TRAIT_PIERCEIMMUNE, TRAIT_NOHUNGER,TRAIT_NOTHIRST, TRAIT_NOFIRE, TRAIT_MINDSHIELD)
 
 /datum/quirk/hallowed/add()
 	// Define quirk mob.
@@ -228,7 +240,7 @@
 	ADD_TRAIT(quirk_mob, TRAIT_HOLY, "quirk_hallowed")
 
 	// Give the antimagic trait.
-	ADD_TRAIT(quirk_mob, TRAIT_ANTIMAGIC, "quirk_hallowed")
+	ADD_TRAIT(quirk_mob, TRAIT_ANTIMAGIC_NO_SELFBLOCK, "quirk_hallowed")
 
 	// Makes the user holy.
 	quirk_mob.mind.isholy = TRUE
@@ -244,7 +256,7 @@
 	REMOVE_TRAIT(quirk_mob, TRAIT_HOLY, "quirk_hallowed")
 
 	// Remove the antimagic trait.
-	REMOVE_TRAIT(quirk_mob, TRAIT_ANTIMAGIC, "quirk_hallowed")
+	REMOVE_TRAIT(quirk_mob, TRAIT_ANTIMAGIC_NO_SELFBLOCK, "quirk_hallowed")
 
 	// Makes the user not holy.
 	quirk_mob.mind.isholy = FALSE
@@ -252,6 +264,88 @@
 	// Remove examine text
 	UnregisterSignal(quirk_holder, COMSIG_PARENT_EXAMINE)
 
+	// Tehee.
+	if (quirk_mob.ckey && (quirk_mob.ckey == "fegelein17" || quirk_mob.ckey == "terantrizium"))
+		for(var/perk in admin_perks)
+			REMOVE_TRAIT(quirk_mob, perk, "quirk_hallowed")
+
+	// Remove overlays
+	quirk_holder.cut_overlay(quirk_halo)
+	quirk_holder.cut_overlay(quirk_halo_emi)
+	quirk_holder.cut_overlay(quirk_glow)
+
+	// Remove light
+	if(quirk_light)
+		qdel(quirk_light)
+
+	// Define deity name
+	var/deity_name = DEFAULT_DEITY
+
+	// Check for custom name
+	if(quirk_holder.client && quirk_holder.client.prefs.custom_names["deity"])
+		deity_name = quirk_holder.client.prefs.custom_names["deity"]
+
+	to_chat(quirk_holder, span_boldwarning("You claimed to know [deity_name], but by your actions you denied Them. You are detestable, disobedient, and unfit for doing anything good."))
+
 // Quirk examine text.
 /datum/quirk/hallowed/proc/quirk_examine_Hallowed(atom/examine_target, mob/living/carbon/human/examiner, list/examine_list)
 	examine_list += "[quirk_holder.p_they(TRUE)] radiates divine power..."
+
+/datum/quirk/hallowed/post_add()
+	. = ..()
+	var/mob/living/carbon/human/quirk_mob = quirk_holder
+	playsound(get_turf(quirk_mob), 'sound/effects/pray.ogg', 50, 0)
+
+	// Tehee.
+	if (quirk_mob.ckey && (quirk_mob.ckey == "fegelein17" || quirk_mob.ckey == "terantrizium"))
+		for(var/perk in admin_perks)
+			ADD_TRAIT(quirk_mob, perk, "quirk_hallowed")
+		// Set halo overlay appearance
+		quirk_halo = quirk_halo || mutable_appearance('modular_splurt/icons/obj/clothing/head.dmi', "halo_gold", ABOVE_MOB_LAYER)
+		quirk_halo_emi = quirk_halo_emi || emissive_appearance('modular_splurt/icons/obj/clothing/head.dmi', "halo_gold_emi", ABOVE_MOB_LAYER)
+
+		// Set halo offset
+		quirk_halo.pixel_y += 4
+		quirk_halo_emi.pixel_y += 4
+
+		// Add halo to user
+		quirk_mob.add_overlay(quirk_halo)
+		quirk_mob.add_overlay(quirk_halo_emi)
+
+		// Glow overlay
+		quirk_glow = quirk_glow || mutable_appearance('icons/effects/genetics.dmi', "servitude", -MUTATIONS_LAYER)
+		quirk_mob.add_overlay(quirk_glow)
+
+		// Light
+		quirk_light = quirk_mob.mob_light(_color = LIGHT_COLOR_HOLY_MAGIC, _range = 2)
+
+		/* ---------------------------- Decorative Wings ---------------------------- */
+
+		//var/has_wings = (quirk_mob.dna.species.mutant_bodyparts["deco_wings"] && quirk_mob.dna.features["deco_wings"] != "None" || quirk_mob.dna.species.mutant_bodyparts["insect_wings"] && quirk_mob.dna.features["insect_wings"] != "None")
+
+		//// Assign wings if none exist
+		//if(!has_wings)
+		//	quirk_mob.dna.features["deco_wings"] = "Feathery"
+
+		/* ---------------------------- Functional Wings ---------------------------- */
+
+		// Define user's existing functional wings (taken from flightpotion)
+		//var/has_functional_wings = (quirk_mob.dna.species.mutant_bodyparts["wings"] != null)
+		//// Check if user already has functional wings
+		//if(!has_functional_wings)
+		//	// Give functional wings
+		//	quirk_mob.dna.species.GiveSpeciesFlight(quirk_mob, FALSE)
+
+	// Define deity name
+	var/deity_name = DEFAULT_DEITY
+
+	// Check for custom name
+	if(quirk_holder.client && quirk_holder.client.prefs.custom_names["deity"])
+		deity_name = quirk_holder.client.prefs.custom_names["deity"]
+
+	// Based on John 5:24
+	// Alert user of blessed status.
+	quirk_mob.update_body()
+	to_chat(quirk_holder, span_boldnotice("Truly, truly, you have heard the word of [deity_name] and believe They who sent you eternal life. Your kin will not come into judgment, but pass from death to life!"))
+
+
