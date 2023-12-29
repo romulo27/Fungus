@@ -33,22 +33,51 @@ class Program
 		List<string> turfs = new List<string>();
 		List<string> datums = new List<string>();
 		List<string> misc = new List<string>();
+		List<string> comments = new List<string>();
 
 		int read = 0;
 		foreach(string file in files)
 		{
 			read++;
-			if (read % 10 == 0)
+			if (read % 50 == 0)
 			{
 				Console.WriteLine("Read " + read + " out of " + files.Count());
 			}
 			using (StreamReader sr = new StreamReader(file))
 			{
+				string f = "-- FILE: " + file  + ". ----------------------";
+				atoms.Add(f);
+				mobs.Add(f);
+				objs.Add(f);
+				areas.Add(f);
+				turfs.Add(f);
+				datums.Add(f);
+				misc.Add(f);
+				comments.Add(f);
 				while(sr.Peek() > -1)
 				{
 					string line = sr.ReadLine();
-					if (line.StartsWith("/") && !line.StartsWith("//"))
+					if (line.StartsWith("/"))
 					{
+						if (line.StartsWith("//"))
+						{
+							read++;
+							comments.Add(line);
+							continue;
+						} else
+						if (line.StartsWith("/*"))
+						{
+							while (!line.Contains("*/"))
+							{
+								read++;
+								comments.Add(line);
+								line = sr.ReadLine();
+							}
+							read++;
+							comments.Add(line);
+							continue;
+						}
+
 						string[] split = line.Split("/");
 						switch(split[1])
 						{
@@ -89,7 +118,7 @@ class Program
 			foreach(string line in atoms)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + atoms.Count());
 				sw.WriteLine(line);
 			}
@@ -102,7 +131,7 @@ class Program
 			foreach(string line in datums)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + datums.Count());
 				sw.WriteLine(line);
 			}
@@ -115,7 +144,7 @@ class Program
 			foreach(string line in objs)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + objs.Count());
 				sw.WriteLine(line);
 			}
@@ -128,7 +157,7 @@ class Program
 			foreach(string line in turfs)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + turfs.Count());
 				sw.WriteLine(line);
 			}
@@ -141,7 +170,7 @@ class Program
 			foreach(string line in areas)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + areas.Count());
 				sw.WriteLine(line);
 			}
@@ -154,7 +183,7 @@ class Program
 			foreach(string line in mobs)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + mobs.Count());
 				sw.WriteLine(line);
 			}
@@ -167,8 +196,21 @@ class Program
 			foreach(string line in misc)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + misc.Count());
+				sw.WriteLine(line);
+			}
+		}
+		Console.WriteLine("Writing comments...");
+		written = 0;
+		using(StreamWriter sw = new StreamWriter("comments.txt"))
+		{
+			written = 0;
+			foreach(string line in comments)
+			{
+				written++;
+				if (written % 50 == 0)
+					Console.WriteLine("Wrote " + written + " out of " + comments.Count());
 				sw.WriteLine(line);
 			}
 		}
