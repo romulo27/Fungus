@@ -43,17 +43,28 @@ class Program
 			{
 				Console.WriteLine("Read " + read + " out of " + files.Count());
 			}
+
+			string f = "-- FILE: " + file  + ". ----------------------";
+			bool foundAtoms = false;
+			bool foundMobs = false;
+			bool foundObjs = false;
+			bool foundAreas = false;
+			bool foundTurfs = false;
+			bool foundDatums = false;
+			bool foundMisc = false;
+			bool foundComments = false;
+
+			void MarkFile(ref bool foundVar, ref List<string> list)
+			{
+				if (!foundVar)
+				{
+					foundVar = true;
+					list.Add(f);
+				}
+			}
+
 			using (StreamReader sr = new StreamReader(file))
 			{
-				string f = "-- FILE: " + file  + ". ----------------------";
-				atoms.Add(f);
-				mobs.Add(f);
-				objs.Add(f);
-				areas.Add(f);
-				turfs.Add(f);
-				datums.Add(f);
-				misc.Add(f);
-				comments.Add(f);
 				while(sr.Peek() > -1)
 				{
 					string line = sr.ReadLine();
@@ -61,7 +72,7 @@ class Program
 					{
 						if (line.StartsWith("//"))
 						{
-							read++;
+							MarkFile(ref foundComments, ref comments);
 							comments.Add(line);
 							continue;
 						} else
@@ -69,11 +80,10 @@ class Program
 						{
 							while (!line.Contains("*/"))
 							{
-								read++;
+								MarkFile(ref foundComments, ref comments);
 								comments.Add(line);
 								line = sr.ReadLine();
 							}
-							read++;
 							comments.Add(line);
 							continue;
 						}
@@ -82,26 +92,40 @@ class Program
 						switch(split[1])
 						{
 							case "atom":
+								MarkFile(ref foundAtoms, ref atoms);
 								atoms.Add(line);
 								break;
 							case "mob":
+								MarkFile(ref foundMobs, ref mobs);
 								mobs.Add(line);
 								break;
 							case "obj":
+								MarkFile(ref foundObjs, ref objs);
 								objs.Add(line);
 								break;
 							case "area":
+								MarkFile(ref foundAreas, ref areas);
 								areas.Add(line);
 								break;
 							case "turfs":
+								MarkFile(ref foundTurfs, ref turfs);
 								turfs.Add(line);
 								break;
 							case "datum":
+								MarkFile(ref foundDatums, ref datums);
 								datums.Add(line);
 								break;
 							default:
+								MarkFile(ref foundMisc, ref misc);
 								misc.Add(line);
 								break;
+						}
+
+						// Just in case someone commented something in the same line as a declaration.
+						if (line.Contains("//"))
+						{
+							MarkFile(ref foundComments, ref comments);
+							comments.Add(line);
 						}
 					}
 				}
