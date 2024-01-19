@@ -598,7 +598,7 @@
 			"envelops \the <b>[target]</b>'s hard member with [u_His] soft [pick(GLOB.breast_nouns)], giving it a tight and sloshing squeeze",
 			"lets [u_His] [pick(GLOB.breast_nouns)] fall into \the <b>[target]</b>'s fat [genital_name], smothering it in [u_His] cleavage"
 		)
-		target.set_is_fucking(src, CUM_TARGET_BREASTS, getorganslot(ORGAN_SLOT_PENIS), dynamic_act_name)
+		target.set_is_fucking(src, CUM_TARGET_BREASTS, getorganslot(ORGAN_SLOT_PENIS), "touch_breast")
 
 	message = span_lewd("\The <b>[src]</b> [pick(lines)]")
 	visible_message(message, ignored_mobs = get_unconsenting())
@@ -606,7 +606,7 @@
 						'modular_sand/sound/interactions/bang2.ogg',
 						'modular_sand/sound/interactions/bang3.ogg'), 70, 1, -1)
 	if(target.can_penetrating_genital_cum())
-		target.handle_post_sex(NORMAL_LUST, CUM_TARGET_BREASTS, src, ORGAN_SLOT_PENIS, dynamic_act_name)
+		target.handle_post_sex(NORMAL_LUST, CUM_TARGET_BREASTS, src, ORGAN_SLOT_PENIS, "touch_breast")
 
 /mob/living/proc/lick_nuts(mob/living/target)
 	var/message
@@ -735,8 +735,8 @@
 						'modular_sand/sound/interactions/bang2.ogg',
 						'modular_sand/sound/interactions/bang3.ogg'), 70, 1, -1)
 	if(can_penetrating_genital_cum())
-		handle_post_sex(NORMAL_LUST, CUM_TARGET_THIGHS, target, ORGAN_SLOT_PENIS, dynamic_act_name)
-	target.handle_post_sex(LOW_LUST, CUM_TARGET_PENIS, src, null, dynamic_act_name)
+		handle_post_sex(NORMAL_LUST, CUM_TARGET_THIGHS, target, ORGAN_SLOT_PENIS, "rub_thighs")
+	target.handle_post_sex(LOW_LUST, CUM_TARGET_PENIS, src, null, "rub_thighs")
 
 /mob/living/proc/do_thighjob(mob/living/target)
 	var/message
