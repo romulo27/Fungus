@@ -19,13 +19,30 @@
 /datum/reagent/consumable/semen
 	// Prevents dripping from drinking a glass or other weird cases
 	var/amount_to_drip = 0
+	metabolize = FALSE
 
 /datum/reagent/consumable/semen/on_mob_life(mob/living/carbon/M)
 	. = ..()
 	if(amount_to_drip && M.is_groin_exposed())
-		amount_to_drip = max(0, amount_to_drip - metabolization_rate)
-		var/obj/effect/decal/cleanable/semendrip/drip = new(get_turf(M))
-		drip.add_blood_DNA(data)
+		if (amount_to_drip > 50)
+			amount_to_drip = max(0, amount_to_drip - metabolization_rate)
+			var/obj/effect/decal/cleanable/semendrip/a = new(get_turf(M))
+			var/obj/effect/decal/cleanable/semendrip/b = new(get_turf(M))
+			var/obj/effect/decal/cleanable/semendrip/c = new(get_turf(M))
+			var/obj/effect/decal/cleanable/semendrip/d = new(get_turf(M))
+			a.add_blood_DNA(data)
+			b.add_blood_DNA(data)
+			c.add_blood_DNA(data)
+			d.add_blood_DNA(data)
+			// if(holder)
+			// 	holder.remove_reagent(type, metabolization_rate * 3)
+		else
+			amount_to_drip = max(0, amount_to_drip - metabolization_rate)
+			var/obj/effect/decal/cleanable/semendrip/drip = new(get_turf(M))
+			drip.add_blood_DNA(data)
+			// if(holder)
+			// 	holder.remove_reagent(type, metabolization_rate)
+
 
 /*/datum/reagent/dragon_blood/admin
 	name = "Special dragon blood"

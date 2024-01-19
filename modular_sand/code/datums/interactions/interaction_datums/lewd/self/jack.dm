@@ -7,6 +7,7 @@
 	max_distance = 0
 	write_log_user = "jerked off"
 	write_log_target = null
+	dynamic_act_name = "touch_penis"
 
 	additional_details = list(
 		list(
@@ -50,4 +51,4 @@
 						'modular_sand/sound/interactions/bang3.ogg'), 70, 1, -1)
 	user.visible_message(span_lewd("<b>\The [user]</b> [message]."), ignored_mobs = user.get_unconsenting())
 	if(user.can_penetrating_genital_cum())
-		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_HAND, liquid_container ? liquid_container : user, ORGAN_SLOT_PENIS) //SPLURT edit
+		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_HAND, liquid_container ? liquid_container : user, ORGAN_SLOT_PENIS, dynamic_act_name) //SPLURT edit

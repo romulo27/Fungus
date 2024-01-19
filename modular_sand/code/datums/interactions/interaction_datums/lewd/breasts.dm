@@ -6,6 +6,7 @@
 	write_log_user = "breastfed"
 	write_log_target = "was breastfed by"
 	interaction_sound = null
+	dynamic_act_name = "suck_breast"
 
 /datum/interaction/lewd/do_breastfeed/display_interaction(mob/living/user, mob/living/target)
 	var/message
@@ -27,13 +28,18 @@
 	lines = list(
 		"pushes [u_His] breasts against \the <b>[target]</b>'s mouth, squirting [u_His] warm [lowertext(milktext)] into [t_His] mouth",
 		"fills \the <b>[target]</b>'s mouth with warm, sweet [lowertext(milktext)] as [u_He] squeezes [u_His] boobs, panting",
-		"lets a large stream of [u_His] own abundant [lowertext(milktext)] coat the back of \the <b>[target]</b>'s throat"
+		"	a large stream of [u_His] own abundant [lowertext(milktext)] coat the back of \the <b>[target]</b>'s throat"
 	)
 
 	message = span_lewd("\The <b>[user]</b> [pick(lines)]")
 	user.visible_message(message, ignored_mobs = user.get_unconsenting())
 	playlewdinteractionsound(get_turf(user), pick('modular_sand/sound/interactions/oral1.ogg',
 						'modular_sand/sound/interactions/oral2.ogg'), 70, 1, -1)
+
+	if (user.arousal_suck_breast > 0)
+		user.handle_post_sex(LOW_LUST, null, target, null, dynamic_act_name)
+	if (target.arousal_suck_breast > 0)
+		target.handle_post_sex(LOW_LUST, null, user, null, dynamic_act_name)
 
 	switch(milkers.size)
 		if("c", "d", "e")
@@ -55,6 +61,7 @@
 	write_log_target = "was groped by"
 	interaction_sound = null
 	max_distance = 1
+	dynamic_act_name = "touch_breast"
 
 	additional_details = list(
 		list(
@@ -150,4 +157,8 @@
 					span_lewd("\The <b>[target]</b> fiercely struggles against <b>[user]</b>."),
 					span_lewd("\The <b>[target]</b> claws <b>[user]</b>'s forearm, drawing blood."),
 					span_lewd("\The <b>[target]</b> slaps <b>[user]</b>'s hand away.")))
+		if (user.arousal_touch_breast > 0)
+			user.handle_post_sex(LOW_LUST, null, target, null, dynamic_act_name)
+		if (target.arousal_touch_breast > 0)
+			target.handle_post_sex(LOW_LUST, null, user, null, dynamic_act_name)
 

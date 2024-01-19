@@ -5,6 +5,7 @@
 	require_user_penis = REQUIRE_EXPOSED
 	max_distance = 1
 	var/fucktarget = "penis"
+	dynamic_act_name = "suck_penis"
 
 /datum/interaction/lewd/facefuck/vag
 	description = "Fuck their mouth using your vagina."
@@ -20,7 +21,7 @@
 	var/u_His = user.p_their()
 	var/t_Him = partner.p_them()
 	var/t_Hes = partner.p_theyre()
-	
+
 	if(user.is_fucking(partner, CUM_TARGET_MOUTH))
 		var/improv = FALSE
 		switch(fucktarget)
@@ -109,7 +110,9 @@
 	if(retaliation_message)
 		user.visible_message("<font color=red><b>\The <b>[partner]</b></b> [retaliation_message]</span>", ignored_mobs = user.get_unconsenting())
 	if(fucktarget != "penis" || user.can_penetrating_genital_cum())
-		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_MOUTH, partner, genital) //SPLURT edit
+		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_MOUTH, partner, genital, dynamic_act_name) //SPLURT edit
+	if (partner.arousal_suck_penis > 0)
+		partner.handle_post_sex(LOW_LUST, null, user, null, dynamic_act_name)
 
 /datum/interaction/lewd/throatfuck
 	description = "Fuck their throat. | Does oxy damage."
@@ -117,6 +120,7 @@
 	require_user_penis = REQUIRE_EXPOSED
 	require_target_mouth = TRUE
 	max_distance = 1
+	dynamic_act_name = "suck_penis_throat"
 
 /datum/interaction/lewd/throatfuck/display_interaction(mob/living/user, mob/living/partner)
 	var/message
@@ -162,4 +166,6 @@
 	if(retaliation_message)
 		user.visible_message(message = "<font color=red><b>\The <b>[partner]</b></b> [retaliation_message]</span>", ignored_mobs = user.get_unconsenting())
 	if(user.can_penetrating_genital_cum())
-		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_THROAT, partner, genital)
+		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_THROAT, partner, genital, dynamic_act_name)
+	if (partner.arousal_suck_penis_throat > 0)
+		partner.handle_post_sex(LOW_LUST, null, user, null, dynamic_act_name)

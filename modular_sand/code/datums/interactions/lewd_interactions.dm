@@ -68,6 +68,8 @@
 	var/user_refractory_cost
 	var/target_refractory_cost
 
+	var/dynamic_act_name = ""
+
 /datum/interaction/lewd/evaluate_user(mob/living/user, silent = TRUE, action_check = TRUE)
 	. = ..()
 	if(!.)

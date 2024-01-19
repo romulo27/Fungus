@@ -57,6 +57,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/boiling_point = null // point at which this gas boils; if null, will never boil (and thus not become a gas)
 	var/condensation_amount = 1
 	var/molarity = 5 // How many units per mole of this reagent. Technically this is INVERSE molarity, but hey.
+	var/metabolize = TRUE
 
 /datum/reagent/New()
 	. = ..()
@@ -101,6 +102,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 
 /datum/reagent/proc/on_mob_life(mob/living/carbon/M)
 	current_cycle++
+	if (!metabolize)
+		return
 	if(holder)
 		holder.remove_reagent(type, metabolization_rate * M.metabolism_efficiency) //By default it slowly disappears.
 
