@@ -591,6 +591,7 @@
 	max_distance = 1
 	write_log_target = "Got a boobjob from"
 	write_log_user = "gave a boobjob to"
+	dynamic_act_name = "touch_breast"
 
 /datum/interaction/lewd/do_boobjob/display_interaction(mob/living/user, mob/living/target)
 	user.do_boobjob(target)
@@ -670,6 +671,7 @@
 	write_log_target = "got their thighs fucked by"
 	interaction_sound = null
 	max_distance = 1
+	dynamic_act_name = "rub_thighs"
 
 /datum/interaction/lewd/fuck_thighs/display_interaction(mob/living/user, mob/living/target)
 	user.do_thighfuck(target)
