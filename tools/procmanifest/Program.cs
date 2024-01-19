@@ -33,46 +33,99 @@ class Program
 		List<string> turfs = new List<string>();
 		List<string> datums = new List<string>();
 		List<string> misc = new List<string>();
+		List<string> comments = new List<string>();
 
 		int read = 0;
 		foreach(string file in files)
 		{
 			read++;
-			if (read % 10 == 0)
+			if (read % 50 == 0)
 			{
 				Console.WriteLine("Read " + read + " out of " + files.Count());
 			}
+
+			string f = "-- FILE: " + file  + ". ----------------------";
+			bool foundAtoms = false;
+			bool foundMobs = false;
+			bool foundObjs = false;
+			bool foundAreas = false;
+			bool foundTurfs = false;
+			bool foundDatums = false;
+			bool foundMisc = false;
+			bool foundComments = false;
+
+			void MarkFile(ref bool foundVar, ref List<string> list)
+			{
+				if (!foundVar)
+				{
+					foundVar = true;
+					list.Add(f);
+				}
+			}
+
 			using (StreamReader sr = new StreamReader(file))
 			{
 				while(sr.Peek() > -1)
 				{
 					string line = sr.ReadLine();
-					if (line.StartsWith("/") && !line.StartsWith("//"))
+					if (line.StartsWith("/"))
 					{
+						if (line.StartsWith("//"))
+						{
+							MarkFile(ref foundComments, ref comments);
+							comments.Add(line);
+							continue;
+						} else
+						if (line.StartsWith("/*"))
+						{
+							while (!line.Contains("*/"))
+							{
+								MarkFile(ref foundComments, ref comments);
+								comments.Add(line);
+								line = sr.ReadLine();
+							}
+							comments.Add(line);
+							continue;
+						}
+
 						string[] split = line.Split("/");
 						switch(split[1])
 						{
 							case "atom":
+								MarkFile(ref foundAtoms, ref atoms);
 								atoms.Add(line);
 								break;
 							case "mob":
+								MarkFile(ref foundMobs, ref mobs);
 								mobs.Add(line);
 								break;
 							case "obj":
+								MarkFile(ref foundObjs, ref objs);
 								objs.Add(line);
 								break;
 							case "area":
+								MarkFile(ref foundAreas, ref areas);
 								areas.Add(line);
 								break;
 							case "turfs":
+								MarkFile(ref foundTurfs, ref turfs);
 								turfs.Add(line);
 								break;
 							case "datum":
+								MarkFile(ref foundDatums, ref datums);
 								datums.Add(line);
 								break;
 							default:
+								MarkFile(ref foundMisc, ref misc);
 								misc.Add(line);
 								break;
+						}
+
+						// Just in case someone commented something in the same line as a declaration.
+						if (line.Contains("//"))
+						{
+							MarkFile(ref foundComments, ref comments);
+							comments.Add(line);
 						}
 					}
 				}
@@ -89,7 +142,7 @@ class Program
 			foreach(string line in atoms)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + atoms.Count());
 				sw.WriteLine(line);
 			}
@@ -102,7 +155,7 @@ class Program
 			foreach(string line in datums)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + datums.Count());
 				sw.WriteLine(line);
 			}
@@ -115,7 +168,7 @@ class Program
 			foreach(string line in objs)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + objs.Count());
 				sw.WriteLine(line);
 			}
@@ -128,7 +181,7 @@ class Program
 			foreach(string line in turfs)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + turfs.Count());
 				sw.WriteLine(line);
 			}
@@ -141,7 +194,7 @@ class Program
 			foreach(string line in areas)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + areas.Count());
 				sw.WriteLine(line);
 			}
@@ -154,7 +207,7 @@ class Program
 			foreach(string line in mobs)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + mobs.Count());
 				sw.WriteLine(line);
 			}
@@ -167,8 +220,21 @@ class Program
 			foreach(string line in misc)
 			{
 				written++;
-				if (written % 20 == 0)
+				if (written % 50 == 0)
 					Console.WriteLine("Wrote " + written + " out of " + misc.Count());
+				sw.WriteLine(line);
+			}
+		}
+		Console.WriteLine("Writing comments...");
+		written = 0;
+		using(StreamWriter sw = new StreamWriter("comments.txt"))
+		{
+			written = 0;
+			foreach(string line in comments)
+			{
+				written++;
+				if (written % 50 == 0)
+					Console.WriteLine("Wrote " + written + " out of " + comments.Count());
 				sw.WriteLine(line);
 			}
 		}

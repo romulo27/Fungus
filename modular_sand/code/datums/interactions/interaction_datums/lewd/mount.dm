@@ -4,6 +4,7 @@
 	require_user_vagina = REQUIRE_EXPOSED
 	require_target_penis = REQUIRE_EXPOSED
 	max_distance = 1
+	dynamic_act_name = "fuck_pussy"
 
 /datum/interaction/lewd/mount/display_interaction(mob/living/user, mob/living/partner)
 	var/message
@@ -21,8 +22,8 @@
 						'modular_sand/sound/interactions/bang3.ogg'), 70, 1, -1)
 	user.visible_message(span_lewd("<b>\The [user]</b> [message]"), ignored_mobs = user.get_unconsenting())
 	if(partner.can_penetrating_genital_cum())
-		partner.handle_post_sex(NORMAL_LUST, CUM_TARGET_VAGINA, user, ORGAN_SLOT_PENIS) //SPLURT edit
-	user.handle_post_sex(NORMAL_LUST, CUM_TARGET_PENIS, partner, ORGAN_SLOT_VAGINA) //SPLURT edit
+		partner.handle_post_sex(NORMAL_LUST, CUM_TARGET_VAGINA, user, ORGAN_SLOT_PENIS, dynamic_act_name) //SPLURT edit
+	user.handle_post_sex(NORMAL_LUST, CUM_TARGET_PENIS, partner, ORGAN_SLOT_VAGINA, dynamic_act_name) //SPLURT edit
 
 /datum/interaction/lewd/mountass
 	description = "Mount with your ass."
@@ -94,6 +95,7 @@
 	write_log_user = "thigh-trapped (vagina)"
 	write_log_target = "was smothered (vagina) by"
 	fucktarget = "vagina"
+	dynamic_act_name = "rub_thighs"
 
 /datum/interaction/lewd/thighs/display_interaction(mob/living/user, mob/living/partner)
 	var/message
@@ -158,8 +160,8 @@
 					'modular_sand/sound/interactions/foot_dry3.ogg')
 	playlewdinteractionsound(get_turf(user), file, 70, 1, -1)
 	user.visible_message(span_lewd("<b>\The [user]</b> [message]"), ignored_mobs = user.get_unconsenting())
-	user.handle_post_sex(lust_increase, THIGH_SMOTHERING, partner, genital) //SPLURT edit
+	user.handle_post_sex(lust_increase, THIGH_SMOTHERING, partner, genital, dynamic_act_name) //SPLURT edit
 	playlewdinteractionsound(get_turf(user), pick('modular_sand/sound/interactions/oral1.ogg',
 						'modular_sand/sound/interactions/oral2.ogg'), 70, 1, -1)
 	if(fucktarget != "penis" || user.can_penetrating_genital_cum())
-		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_MOUTH, partner, genital) //SPLURT edit
+		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_MOUTH, partner, genital, dynamic_act_name) //SPLURT edit

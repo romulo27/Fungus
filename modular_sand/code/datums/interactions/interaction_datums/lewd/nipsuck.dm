@@ -6,6 +6,7 @@
 	write_log_target = "had their nipples sucked by"
 	interaction_sound = null
 	max_distance = 1
+	dynamic_act_name = "suck_breast"
 
 /datum/interaction/lewd/nipsuck/display_interaction(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	if((user.a_intent == INTENT_HELP) || (user.a_intent == INTENT_DISARM))
@@ -90,7 +91,7 @@
 						span_lewd("\The <b>[target]</b> trembles as their breasts get molested."),
 						span_lewd("\The <b>[target]</b> quivers in arousal as \the <b>[user]</b> delights themselves on their milk.")))
 			if(target.get_lust() < 5)
-				target.handle_post_sex(5, CUM_TARGET_MOUTH, user, ORGAN_SLOT_BREASTS) //SPLURT edit
+				target.handle_post_sex(5, CUM_TARGET_MOUTH, user, ORGAN_SLOT_BREASTS, dynamic_act_name) //SPLURT edit
 		if(target.a_intent == INTENT_DISARM)
 			if (target.restrained())
 				if(!target.has_breasts())
@@ -120,7 +121,7 @@
 							span_lewd("\The <b>[target]</b> teasingly caresses \the <b>[user]</b>'s neck."),
 							span_lewd("\The <b>[target]</b> rubs their breasts against \the <b>[user]</b>'s head.")))
 			if(target.get_lust() < 10)
-				target.handle_post_sex(NORMAL_LUST, CUM_TARGET_MOUTH, user, ORGAN_SLOT_BREASTS) //SPLURT edit
+				target.handle_post_sex(NORMAL_LUST, CUM_TARGET_MOUTH, user, ORGAN_SLOT_BREASTS, dynamic_act_name) //SPLURT edit
 	if(target.a_intent == INTENT_GRAB)
 		user.visible_message(
 				pick(span_lewd("\The <b>[target]</b> grips \the <b>[user]</b>'s head tight."),

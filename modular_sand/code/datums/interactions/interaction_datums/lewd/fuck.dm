@@ -6,6 +6,7 @@
 	write_log_target = "was fucked by"
 	interaction_sound = null
 	max_distance = 1
+	dynamic_act_name = "fuck_pussy"
 
 /datum/interaction/lewd/fuck/display_interaction(mob/living/user, mob/living/partner)
 	var/message
@@ -26,8 +27,8 @@
 						'modular_sand/sound/interactions/champ2.ogg'), 50, 1, -1)
 	user.visible_message(span_lewd("<b>\The [user]</b> [message]"), ignored_mobs = user.get_unconsenting())
 	if(user.can_penetrating_genital_cum())
-		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_VAGINA, partner, ORGAN_SLOT_PENIS) //SPLURT edit
-	partner.handle_post_sex(NORMAL_LUST, CUM_TARGET_PENIS, user, ORGAN_SLOT_VAGINA) //SPLURT edit
+		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_VAGINA, partner, ORGAN_SLOT_PENIS, dynamic_act_name) //SPLURT edit
+	partner.handle_post_sex(NORMAL_LUST, CUM_TARGET_PENIS, user, ORGAN_SLOT_VAGINA, dynamic_act_name) //SPLURT edit
 
 /datum/interaction/lewd/fuck/anal
 	description = "Fuck their ass."
@@ -67,6 +68,7 @@
 	require_user_penis = REQUIRE_EXPOSED
 	require_target_breasts = REQUIRE_EXPOSED
 	max_distance = 1
+	dynamic_act_name = "fuck_breast"
 
 /datum/interaction/lewd/breastfuck/display_interaction(mob/living/user, mob/living/partner)
 	var/message
@@ -88,7 +90,7 @@
 						'modular_sand/sound/interactions/bang3.ogg'), 70, 1, -1)
 	user.visible_message(span_lewd("<b>\The [user]</b> [message]"), ignored_mobs = user.get_unconsenting())
 	if(user.can_penetrating_genital_cum())
-		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_BREASTS, partner, ORGAN_SLOT_PENIS) //SPLURT edit
+		user.handle_post_sex(NORMAL_LUST, CUM_TARGET_BREASTS, partner, ORGAN_SLOT_PENIS, dynamic_act_name) //SPLURT edit
 
 /datum/interaction/lewd/footfuck
 	description = "Rub your %COCK% on their foot."

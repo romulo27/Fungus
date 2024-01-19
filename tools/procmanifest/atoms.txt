@@ -1,17 +1,25 @@
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\controllers\subsystem\job.dm. ----------------------
 /atom/proc/JoinPlayerHere(mob/M, buckle)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\controllers\subsystem\overlays.dm. ----------------------
 /atom/proc/build_appearance_list(old_overlays)
 /atom/proc/cut_overlays()
 /atom/proc/cut_overlay(list/overlays)
 /atom/proc/add_overlay(list/overlays)
 /atom/proc/copy_overlays(atom/other, cut_old)	//copys our_overlays from another atom
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\controllers\subsystem\statpanel.dm. ----------------------
 /atom/proc/remove_from_cache()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\controllers\subsystem\sun.dm. ----------------------
 /atom/proc/check_obscured(datum/sun/sun, distance = OCCLUSION_DISTANCE)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\beam.dm. ----------------------
 /atom/proc/Beam(atom/BeamTarget,icon_state="b_beam",icon='icons/effects/beam.dmi',time=50, maxdistance=10,beam_type=/obj/effect/ebeam,beam_sleep_time = 3)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\cinematic.dm. ----------------------
 /atom/movable/screen/cinematic
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\components\combat_mode.dm. ----------------------
 /atom/movable/screen/combattoggle
 /atom/movable/screen/combattoggle/Click()
 /atom/movable/screen/combattoggle/update_icon_state()
 /atom/movable/screen/combattoggle/update_overlays()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\components\field_of_vision.dm. ----------------------
 /atom/movable/fov_holder
 /atom/movable/fov_holder/ConveyorMove()
 /atom/movable/fov_holder/has_gravity(turf/T)
@@ -22,15 +30,20 @@
 /atom/movable/fov_holder/onTransitZ()
 /atom/movable/fov_holder/forceMove(atom/destination, no_tp=FALSE, harderforce = FALSE)
 /atom/movable/fov_holder/Destroy(force = FALSE)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\components\orbiter.dm. ----------------------
 /atom/movable/proc/orbit(atom/A, radius = 10, clockwise = FALSE, rotation_speed = 20, rotation_segments = 36, pre_rotation = TRUE)
 /atom/movable/proc/stop_orbit(datum/component/orbiter/orbits)
 /atom/proc/transfer_observers_to(atom/target)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\components\rotation.dm. ----------------------
 /atom/movable/proc/simple_rotate_clockwise()
 /atom/movable/proc/simple_rotate_counterclockwise()
 /atom/movable/proc/simple_rotate_flip()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\materials\_material.dm. ----------------------
 /atom/proc/mat_update_desc(/datum/material/mat)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\screentips\atom_context.dm. ----------------------
 /atom/proc/register_context()
 /atom/proc/add_context(
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\status_effects\buffs.dm. ----------------------
 /atom/movable/screen/alert/status_effect/shadow_mend
 /atom/movable/screen/alert/status_effect/void_price
 /atom/movable/screen/alert/status_effect/vanguard
@@ -47,6 +60,7 @@
 /atom/movable/screen/alert/status_effect/crucible_soul
 /atom/movable/screen/alert/status_effect/duskndawn
 /atom/movable/screen/alert/status_effect/marshal
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\status_effects\debuffs.dm. ----------------------
 /atom/movable/screen/alert/status_effect/asleep
 /atom/movable/screen/alert/status_effect/stasis
 /atom/movable/screen/alert/status_effect/mesmerized
@@ -58,14 +72,20 @@
 /atom/movable/screen/alert/status_effect/strandling/Click(location, control, params)
 /atom/movable/screen/alert/status_effect/trance
 /atom/movable/screen/alert/status_effect/dna_melt
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\status_effects\gas.dm. ----------------------
 /atom/movable/screen/alert/status_effect/freon
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\status_effects\neutral.dm. ----------------------
 /atom/movable/screen/alert/status_effect/in_love
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\status_effects\status_effect.dm. ----------------------
 /atom/movable/screen/alert/status_effect
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\status_effects\wound_effects.dm. ----------------------
 /atom/movable/screen/alert/status_effect/determined
 /atom/movable/screen/alert/status_effect/limp
 /atom/movable/screen/alert/status_effect/wound
 /atom/movable/screen/alert/status_effect/wound/Click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\wires\_wires.dm. ----------------------
 /atom/proc/attempt_wire_interaction(mob/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\atoms.dm. ----------------------
 /atom
 /atom/New(loc, ...)
 /atom/proc/Initialize(mapload, ...)
@@ -193,6 +213,7 @@
 /atom/proc/setOpened()
 /atom/proc/setClosed()
 /atom/MouseEntered(location, control, params)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\atoms_movable.dm. ----------------------
 /atom/movable
 /atom/movable/Initialize(mapload)
 /atom/movable/Destroy(force)
@@ -249,6 +270,7 @@
 /atom/movable/proc/get_cell()
 /atom/movable/proc/can_be_pulled(user, grab_state, force)
 /atom/movable/proc/setGrabState(newstate)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\atoms_movement.dm. ----------------------
 /atom/movable/Move(atom/newloc, direct=0, glide_size_override = 0)
 /atom/movable/proc/abstract_move(atom/new_loc)
 /atom/movable/Move(atom/newloc, direct, glide_size_override = 0)
@@ -266,6 +288,7 @@
 /atom/movable/proc/doMove(atom/destination)
 /atom/movable/proc/Process_Spacemove(movement_dir = 0)
 /atom/movable/proc/newtonian_move(direction)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\say.dm. ----------------------
 /atom/movable/proc/say(message, bubble_type, var/list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 /atom/movable/proc/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode, atom/movable/source)
 /atom/movable/proc/bark(list/hearers, distance, volume, pitch, queue_time)
@@ -291,8 +314,11 @@
 /atom/movable/virtualspeaker/GetJob()
 /atom/movable/virtualspeaker/GetSource()
 /atom/movable/virtualspeaker/GetRadio()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\machinery\washing_machine.dm. ----------------------
 /atom/movable/proc/machine_wash(obj/machinery/washing_machine/WM)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\machinery\camera\camera.dm. ----------------------
 /atom/proc/auto_turn()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\objects\buckling.dm. ----------------------
 /atom/movable
 /atom/movable/on_attack_hand(mob/living/user, act_intent = user.a_intent, unarmed_attack_flags)
 /atom/movable/MouseDrop_T(mob/living/M, mob/living/user)
@@ -305,17 +331,25 @@
 /atom/movable/proc/user_buckle_mob(mob/living/M, mob/user, check_loc = TRUE)
 /atom/movable/proc/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 /atom/movable/proc/precise_user_unbuckle_mob(mob/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\objects\objs.dm. ----------------------
 /atom/proc/on_unset_machine(mob/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\objects\items\summon.dm. ----------------------
 /atom/movable/summon_weapon_effect
 /atom/movable/summon_weapon_effect/Destroy()
 /atom/movable/summon_weapon_effect/proc/Lock(atom/target)
 /atom/movable/summon_weapon_effect/proc/Release()
 /atom/movable/summon_weapon_effect/proc/Update()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\objects\structures\ai_core.dm. ----------------------
 /atom/proc/transfer_ai(interaction, mob/user, mob/living/silicon/ai/AI, obj/item/aicard/card)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\turfs\simulated\openspace.dm. ----------------------
 /atom/movable/openspace_backdrop
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\admin\admin_investigate.dm. ----------------------
 /atom/proc/investigate_log(message, subject)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\admin\verbs\adminjump.dm. ----------------------
 /atom/movable/proc/admin_teleport(atom/new_location, message = TRUE)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\admin\verbs\SDQL2\SDQL_2_wrappers.dm. ----------------------
 /atom/proc/_contents()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\antagonists\bloodsucker\datum_bloodsucker.dm. ----------------------
 /atom/movable/screen/bloodsucker
 /atom/movable/screen/bloodsucker/proc/clear()
 /atom/movable/screen/bloodsucker/proc/update_counter(value, valuecolor)
@@ -325,19 +359,28 @@
 /atom/movable/screen/bloodsucker/rank_counter/update_counter(value, valuecolor)
 /atom/movable/screen/bloodsucker/sunlight_counter
 /atom/movable/screen/bloodsucker/sunlight_counter/update_counter(value, valuecolor)
-/atom/movable/screen/alert/status_effect/agent_pinpointer/hunter_edition
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\antagonists\bloodsucker\datum_vassal.dm. ----------------------
 /atom/movable/screen/alert/status_effect/agent_pinpointer/vassal_edition
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\antagonists\changeling\powers\pheromone_receptors.dm. ----------------------
 /atom/movable/screen/alert/status_effect/agent_pinpointer/changeling
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\antagonists\clockcult\clock_effects\spatial_gateway.dm. ----------------------
 /atom/movable/proc/procure_gateway(mob/living/invoker, time_duration, gateway_uses, two_way)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\antagonists\clockcult\clock_helpers\clock_powerdrain.dm. ----------------------
 /atom/movable/proc/power_drain(clockcult_user, drain_weapons = FALSE, recursive = FALSE, drain_amount = MIN_CLOCKCULT_POWER) //This proc as of now is only in use for void volt and transmission sigils
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\antagonists\clockcult\clock_helpers\fabrication_helpers.dm. ----------------------
 /atom/proc/fabrication_vals(mob/living/user, obj/item/clockwork/replica_fabricator/fabricator, silent)
 /atom/proc/consume_visual(obj/item/clockwork/replica_fabricator/fabricator, power_amount)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\antagonists\clockcult\clock_items\wraith_spectacles.dm. ----------------------
 /atom/movable/screen/alert/status_effect/wraith_spectacles
 /atom/movable/screen/alert/status_effect/wraith_spectacles/MouseEntered(location,control,params)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\antagonists\swarmer\swarmer.dm. ----------------------
 /atom/proc/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
 /atom/movable/proc/IntegrateAmount()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\antagonists\traitor\IAA\internal_affairs.dm. ----------------------
 /atom/movable/screen/alert/status_effect/agent_pinpointer
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\atmospherics\environmental\LINDA_fire.dm. ----------------------
 /atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\atmospherics\environmental\LINDA_system.dm. ----------------------
 /atom/var/CanAtmosPass = ATMOS_PASS_YES
 /atom/var/CanAtmosPassVertical = ATMOS_PASS_YES
 /atom/proc/CanAtmosPass(turf/T)
@@ -345,12 +388,15 @@
 /atom/proc/air_update_turf(command = 0)
 /atom/movable/proc/move_update_air(turf/T)
 /atom/proc/atmos_spawn_air(text) //because a lot of people loves to copy paste awful code lets just make an easy proc to spawn your plasma fires
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\atmospherics\environmental\LINDA_turf_tile.dm. ----------------------
 /atom/movable/var/pressure_resistance = 10
 /atom/movable/var/last_high_pressure_movement_air_cycle = 0
 /atom/movable/proc/experience_pressure_difference(pressure_difference, direction, pressure_resistance_prob_delta = 0, throw_target)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\balloon_alert\balloon_alert.dm. ----------------------
 /atom/proc/balloon_alert(mob/viewer, text)
 /atom/proc/balloon_alert_to_viewers(message, self_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs)
 /atom/proc/balloon_alert_perform(mob/viewer, text)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\buildmode\buttons.dm. ----------------------
 /atom/movable/screen/buildmode
 /atom/movable/screen/buildmode/New(bld)
 /atom/movable/screen/buildmode/Destroy()
@@ -370,14 +416,19 @@
 /atom/movable/screen/buildmode/dirswitch/Click()
 /atom/movable/screen/buildmode/quit
 /atom/movable/screen/buildmode/quit/Click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\clothing\spacesuits\chronosuit.dm. ----------------------
 /atom/movable/screen/chronos_target
 /atom/movable/screen/chronos_target/New(loc, var/mob/living/carbon/human/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\detectivework\detective_work.dm. ----------------------
 /atom/proc/add_fibers(mob/living/carbon/human/M)
 /atom/proc/add_hiddenprint(mob/living/M)
 /atom/proc/add_fingerprint(mob/living/M, ignoregloves = FALSE)
 /atom/proc/transfer_fingerprints_to(atom/A)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\food_and_drinks\food\snacks.dm. ----------------------
 /atom/proc/fry(cook_time = 30) //you can truly fry anything
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\keybindings\bindings_atom.dm. ----------------------
 /atom/movable/keyLoop(client/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\lighting\emissive_blocker.dm. ----------------------
 /atom/movable/emissive_blocker
 /atom/movable/emissive_blocker/Initialize(mapload, source)
 /atom/movable/emissive_blocker/ex_act(severity, target, origin)
@@ -386,6 +437,7 @@
 /atom/movable/emissive_blocker/blob_act()
 /atom/movable/emissive_blocker/onTransitZ()
 /atom/movable/emissive_blocker/forceMove(atom/destination, no_tp=FALSE, harderforce = FALSE)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\lighting\lighting_atom.dm. ----------------------
 /atom
 /atom/proc/set_light(var/l_range, var/l_power, var/l_color = NONSENSICAL_VALUE)
 /atom/proc/update_light()
@@ -397,17 +449,21 @@
 /atom/proc/set_light_power(new_power)
 /atom/proc/set_light_range(new_range)
 /atom/proc/set_light_color(new_color)
-/atom/proc/set_light_on(new_value)
-/atom/proc/set_light_flags(new_value)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mapexporting\mapexporter.dm. ----------------------
 /atom/proc/get_save_vars()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mob\clickdelay.dm. ----------------------
 /atom
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mob\mob.dm. ----------------------
 /atom/proc/prepare_huds()
 /atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, ignored_mobs, mob/target, target_message, omni = FALSE, runechat_popup, rune_msg)
 /atom/proc/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message, ignored_mobs, runechat_popup, rune_msg) //SKYRAT CHANGE
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mob\mob_helpers.dm. ----------------------
 /atom/proc/hasSiliconAccessInArea(mob/user, flags = PRIVILEGES_SILICON)
-/atom/movable
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mob\living\say.dm. ----------------------
 /atom/movable/proc/process_yelling(list/already_heard, rendered, atom/movable/speaker, datum/language/message_language, message, list/spans, message_mode, obj/source)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mob\living\ventcrawling.dm. ----------------------
 /atom/proc/update_pipe_vision(atom/new_loc = null)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mob\living\silicon\ai\multicam.dm. ----------------------
 /atom/movable/screen/movable/pic_in_pic/ai
 /atom/movable/screen/movable/pic_in_pic/ai/Initialize(mapload)
 /atom/movable/screen/movable/pic_in_pic/ai/Destroy()
@@ -420,15 +476,25 @@
 /atom/movable/screen/movable/pic_in_pic/ai/proc/highlight()
 /atom/movable/screen/movable/pic_in_pic/ai/proc/unhighlight()
 /atom/movable/screen/movable/pic_in_pic/ai/proc/set_ai(mob/living/silicon/ai/new_ai)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mob\living\silicon\ai\freelook\eye.dm. ----------------------
 /atom/proc/move_camera_by_click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mob\living\simple_animal\hostile\jungle\seedling.dm. ----------------------
 /atom/movable/screen/seedling
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mob\living\simple_animal\hostile\megafauna\demonic_frost_miner.dm. ----------------------
 /atom/movable/screen/alert/status_effect/ice_block_talisman
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\ninja\suit\ninjaDrainAct.dm. ----------------------
 /atom/proc/ninjadrain_act(obj/item/clothing/suit/space/space_ninja/ninja_suit, mob/living/carbon/human/ninja, obj/item/clothing/gloves/space_ninja/ninja_gloves)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\projectiles\projectile\magic.dm. ----------------------
 /atom/proc/animate_atom_living(var/mob/living/owner = null)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\projectiles\projectile\energy\nuclear_particle.dm. ----------------------
 /atom/proc/fire_nuclear_particle(angle = rand(0,360)) //used by fusion to fire random nuclear particles. Fires one particle in a random direction.
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\reagents\chemistry\holder.dm. ----------------------
 /atom/proc/create_reagents(max_vol, flags, new_value)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\recycling\disposal\bin.dm. ----------------------
 /atom/movable/proc/CanEnterDisposals()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\recycling\disposal\eject.dm. ----------------------
 /atom/movable/proc/pipe_eject(direction)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\research\xenobiology\crossbreeding\_status_effects.dm. ----------------------
 /atom/movable/screen/alert/status_effect/rainbow_protection
 /atom/movable/screen/alert/status_effect/slimeskin
 /atom/movable/screen/alert/status_effect/freon/stasis
@@ -437,31 +503,40 @@
 /atom/movable/screen/alert/status_effect/bloodchill
 /atom/movable/screen/alert/status_effect/bonechill
 /atom/movable/screen/alert/status_effect/bluespaceslime
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\shuttle\on_move.dm. ----------------------
 /atom/movable/proc/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)
 /atom/movable/proc/onShuttleMove(turf/newT, turf/oldT, list/movement_force, move_dir, obj/docking_port/stationary/old_dock, obj/docking_port/mobile/moving_dock)
 /atom/movable/proc/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
 /atom/movable/proc/lateShuttleMove(turf/oldT, list/movement_force, move_dir)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\shuttle\shuttle_rotate.dm. ----------------------
 /atom/proc/shuttleRotate(rotation, params=ROTATE_DIR|ROTATE_SMOOTH|ROTATE_OFFSET)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\tooltip\tooltip.dm. ----------------------
 /atom/movable/proc/get_tooltip_data()
 /atom/movable/MouseEntered(location, control, params)
 /atom/movable/MouseExited(location, control, params)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\unit_tests\find_reference_sanity.dm. ----------------------
 /atom/movable/ref_holder
 /atom/movable/ref_holder/Destroy()
 /atom/movable/ref_test
 /atom/movable/ref_test/Destroy(force)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\vehicles\mecha\mech_melee_attack.dm. ----------------------
 /atom/proc/mech_melee_attack(obj/vehicle/sealed/mecha/mecha_attacker)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\vore\persistence.dm. ----------------------
 /atom
 /atom/proc/vars_to_save()
 /atom/proc/map_important_vars()
 /atom/serialize()
 /atom/deserialize(var/list/data)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\adjacent.dm. ----------------------
 /atom/proc/Adjacent(atom/neighbor) // basic inheritance, unused
 /atom/movable/Adjacent(var/atom/neighbor)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\ai.dm. ----------------------
 /atom/proc/attack_ai(mob/user)
 /atom/proc/AICtrlClick()
 /atom/proc/AIAltClick(mob/living/silicon/ai/user)
 /atom/proc/AIShiftClick()
 /atom/proc/AICtrlShiftClick()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\click.dm. ----------------------
 /atom/Click(location,control,params)
 /atom/DblClick(location,control,params)
 /atom/MouseWheel(delta_x,delta_y,location,control,params)
@@ -470,7 +545,6 @@
 /atom/movable/proc/DirectAccess()
 /atom/proc/canReachInto(atom/user, atom/target, list/next, view_only, obj/item/tool)
 /atom/proc/AllowClick()
-/atom/proc/MiddleClick(mob/M as mob)
 /atom/proc/ShiftClick(mob/user)
 /atom/proc/attempt_examinate(mob/user)
 /atom/proc/CtrlRightClickOn(atom/A, params)
@@ -478,19 +552,24 @@
 /atom/proc/AltClick(mob/user)
 /atom/proc/AltClickNoInteract(mob/user, atom/A)
 /atom/proc/CtrlShiftClick(mob/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\cyborg.dm. ----------------------
 /atom/proc/BorgCtrlShiftClick(mob/living/silicon/robot/user) //forward to human click if not overridden
 /atom/proc/BorgShiftClick(mob/living/silicon/robot/user) //forward to human click if not overridden
 /atom/proc/BorgCtrlClick(mob/living/silicon/robot/user) //forward to human click if not overridden
 /atom/proc/BorgAltClick(mob/living/silicon/robot/user)
 /atom/proc/attack_robot(mob/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\drag_drop.dm. ----------------------
 /atom/MouseDrop(atom/over, src_location, over_location, src_control, over_control, params)
 /atom/proc/MouseDrop_T(atom/dropping, mob/user)
 /atom/proc/IsAutoclickable()
 /atom/movable/screen/IsAutoclickable()
 /atom/movable/screen/click_catcher/IsAutoclickable()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\item_attack.dm. ----------------------
 /atom/proc/attackby(obj/item/W, mob/user, params)
 /atom/movable/proc/attacked_by()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\observer.dm. ----------------------
 /atom/proc/attack_ghost(mob/dead/observer/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\other_mobs.dm. ----------------------
 /atom/proc/attack_hand(mob/user, act_intent = user.a_intent, attackchain_flags)
 /atom/proc/on_attack_hand(mob/user, act_intent = user.a_intent, unarmed_attack_flags)
 /atom/proc/_try_interact(mob/user)
@@ -504,10 +583,14 @@
 /atom/proc/attack_larva(mob/user)
 /atom/proc/attack_slime(mob/user)
 /atom/proc/attack_drone(mob/living/simple_animal/drone/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\right_item_attack.dm. ----------------------
 /atom/proc/altattackby(obj/item/W, mob/user, params)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\right_other_mobs.dm. ----------------------
 /atom/proc/alt_attack_hand(mob/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\telekinesis.dm. ----------------------
 /atom/proc/attack_tk(mob/user)
 /atom/proc/attack_self_tk(mob/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\action_button.dm. ----------------------
 /atom/movable/screen/movable/action_button
 /atom/movable/screen/movable/action_button/proc/can_use(mob/user)
 /atom/movable/screen/movable/action_button/MouseDrop(over_object)
@@ -520,6 +603,7 @@
 /atom/movable/screen/movable/action_button/hide_toggle/update_overlays()
 /atom/movable/screen/movable/action_button/MouseEntered(location,control,params)
 /atom/movable/screen/movable/action_button/MouseExited()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\ai.dm. ----------------------
 /atom/movable/screen/ai
 /atom/movable/screen/ai/Click()
 /atom/movable/screen/ai/aicore
@@ -556,6 +640,7 @@
 /atom/movable/screen/ai/multicam/Click()
 /atom/movable/screen/ai/add_multicam
 /atom/movable/screen/ai/add_multicam/Click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\alert.dm. ----------------------
 /atom/movable/screen/alert
 /atom/movable/screen/alert/MouseEntered(location,control,params)
 /atom/movable/screen/alert/MouseExited()
@@ -571,11 +656,6 @@
 /atom/movable/screen/alert/too_much_ch4
 /atom/movable/screen/alert/not_enough_ch3br
 /atom/movable/screen/alert/too_much_ch3br
-/atom/movable/screen/alert/fat
-/atom/movable/screen/alert/hungry
-/atom/movable/screen/alert/thirsty
-/atom/movable/screen/alert/starving
-/atom/movable/screen/alert/dehydrated
 /atom/movable/screen/alert/gross
 /atom/movable/screen/alert/verygross
 /atom/movable/screen/alert/disgusted
@@ -649,11 +729,13 @@
 /atom/movable/screen/alert/shoes/Click()
 /atom/movable/screen/alert/Click(location, control, params)
 /atom/movable/screen/alert/Destroy()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\alien.dm. ----------------------
 /atom/movable/screen/alien
 /atom/movable/screen/alien/leap
 /atom/movable/screen/alien/leap/Click()
 /atom/movable/screen/alien/plasma_display
 /atom/movable/screen/alien/alien_queen_finder
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\blob_overmind.dm. ----------------------
 /atom/movable/screen/blob
 /atom/movable/screen/blob/MouseEntered(location,control,params)
 /atom/movable/screen/blob/MouseExited()
@@ -677,19 +759,23 @@
 /atom/movable/screen/blob/ReadaptStrain/Click()
 /atom/movable/screen/blob/RelocateCore
 /atom/movable/screen/blob/RelocateCore/Click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\clockwork_marauder.dm. ----------------------
 /atom/movable/screen/marauder
 /atom/movable/screen/marauder/emerge
 /atom/movable/screen/marauder/emerge/Click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\credits.dm. ----------------------
 /atom/movable/screen/credit
 /atom/movable/screen/credit/Initialize(mapload, credited, client/P, icon/I)
 /atom/movable/screen/credit/Destroy()
 /atom/movable/screen/credit/proc/FadeOut()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\families.dm. ----------------------
 /atom/movable/screen/wanted
 /atom/movable/screen/wanted/New()
 /atom/movable/screen/wanted/Initialize(mapload)
 /atom/movable/screen/wanted/MouseEntered(location,control,params)
 /atom/movable/screen/wanted/MouseExited()
 /atom/movable/screen/wanted/update_icon_state()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\ghost.dm. ----------------------
 /atom/movable/screen/ghost
 /atom/movable/screen/ghost/MouseEntered()
 /atom/movable/screen/ghost/jumptomob
@@ -702,6 +788,7 @@
 /atom/movable/screen/ghost/teleport/Click()
 /atom/movable/screen/ghost/spawners
 /atom/movable/screen/ghost/spawners/Click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\guardian.dm. ----------------------
 /atom/movable/screen/guardian
 /atom/movable/screen/guardian/Manifest
 /atom/movable/screen/guardian/Manifest/Click()
@@ -715,6 +802,7 @@
 /atom/movable/screen/guardian/Communicate/Click()
 /atom/movable/screen/guardian/ToggleLight
 /atom/movable/screen/guardian/ToggleLight/Click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\human.dm. ----------------------
 /atom/movable/screen/human
 /atom/movable/screen/human/toggle
 /atom/movable/screen/human/toggle/Click()
@@ -737,15 +825,21 @@
 /atom/movable/screen/synth/coolant_counter/update_counter(mob/living/carbon/owner)
 /atom/movable/screen/synth/coolant_counter/examine(mob/user)
 /atom/movable/screen/synth/coolant_counter/proc/jam(amount, cap = 20)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\map_popups.dm. ----------------------
 /atom/movable/screen/map_view
 /atom/movable/screen/background
 /atom/movable/screen/proc/set_position(x, y, px = 0, py = 0)
 /atom/movable/screen/proc/fill_rect(x1, y1, x2, y2)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\movable_screen_objects.dm. ----------------------
 /atom/movable/screen/movable
 /atom/movable/screen/movable/snap
 /atom/movable/screen/movable/MouseDrop(over_object, src_location, over_location, src_control, over_control, params)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\new_player.dm. ----------------------
 /atom/movable/screen/lobby
+/atom/movable/screen/lobby/New(loc, datum/hud/our_hud, ...)
 /atom/movable/screen/lobby/proc/SlowInit()
+/atom/movable/screen/lobby/proc/collapse_button()
+/atom/movable/screen/lobby/proc/expand_button()
 /atom/movable/screen/lobby/background
 /atom/movable/screen/lobby/button
 /atom/movable/screen/lobby/button/Click(location, control, params)
@@ -769,16 +863,24 @@
 /atom/movable/screen/lobby/button/observe/Initialize(mapload)
 /atom/movable/screen/lobby/button/observe/Click(location, control, params)
 /atom/movable/screen/lobby/button/observe/proc/enable_observing()
-/atom/movable/screen/lobby/button/settings
-/atom/movable/screen/lobby/button/settings/Click(location, control, params)
-/atom/movable/screen/lobby/button/changelog_button
-/atom/movable/screen/lobby/button/crew_manifest
-/atom/movable/screen/lobby/button/crew_manifest/Click(location, control, params)
-/atom/movable/screen/lobby/button/changelog_button/Click(location, control, params)
-/atom/movable/screen/lobby/button/poll
-/atom/movable/screen/lobby/button/poll/SlowInit(mapload)
-/atom/movable/screen/lobby/button/poll/update_overlays()
-/atom/movable/screen/lobby/button/poll/Click(location, control, params)
+/atom/movable/screen/lobby/button/bottom
+/atom/movable/screen/lobby/button/bottom/settings
+/atom/movable/screen/lobby/button/bottom/settings/Click(location, control, params)
+/atom/movable/screen/lobby/button/bottom/changelog_button
+/atom/movable/screen/lobby/button/bottom/changelog_button/Click(location, control, params)
+/atom/movable/screen/lobby/button/bottom/crew_manifest
+/atom/movable/screen/lobby/button/bottom/crew_manifest/Click(location, control, params)
+/atom/movable/screen/lobby/button/bottom/poll
+/atom/movable/screen/lobby/button/bottom/poll/SlowInit(mapload)
+/atom/movable/screen/lobby/button/bottom/poll/update_overlays()
+/atom/movable/screen/lobby/button/bottom/poll/Click(location, control, params)
+/atom/movable/screen/lobby/button/collapse
+/atom/movable/screen/lobby/button/collapse/Click(location, control, params)
+/atom/movable/screen/lobby/button/collapse/proc/collapse_menu()
+/atom/movable/screen/lobby/button/collapse/proc/expand_menu()
+/atom/movable/screen/lobby/shutter
+/atom/movable/screen/lobby/shutter/proc/setup_shutter_animation()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\picture_in_picture.dm. ----------------------
 /atom/movable/screen/movable/pic_in_pic
 /atom/movable/screen/movable/pic_in_pic/Initialize(mapload)
 /atom/movable/screen/movable/pic_in_pic/Destroy()
@@ -792,6 +894,7 @@
 /atom/movable/screen/movable/pic_in_pic/proc/get_visible_turfs()
 /atom/movable/screen/movable/pic_in_pic/proc/show_to(client/C)
 /atom/movable/screen/movable/pic_in_pic/proc/unshow_to(client/C)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\plane_master.dm. ----------------------
 /atom/movable/screen/plane_master
 /atom/movable/screen/plane_master/proc/Show(override)
 /atom/movable/screen/plane_master/proc/Hide(override)
@@ -823,7 +926,10 @@
 /atom/movable/screen/plane_master/parallax_white
 /atom/movable/screen/plane_master/camera_static
 /atom/movable/screen/plane_master/chat_messages
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\radial.dm. ----------------------
 /atom/movable/screen/radial
+/atom/movable/screen/radial/proc/set_parent(new_value)
+/atom/movable/screen/radial/proc/handle_parent_del()
 /atom/movable/screen/radial/slice
 /atom/movable/screen/radial/slice/MouseEntered(location, control, params)
 /atom/movable/screen/radial/slice/MouseExited(location, control, params)
@@ -832,10 +938,12 @@
 /atom/movable/screen/radial/center/MouseEntered(location, control, params)
 /atom/movable/screen/radial/center/MouseExited(location, control, params)
 /atom/movable/screen/radial/center/Click(location, control, params)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\radial_persistent.dm. ----------------------
 /atom/movable/screen/radial/persistent/center
 /atom/movable/screen/radial/persistent/center/Click(location, control, params)
 /atom/movable/screen/radial/persistent/center/MouseEntered(location, control, params)
 /atom/movable/screen/radial/persistent/center/MouseExited(location, control, params)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\robot.dm. ----------------------
 /atom/movable/screen/robot
 /atom/movable/screen/robot/module
 /atom/movable/screen/robot/Click()
@@ -867,9 +975,11 @@
 /atom/movable/screen/robot/pda_msg_send/Click()
 /atom/movable/screen/robot/pda_msg_show
 /atom/movable/screen/robot/pda_msg_show/Click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\screentip.dm. ----------------------
 /atom/movable/screen/screentip
 /atom/movable/screen/screentip/Initialize(mapload, _hud)
 /atom/movable/screen/screentip/proc/update_view(datum/source)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\screen_objects.dm. ----------------------
 /atom/movable/screen
 /atom/movable/screen/Destroy()
 /atom/movable/screen/examine(mob/user)
@@ -955,6 +1065,7 @@
 /atom/movable/screen/combo
 /atom/movable/screen/combo/proc/clear_streak()
 /atom/movable/screen/combo/update_icon_state(streak = "")
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\swarmer.dm. ----------------------
 /atom/movable/screen/swarmer
 /atom/movable/screen/swarmer/FabricateTrap
 /atom/movable/screen/swarmer/FabricateTrap/Click()
@@ -968,6 +1079,7 @@
 /atom/movable/screen/swarmer/ToggleLight/Click()
 /atom/movable/screen/swarmer/ContactSwarmers
 /atom/movable/screen/swarmer/ContactSwarmers/Click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\screen_objects\clickdelay.dm. ----------------------
 /atom/movable/screen/action_bar
 /atom/movable/screen/action_bar/Destroy()
 /atom/movable/screen/action_bar/proc/mark_dirty()
@@ -978,6 +1090,7 @@
 /atom/movable/screen/action_bar/clickdelay/update_to_mob(mob/living/L)
 /atom/movable/screen/action_bar/resistdelay
 /atom/movable/screen/action_bar/resistdelay/update_to_mob(mob/living/L)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\screen_objects\sprint.dm. ----------------------
 /atom/movable/screen/mov_intent
 /atom/movable/screen/sprintbutton
 /atom/movable/screen/sprintbutton/Click()
@@ -986,6 +1099,7 @@
 /atom/movable/screen/sprint_buffer
 /atom/movable/screen/sprint_buffer/Click()
 /atom/movable/screen/sprint_buffer/proc/update_to_mob(mob/living/L)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\screen_objects\stamina.dm. ----------------------
 /atom/movable/screen/staminas
 /atom/movable/screen/staminas/Click(location,control,params)
 /atom/movable/screen/staminas/update_icon_state()
@@ -995,6 +1109,7 @@
 /atom/movable/screen/staminabuffer/process()
 /atom/movable/screen/staminabuffer/Destroy()
 /atom/movable/screen/staminabuffer/proc/update_to_mob()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\screen_objects\storage.dm. ----------------------
 /atom/movable/screen/storage
 /atom/movable/screen/storage/Initialize(mapload, new_master)
 /atom/movable/screen/storage/Click(location, control, params)
@@ -1034,19 +1149,23 @@
 /atom/movable/screen/storage/item_holder/Initialize(mapload, new_master, obj/item/I)
 /atom/movable/screen/storage/item_holder/Destroy()
 /atom/movable/screen/storage/item_holder/Click(location, control, params)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\hud\screen_objects\vore.dm. ----------------------
 /atom/movable/screen/voretoggle
 /atom/movable/screen/voretoggle/Click()
 /atom/movable/screen/voretoggle/update_icon_state()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_rendering\atom_huds\alternate_appearance.dm. ----------------------
 /atom
 /atom/proc/remove_alt_appearance(key)
 /atom/proc/add_alt_appearance(type, key, ...)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_rendering\atom_huds\data_huds.dm. ----------------------
 /atom/proc/add_to_all_human_data_huds()
 /atom/proc/remove_from_all_data_huds()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_rendering\clickcatcher\clickcatcher.dm. ----------------------
 /atom/movable/screen/click_catcher
-/atom/movable/screen/click_catcher/proc/UpdateFill(view_size_x = 15, view_size_y = 15)
 /atom/movable/screen/click_catcher/proc/UpdateFill(view_size_x, view_size_y)
 /atom/movable/screen/click_catcher/Click(location, control, params)
 /atom/movable/screen/click_catcher/proc/Parse(scr_loc, turf/origin, client/C)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_rendering\fullscreen\fullscreen.dm. ----------------------
 /atom/movable/screen/fullscreen
 /atom/movable/screen/fullscreen/proc/SetSeverity(severity)
 /atom/movable/screen/fullscreen/proc/SetView(client_view)
@@ -1075,7 +1194,9 @@
 /atom/movable/screen/fullscreen/special/lighting_backdrop/lit
 /atom/movable/screen/fullscreen/special/lighting_backdrop/unlit
 /atom/movable/screen/fullscreen/special/see_through_darkness
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_rendering\parallax\parallax_holder.dm. ----------------------
 /atom/movable/screen/parallax_vis
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_rendering\parallax\parallax_object.dm. ----------------------
 /atom/movable/screen/parallax_layer
 /atom/movable/screen/parallax_layer/proc/ResetPosition(x, y)
 /atom/movable/screen/parallax_layer/proc/RelativePosition(x, y, rel_x, rel_y)
@@ -1088,6 +1209,7 @@
 /atom/movable/screen/parallax_layer/proc/QueueLoop(delay, speed, matrix/translate_matrix, matrix/target_matrix)
 /atom/movable/screen/parallax_layer/proc/_loop(speed, matrix/translate_matrix = matrix(1, 0, 0, 0, 1, 480), matrix/target_matrix = matrix())
 /atom/movable/screen/parallax_layer/proc/CancelAnimation()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_rendering\parallax\types\space.dm. ----------------------
 /atom/movable/screen/parallax_layer/space/layer_1
 /atom/movable/screen/parallax_layer/space/layer_2
 /atom/movable/screen/parallax_layer/space/layer_3
@@ -1096,7 +1218,9 @@
 /atom/movable/screen/parallax_layer/space/random/asteroids
 /atom/movable/screen/parallax_layer/space/planet
 /atom/movable/screen/parallax_layer/space/planet/ShouldSee(client/C, atom/location)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\__HELPERS\icons.dm. ----------------------
 /atom/proc/DrawPixelOn(colour, drawX, drawY)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\__HELPERS\icon_smoothing.dm. ----------------------
 /atom/var/smooth = SMOOTH_FALSE
 /atom/var/top_left_corner
 /atom/var/top_right_corner
@@ -1107,46 +1231,66 @@
 /atom/proc/diagonal_smooth(adjacencies)
 /atom/proc/clear_smooth_overlays()
 /atom/proc/replace_smooth_overlays(nw, ne, sw, se)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\__HELPERS\matrices.dm. ----------------------
 /atom/proc/shake_animation(var/intensity = 8) //Makes the object visibly shake
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\__HELPERS\unsorted.dm. ----------------------
 /atom/proc/GetAllContents(var/T)
 /atom/proc/GetAllContentsIgnoring(list/ignore_typecache)
 /atom/proc/contains(var/atom/A)
 /atom/proc/Shake(pixelshiftx = 15, pixelshifty = 15, duration = 250)
 /atom/proc/do_jiggle(targetangle = 25, timer = 20)
 /atom/proc/do_squish(squishx = 1.2, squishy = 0.6, timer = 20)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\__HELPERS\vector.dm. ----------------------
 /atom/movable/proc/vector_translate(var/datum/vector/V, var/delay)
 /atom/proc/get_translated_turf(var/datum/vector/V)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\__HELPERS\matrices\transform_matrix.dm. ----------------------
 /atom/proc/SpinAnimation(speed = 10, loops = -1, clockwise = 1, segments = 3, parallel = TRUE)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_citadel\code\modules\mob\living\living.dm. ----------------------
 /atom
 /atom/proc/get_fake_z()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_sand\code\datums\status_effects\buffs.dm. ----------------------
 /atom/movable/screen/alert/status_effect/argent
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_sand\code\game\atoms.dm. ----------------------
 /atom/emag_act()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_sand\code\modules\clothing\spacesuits\chronosuit.dm. ----------------------
 /atom/movable/screen/chronos_target
 /atom/movable/screen/chronos_target/New(loc, var/mob/living/carbon/human/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_sand\code\_onclick\hud\screen_objects.dm. ----------------------
 /atom/movable/screen/hunger
 /atom/movable/screen/thirst
 /atom/movable/screen/healthdoll/Click(location, control, params)
 /atom/movable/screen/sanity
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\datums\status_effects\pregnancy.dm. ----------------------
 /atom/movable/screen/alert/status_effect/pregnancy
 /atom/movable/screen/alert/status_effect/lactation
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\atoms.dm. ----------------------
 /atom
 /atom/log_message(message, message_type, color=null, log_globally=TRUE) //This is only a "temporal" measure until cit and tg decide to fix their shit
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\atoms_movable.dm. ----------------------
 /atom/movable/Initialize(mapload)
 /atom/movable/Destroy()
 /atom/movable/proc/handle_special_bark(atom/movable/source, list/hearers, distance, volume, pitch)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\say.dm. ----------------------
 /atom/movable/bark(list/hearers, distance, volume, pitch)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\modules\arousal\arousal.dm. ----------------------
 /atom/proc/add_cum_overlay() //This can go in a better spot, for now its here.
 /atom/proc/wash_cum()
 /atom/movable/screen/arousal
 /atom/movable/screen/arousal/Initialize(mapload, mob/living/carbon/human/owner)
 /atom/movable/screen/arousal/Click()
 /atom/movable/screen/arousal/proc/update_lust(mob/living/carbon/human/source)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\_onclick\observer.dm. ----------------------
 /atom/attack_ghost(mob/dead/observer/user)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\_onclick\hud\new_player.dm. ----------------------
 /atom/movable/screen/lobby/button/Click(location, control, params)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\_onclick\hud\screen_objects.dm. ----------------------
 /atom/movable/screen/healths/qareen
 /atom/movable/screen/navigate
 /atom/movable/screen/navigate/Click()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\_rendering\fullscreen\fullscreen.dm. ----------------------
 /atom/movable/screen/fullscreen/ivanov_display
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\__HELPERS\icons.dm. ----------------------
 /atom/movable/proc/transformation_animation(result_appearance,time = 3 SECONDS,transform_overlay,reset_after=TRUE)
 /atom/movable/proc/_reset_transformation_animation(filter_index)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\__HELPERS\unsorted.dm. ----------------------
 /atom/proc/do_twist(targetangle = 45, timer = 20)

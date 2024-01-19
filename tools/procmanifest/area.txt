@@ -1,9 +1,12 @@
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\datums\mapgen\JungleGenerator.dm. ----------------------
 /area/mine/planetgeneration
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\ai_monitored.dm. ----------------------
 /area/ai_monitored
 /area/ai_monitored/Initialize(mapload)
 /area/ai_monitored/Entered(atom/movable/O)
 /area/ai_monitored/Exited(atom/movable/O)
 /area/ai_monitored/turret_protected/ai/Initialize(mapload)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas.dm. ----------------------
 /area
 /area/New()
 /area/Initialize(mapload)
@@ -40,7 +43,7 @@
 /area/AllowDrop()
 /area/drop_location()
 /area/proc/PlaceOnTopReact(list/new_baseturfs, turf/fake_turf_type, flags)
-/area/CATEGORY/OR/DESCRIPTOR/NAME   (you can make as many subdivisions as you want)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\Space_Station_13_areas.dm. ----------------------
 /area/ai_monitored //stub defined ai_monitored.dm
 /area/ai_monitored/turret_protected
 /area/ai_monitored/turret_protected/AIsatextFP
@@ -429,10 +432,12 @@
 /area/router/air
 /area/router/eng
 /area/router/aux
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\away_content.dm. ----------------------
 /area/awaymission
 /area/awaymission/beach
 /area/awaymission/errorroom
 /area/awaymission/vr
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\centcom.dm. ----------------------
 /area/centcom
 /area/centcom/control
 /area/centcom/evac
@@ -477,6 +482,7 @@
 /area/ctf/flag_room2
 /area/reebe
 /area/reebe/city_of_cogs
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\edina.dm. ----------------------
 /area/edina
 /area/edina/backstreet
 /area/edina/backstreet/supply
@@ -508,6 +514,7 @@
 /area/edina/crew_quarters/store/clothes
 /area/edina/crew_quarters/store/plushies
 /area/edina/crew_quarters/store/pet
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\holodeck.dm. ----------------------
 /area/holodeck
 /area/holodeck/Initialize(mapload)
 /area/holodeck/powered(var/chan)
@@ -537,6 +544,7 @@
 /area/holodeck/rec_center/anthophila
 /area/holodeck/rec_center/refuel
 /area/holodeck/rec_center/thunderdome1218
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\mining.dm. ----------------------
 /area/mine
 /area/mine/explored
 /area/mine/unexplored
@@ -572,6 +580,7 @@
 /area/icemoon/underground/unexplored/rivers // rivers spawn here
 /area/icemoon/underground/unexplored/rivers/deep
 /area/icemoon/underground/explored // ruins can't spawn here
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\shuttles.dm. ----------------------
 /area/shuttle
 /area/shuttle/Initialize(mapload)
 /area/shuttle/PlaceOnTopReact(list/new_baseturfs, turf/fake_turf_type, flags)
@@ -629,8 +638,10 @@
 /area/shuttle/caravan/freighter2
 /area/shuttle/caravan/freighter3
 /area/shuttle/snowtaxi
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\ruins\icemoon.dm. ----------------------
 /area/ruin/lavaland/unpowered/buried_library
 /area/ruin/lavaland/powered/bathhouse
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\ruins\lavaland.dm. ----------------------
 /area/ruin/lavaland/unpowered
 /area/ruin/lavaland/unpowered/no_grav
 /area/ruin/lavaland/powered
@@ -661,6 +672,7 @@
 /area/ruin/lavaland/unpowered/syndicate_lava_base/circuits
 /area/ruin/lavaland/unpowered/xenonest
 /area/ruin/lavaland/unpowered/ash_walkers
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\ruins\space.dm. ----------------------
 /area/ruin/space
 /area/ruin/space/has_grav
 /area/ruin/space/has_grav/powered
@@ -789,20 +801,24 @@
 /area/ruin/space/has_grav/listeningstation
 /area/ruin/space/has_grav/powered/ancient_shuttle
 /area/ruin/space/has_grav/powered/advancedlab
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\ruins\templates.dm. ----------------------
 /area/ruin/powered/shuttle
 /area/ruin/powered/shuttle/medium_1
 /area/ruin/powered/shuttle/medium_2
 /area/ruin/powered/shuttle/medium_3
 /area/ruin/powered/shuttle/medium_4
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\area\areas\ruins\_ruins.dm. ----------------------
 /area/ruin
 /area/ruin/unpowered
 /area/ruin/unpowered/no_grav
 /area/ruin/powered
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\game\machinery\firealarm.dm. ----------------------
 /area
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\admin\fun_balloon.dm. ----------------------
 /area/shuttle_arena
-/area/
-/area/proc/ClaimAsLair(/obj/structure/closet/crate/inClaimant)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\atmospherics\machinery\airalarm.dm. ----------------------
 /area
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\Academy.dm. ----------------------
 /area/awaymission/academy
 /area/awaymission/academy/headmaster
 /area/awaymission/academy/classrooms
@@ -810,6 +826,7 @@
 /area/awaymission/academy/academygate
 /area/awaymission/academy/academycellar
 /area/awaymission/academy/academyengine
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\Cabin.dm. ----------------------
 /area/awaymission/cabin
 /area/awaymission/cabin/snowforest
 /area/awaymission/cabin/snowforest/sovietsurface
@@ -817,6 +834,7 @@
 /area/awaymission/cabin/caves/sovietcave
 /area/awaymission/cabin/caves
 /area/awaymission/cabin/caves/mountain
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\caves.dm. ----------------------
 /area/awaymission/caves/BMP_asteroid
 /area/awaymission/caves/BMP_asteroid/level_two
 /area/awaymission/caves/BMP_asteroid/level_three
@@ -824,6 +842,7 @@
 /area/awaymission/caves/research
 /area/awaymission/caves/northblock //engineering, bridge (not really north but it doesnt really need its own APC)
 /area/awaymission/caves/listeningpost
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\centcomAway.dm. ----------------------
 /area/awaymission/centcomAway
 /area/awaymission/centcomAway/general
 /area/awaymission/centcomAway/maint
@@ -831,17 +850,22 @@
 /area/awaymission/centcomAway/cafe
 /area/awaymission/centcomAway/courtroom
 /area/awaymission/centcomAway/hangar
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\challenge.dm. ----------------------
 /area/awaymission/challenge/start
 /area/awaymission/challenge/main
 /area/awaymission/challenge/end
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\jungleresort.dm. ----------------------
 /area/awaymission/jungleresort
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\moonoutpost19.dm. ----------------------
 /area/awaymission/moonoutpost19
 /area/awaymission/moonoutpost19/arrivals
 /area/awaymission/moonoutpost19/research
 /area/awaymission/moonoutpost19/syndicate
 /area/awaymission/moonoutpost19/main
 /area/awaymission/moonoutpost19/hive
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\murderdome.dm. ----------------------
 /area/awaymission/vr/murderdome
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\research.dm. ----------------------
 /area/awaymission/research
 /area/awaymission/research/interior
 /area/awaymission/research/interior/cryo
@@ -857,6 +881,7 @@
 /area/awaymission/research/interior/bathroom
 /area/awaymission/research/interior/medbay
 /area/awaymission/research/exterior
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\snowdin.dm. ----------------------
 /area/awaymission/snowdin
 /area/awaymission/snowdin/outside
 /area/awaymission/snowdin/outside/vip
@@ -889,6 +914,7 @@
 /area/awaymission/snowdin/sekret
 /area/shuttle/snowdin/elevator1
 /area/shuttle/snowdin/elevator2
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\undergroundoutpost45.dm. ----------------------
 /area/awaymission/undergroundoutpost45
 /area/awaymission/undergroundoutpost45/central
 /area/awaymission/undergroundoutpost45/crew_quarters
@@ -897,30 +923,44 @@
 /area/awaymission/undergroundoutpost45/research
 /area/awaymission/undergroundoutpost45/gateway
 /area/awaymission/undergroundoutpost45/caves
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\awaymissions\mission_code\wildwest.dm. ----------------------
 /area/awaymission/wildwest/mines
 /area/awaymission/wildwest/gov
 /area/awaymission/wildwest/refine
 /area/awaymission/wildwest/vault
 /area/awaymission/wildwest/vaultdoors
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\cargo\centcom_podlauncher.dm. ----------------------
 /area/centcom/supplypod/pod_storage/Initialize(mapload) //temp_pod holding area
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\holodeck\area_copy.dm. ----------------------
 /area/proc/copy_contents_to(var/area/A , var/platingRequired = 0, var/nerf_weapons = 0 )
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\lighting\lighting_area.dm. ----------------------
 /area
 /area/proc/set_dynamic_lighting(var/new_dynamic_lighting = DYNAMIC_LIGHTING_ENABLED)
 /area/vv_edit_var(var_name, var_value)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mafia\map_pieces.dm. ----------------------
 /area/mafia
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mapping\preloader.dm. ----------------------
 /area/template_noop
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mining\aux_base.dm. ----------------------
 /area/shuttle/auxillary_base
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mining\equipment\survival_pod.dm. ----------------------
 /area/survivalpod
 /area/survivalpod/nonpowered
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\mob\living\silicon\ai\multicam.dm. ----------------------
 /area/ai_multicam_room
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\power\power.dm. ----------------------
 /area/proc/get_apc()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\power\reactor\rbmk.dm. ----------------------
 /area/engineering/main/reactor_core
 /area/engineering/main/reactor_control
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\power\singularity\investigate.dm. ----------------------
 /area/engineering/main/poweralert(state, source)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\ruins\spaceruin_code\crashedship.dm. ----------------------
 /area/awaymission/BMPship
 /area/awaymission/BMPship/Aft
 /area/awaymission/BMPship/Midship
 /area/awaymission/BMPship/Fore
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\ruins\spaceruin_code\hilbertshotel.dm. ----------------------
 /area/hilbertshotel
 /area/hilbertshotel/Entered(atom/movable/AM)
 /area/hilbertshotel/proc/relocate(obj/item/hilbertshotel/H)
@@ -928,19 +968,25 @@
 /area/hilbertshotel/proc/storeRoom()
 /area/hilbertshotelstorage
 /area/ruin/space/has_grav/hilbertresearchfacility
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\shuttle\on_move.dm. ----------------------
 /area/proc/beforeShuttleMove(list/shuttle_areas)
 /area/proc/onShuttleMove(turf/oldT, turf/newT, area/underlying_old_area)
 /area/proc/afterShuttleMove(new_parallax_dir, speed)
 /area/proc/lateShuttleMove()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\modules\vore\persistence.dm. ----------------------
 /area/map_important_vars()
 /area/vars_to_save()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\_onclick\adjacent.dm. ----------------------
 /area/Adjacent(var/atom/neighbor)
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\code\__HELPERS\areas.dm. ----------------------
 /area/proc/addSorted()
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_citadel\code\modules\eventmaps\Spookystation\JTGSZwork.dm. ----------------------
 /area/eventmap
 /area/eventmap/outside //We are outside
 /area/eventmap/inside //We are inside, all things are pretty normal.
 /area/eventmap/mountain //Mostly so I can see the area lines of the mountain area in the minimap.
 /area/eventmap/mountaininside
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_sand\code\game\area\ship_area.dm. ----------------------
 /area/ship
 /area/ship/medbay
 /area/ship/engi
@@ -960,35 +1006,49 @@
 /area/ship/science/air_testing
 /area/ship/science/server_room
 /area/ship/kitchen
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_sand\code\game\area\areas\shuttles.dm. ----------------------
 /area/shuttle/access_smol
 /area/shuttle/axsbrig_smol
 /area/shuttle/axsscioutpost_smol
 /area/shuttle/mining_large
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_sand\code\game\area\areas\ruins\lavaland.dm. ----------------------
 /area/ruin/lavaland/powered/kinggoat_arena
 /area/ruin/lavaland/unpowered/sif
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_sand\code\modules\ruins\lavalandruin_code\doom.dm. ----------------------
 /area/ruin/powered/e1m1
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_sand\code\modules\ruins\lavalandruin_code\misc.dm. ----------------------
 /area/ruin/powered/wrath
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\area\areas\centcom.dm. ----------------------
 /area/slavers
 /area/slavers/export
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\area\areas\commons.dm. ----------------------
 /area/commons/dorms
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\area\areas\holodeck.dm. ----------------------
 /area/holodeck/rec_center/burn
 /area/holodeck/rec_center/wildlife
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\area\areas\layenia.dm. ----------------------
 /area/layenia
 /area/layenia/cloudlayer
 /area/layenia/powered
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\area\areas\maintenance.dm. ----------------------
 /area/maintenance/department/electrical2
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\area\areas\mining.dm. ----------------------
 /area/mine/xenoarch_area_a
 /area/mine/xenoarch_area_b
 /area/mine/xenoarch_area_c
 /area/mine/xenoarch
 /area/ruin/lavaland/unpowered/xenoarch
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\area\areas\shuttles.dm. ----------------------
 /area/shuttle/slaveship
 /area/shuttle/slaveship/brig
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\area\areas\station_areas.dm. ----------------------
 /area/medical/psychology/petpark
 /area/service/library/artgallery/museum
 /area/service/hydroponics/enclosure
 /area/engineering/break_room/atmos
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\area\areas\ruins\lavaland.dm. ----------------------
 /area/ruin/unpowered/reactor
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\game\area\areas\ruins\space.dm. ----------------------
 /area/ruin/space/radiostation
 /area/ruin/space/radiostation/solars
 /area/ruin/space/radiostation/engineering
@@ -999,8 +1059,10 @@
 /area/ruin/space/radiostation/cabin
 /area/ruin/space/syndielistenspace
 /area/ruin/space/ruinsolars
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\modules\jobs\job_types\blueshield.dm. ----------------------
 /area/command/blueshieldoffice
 /area/command/blueshielquarters
 /area/command/blueshielquarters2
 /area/command/blueshielquarters3
+-- FILE: C:\Users\Nicholas\Desktop\Nick\Development\BYOND\Fungus\modular_splurt\code\modules\jobs\job_types\peacekeeper.dm. ----------------------
 /area/security/pk

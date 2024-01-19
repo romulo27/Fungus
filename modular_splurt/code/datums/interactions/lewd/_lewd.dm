@@ -17,8 +17,9 @@
 /mob/living/moan()
 	var/moaned = lastmoan
 	var/miming = mind ? mind?.miming : FALSE
+	var/p = arousal_moan ? arousal_moan : 50
 	. = ..()
-	if((moaned == lastmoan) || is_muzzled() || miming || !prob(50))
+	if((moaned == lastmoan) || is_muzzled() || miming || !prob(p))
 		return
 	var/list/moans
 	if(isalien(src))
@@ -211,7 +212,7 @@
 	if(gender == MALE)
 		playlewdinteractionsound(loc, pick('modular_splurt/sound/voice/moan_m1.ogg',
 							'modular_splurt/sound/voice/moan_m2.ogg',
-							'modular_splurt/sound/voice/moan_m3.ogg'), 90, 1, 0)
+							'modular_splurt/sound/voice/moan_m3.ogg'), 70, 0, 0)
 	else if(gender == FEMALE)
 		playlewdinteractionsound(loc, pick('modular_sand/sound/interactions/final_f1.ogg',
 							'modular_sand/sound/interactions/final_f2.ogg',
@@ -597,7 +598,7 @@
 			"envelops \the <b>[target]</b>'s hard member with [u_His] soft [pick(GLOB.breast_nouns)], giving it a tight and sloshing squeeze",
 			"lets [u_His] [pick(GLOB.breast_nouns)] fall into \the <b>[target]</b>'s fat [genital_name], smothering it in [u_His] cleavage"
 		)
-		target.set_is_fucking(src, CUM_TARGET_BREASTS, getorganslot(ORGAN_SLOT_PENIS))
+		target.set_is_fucking(src, CUM_TARGET_BREASTS, getorganslot(ORGAN_SLOT_PENIS), dynamic_act_name)
 
 	message = span_lewd("\The <b>[src]</b> [pick(lines)]")
 	visible_message(message, ignored_mobs = get_unconsenting())
@@ -605,7 +606,7 @@
 						'modular_sand/sound/interactions/bang2.ogg',
 						'modular_sand/sound/interactions/bang3.ogg'), 70, 1, -1)
 	if(target.can_penetrating_genital_cum())
-		target.handle_post_sex(NORMAL_LUST, CUM_TARGET_BREASTS, src, ORGAN_SLOT_PENIS)
+		target.handle_post_sex(NORMAL_LUST, CUM_TARGET_BREASTS, src, ORGAN_SLOT_PENIS, dynamic_act_name)
 
 /mob/living/proc/lick_nuts(mob/living/target)
 	var/message
@@ -734,8 +735,8 @@
 						'modular_sand/sound/interactions/bang2.ogg',
 						'modular_sand/sound/interactions/bang3.ogg'), 70, 1, -1)
 	if(can_penetrating_genital_cum())
-		handle_post_sex(NORMAL_LUST, CUM_TARGET_THIGHS, target, ORGAN_SLOT_PENIS)
-	target.handle_post_sex(LOW_LUST, CUM_TARGET_PENIS, src)
+		handle_post_sex(NORMAL_LUST, CUM_TARGET_THIGHS, target, ORGAN_SLOT_PENIS, dynamic_act_name)
+	target.handle_post_sex(LOW_LUST, CUM_TARGET_PENIS, src, null, dynamic_act_name)
 
 /mob/living/proc/do_thighjob(mob/living/target)
 	var/message
