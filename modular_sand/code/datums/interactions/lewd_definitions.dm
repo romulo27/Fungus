@@ -851,7 +851,7 @@
 		return FALSE
 
 	if(amount)
-		add_lust((amount + user.arousal_increase) * (user.arousal_multiplier/100))
+		add_lust((amount + arousal_increase) * (arousal_multiplier/100))
 	var/lust = get_lust()
 	var/lust_tolerance = get_lust_tolerance()
 	if(lust >= lust_tolerance)
