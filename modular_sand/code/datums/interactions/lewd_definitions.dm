@@ -40,6 +40,10 @@
 												//Yes i feel like an idiot writing this.
 	var/cleartimer //Timer for clearing the "last_lewd_datum". This prevents some oddities.
 
+	var/arousal_multiplier = 100
+	var/arousal_moan = 50
+	var/arousal_increase = 0
+
 /mob/living/proc/clear_lewd_datum()
 	last_partner = null
 	last_orifice = null
@@ -841,7 +845,7 @@
 		return FALSE
 
 	if(amount)
-		add_lust(amount)
+		add_lust((amount + user.arousal_increase) * (user.arousal_multiplier/100))
 	var/lust = get_lust()
 	var/lust_tolerance = get_lust_tolerance()
 	if(lust >= lust_tolerance)

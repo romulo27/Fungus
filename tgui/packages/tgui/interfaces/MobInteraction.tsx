@@ -2,7 +2,7 @@ import { filter, map, sortBy } from 'common/collections';
 import { flow } from 'common/fp';
 import { createSearch } from 'common/string';
 import { useBackend, useLocalState } from '../backend';
-import { BlockQuote, Button, Flex, LabeledList, Icon, Input, Section, Table, Tabs, Stack, ProgressBar, Divider } from '../components';
+import { BlockQuote, Button, Flex, LabeledList, Icon, Input, Section, Table, Tabs, Stack, ProgressBar, Divider, Slider } from '../components';
 import { TableCell, TableRow } from '../components/Table';
 import { Window } from '../layouts';
 
@@ -78,6 +78,12 @@ type ContentPrefsInfo = {
   edging_pref: boolean,
 }
 
+type ArousalPrefsInfo = {
+  multiplier: number,
+  increase: number,
+  moan: number
+}
+
 export const MobInteraction = (props, context) => {
   const { act, data } = useBackend<HeaderInfo>(context);
   const {
@@ -150,6 +156,9 @@ export const MobInteraction = (props, context) => {
             <Tabs.Tab selected={tabIndex === 3} onClick={() => setTabIndex(3)}>
               Preferences
             </Tabs.Tab>
+            <Tabs.Tab selected={tabIndex === 4} onClick={() => setTabIndex(4)}>
+              Arousal
+            </Tabs.Tab>
           </Tabs>
           {tabIndex === 0 && (
             <InteractionsTab />
@@ -159,6 +168,8 @@ export const MobInteraction = (props, context) => {
             <CharacterPrefsTab />
           ) || tabIndex === 3 && (
             <ContentPreferencesTab />
+          ) || tabIndex === 4 && (
+            <ArousalPrefsTab />
           ) || ("Somehow, you've got into an invalid page, please report this.")}
         </Section>
       </Window.Content>
@@ -331,6 +342,69 @@ const GenitalTab = (props, context) => {
     )
   );
 };
+
+const ArousalPrefsTab = (props, context) => {
+  const {act, data} = useBackend<ArousalPrefsInfo>(context);
+  const {
+    multiplier,
+    increase,
+    moan
+  } = data;
+  return (
+    <Flex direction="column">
+      <LabeledList>
+        <LabeledList.Item label="Global Multiplier">
+        <Slider
+            minValue={0}
+            maxValue={300}
+            ranges={{
+              bad: [-Infinity, 79],
+              average: [80, 120],
+              good: [121, Infinity],
+            }}
+            unit="%"
+            step={1}
+            value={ multiplier }
+            onChange={(_, value) => act("dynamic", { type: 'multiplier', amount: value })}
+          />
+        </LabeledList.Item>
+
+        <LabeledList.Item label="Global Increase">
+        <Slider
+            minValue={-1}
+            maxValue={10}
+            ranges={{
+              bad: [-Infinity, 0],
+              average: [1, 2],
+              good: [3, Infinity],
+            }}
+            unit="%"
+            step={1}
+            value={ increase }
+            onChange={(_, value) => act("dynamic", { type: 'increase', amount: value })}
+          />
+        </LabeledList.Item>
+
+        <LabeledList.Item label="Moaning Chance">
+        <Slider
+            minValue={0}
+            maxValue={100}
+            ranges={{
+              bad: [-Infinity, 25],
+              average: [26, 49],
+              good: [50, Infinity],
+            }}
+            unit="%"
+            step={1}
+            value={ moan }
+            onChange={(_, value) => act("dynamic", { type: 'moan', amount: value })}
+          />
+        </LabeledList.Item>
+
+      </LabeledList>
+    </Flex>
+  )
+}
 
 const CharacterPrefsTab = (props, context) => {
   const { act, data } = useBackend<CharacterPrefsInfo>(context);

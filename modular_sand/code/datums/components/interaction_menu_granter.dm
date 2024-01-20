@@ -117,6 +117,10 @@
 			sent_interactions += list(interaction)
 	.["interactions"] = sent_interactions
 
+	//Getting dynamic arousal info
+	.["mood"] = self.arousal_multiplier
+	.["moan"] = self.arousal_moan
+
 	//Get their genitals
 	var/list/genitals = list()
 	var/mob/living/carbon/get_genitals = self
@@ -214,6 +218,15 @@
 		return
 	var/mob/living/parent_mob = parent
 	switch(action)
+		if("dynamic") // Maleable arousal - Life edits.
+			var/mob/living/carbon/self = parent_mob
+			switch(params["type"])
+				if("multiplier")
+					self.arousal_multiplier = params["amount"]
+				if("moan")
+					self.arousal_moan = params["amount"]
+				if("increase")
+					self.arousal_increase = params["amount"]
 		if("interact")
 			var/datum/interaction/o = SSinteractions.interactions[params["interaction"]]
 			if(o)
