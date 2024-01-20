@@ -118,7 +118,8 @@
 	.["interactions"] = sent_interactions
 
 	//Getting dynamic arousal info
-	.["mood"] = self.arousal_multiplier
+	.["increase"] = self.arousal_increase
+	.["multiplier"] = self.arousal_multiplier
 	.["moan"] = self.arousal_moan
 
 	//Get their genitals
