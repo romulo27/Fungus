@@ -118,19 +118,8 @@
 	.["interactions"] = sent_interactions
 
 	//Getting dynamic arousal info
-	.["rub_pussy"] = self.arousal_rub_pussy
-	.["rub_pussy_penis"] = self.arousal_rub_pussy_penis
-	.["rub_thighs"] = self.arousal_rub_thighs
-	.["fuck_pussy"] = self.arousal_fuck_pussy
-	.["fuck_breast"] = self.arousal_fuck_breast
-	.["touch_breast"] = self.arousal_touch_breast
-	.["touch_penis"] = self.arousal_touch_penis
-	.["suck_breast"] = self.arousal_suck_breast
-	.["suck_penis"] = self.arousal_suck_penis
-	.["suck_penis_throat"] = self.arousal_suck_penis_throat
-	.["lick_pussy"] = self.arousal_lick_pussy
-	.["lick_penis"] = self.arousal_lick_penis
-	.["mood"] = self.arousal_mood
+	.["increase"] = self.arousal_increase
+	.["multiplier"] = self.arousal_multiplier
 	.["moan"] = self.arousal_moan
 
 	//Get their genitals
@@ -233,34 +222,12 @@
 		if("dynamic") // Maleable arousal - Life edits.
 			var/mob/living/carbon/self = parent_mob
 			switch(params["type"])
-				if("rub_pussy")
-					self.arousal_rub_pussy = params["amount"]
-				if("rub_pussy_penis")
-					self.arousal_rub_pussy_penis = params["amount"]
-				if("rub_thighs")
-					self.arousal_rub_thighs = params["amount"]
-				if("fuck_pussy")
-					self.arousal_fuck_pussy = params["amount"]
-				if("fuck_breast")
-					self.arousal_fuck_breast = params["amount"]
-				if("touch_breast")
-					self.arousal_touch_breast = params["amount"]
-				if("touch_penis")
-					self.arousal_touch_penis = params["amount"]
-				if("suck_breast")
-					self.arousal_suck_breast = params["amount"]
-				if("suck_penis")
-					self.arousal_suck_penis = params["amount"]
-				if("suck_penis_throat")
-					self.arousal_suck_penis_throat = params["amount"]
-				if("lick_pussy")
-					self.arousal_lick_pussy = params["amount"]
-				if("lick_penis")
-					self.arousal_lick_penis = params["amount"]
-				if("mood")
-					self.arousal_mood = params["amount"]
+				if("multiplier")
+					self.arousal_multiplier = params["amount"]
 				if("moan")
 					self.arousal_moan = params["amount"]
+				if("increase")
+					self.arousal_increase = params["amount"]
 		if("interact")
 			var/datum/interaction/o = SSinteractions.interactions[params["interaction"]]
 			if(o)

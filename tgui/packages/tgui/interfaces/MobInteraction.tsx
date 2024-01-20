@@ -79,19 +79,8 @@ type ContentPrefsInfo = {
 }
 
 type ArousalPrefsInfo = {
-  rub_pussy: number,
-  rub_pussy_penis: number,
-  rub_thighs: number,
-  fuck_pussy: number,
-  fuck_breast: number,
-  touch_breast: number,
-  touch_penis: number,
-  suck_breast: number,
-  suck_penis: number,
-  suck_penis_throat: number,
-  lick_pussy: number,
-  lick_penis: number,
-  mood: number,
+  multiplier: number,
+  increase: number,
   moan: number
 }
 
@@ -168,7 +157,7 @@ export const MobInteraction = (props, context) => {
               Preferences
             </Tabs.Tab>
             <Tabs.Tab selected={tabIndex === 4} onClick={() => setTabIndex(4)}>
-              Arousal Prefs
+              Arousal
             </Tabs.Tab>
           </Tabs>
           {tabIndex === 0 && (
@@ -357,229 +346,55 @@ const GenitalTab = (props, context) => {
 const ArousalPrefsTab = (props, context) => {
   const {act, data} = useBackend<ArousalPrefsInfo>(context);
   const {
-    rub_pussy,
-    rub_pussy_penis,
-    rub_thighs,
-    fuck_pussy,
-    fuck_breast,
-    touch_breast,
-    touch_penis,
-    suck_breast,
-    suck_penis,
-    suck_penis_throat,
-    lick_pussy,
-    lick_penis,
-    mood,
+    multiplier,
+    increase,
     moan
   } = data;
   return (
     <Flex direction="column">
       <LabeledList>
-
-        <LabeledList.Item label="Rubbing">
-          <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ rub_pussy }
-            onChange={(_, value) => act("dynamic", { type: 'rub_pussy', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Rubbing /w Penis">
+        <LabeledList.Item label="Global Multiplier">
         <Slider
             minValue={0}
             maxValue={300}
             ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
+              bad: [-Infinity, 79],
+              average: [80, 120],
+              good: [121, Infinity],
             }}
+            unit="%"
             step={1}
-            value={ rub_pussy_penis }
-            onChange={(_, value) => act("dynamic", { type: 'rub_pussy_penis', amount: value })}
+            value={ multiplier }
+            onChange={(_, value) => act("dynamic", { type: 'multiplier', amount: value })}
           />
         </LabeledList.Item>
 
-        <LabeledList.Item label="Thighs">
+        <LabeledList.Item label="Global Increase">
         <Slider
-            minValue={0}
-            maxValue={300}
+            minValue={-1}
+            maxValue={10}
             ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
+              bad: [-Infinity, 0],
+              average: [1, 2],
+              good: [3, Infinity],
             }}
+            unit="%"
             step={1}
-            value={ rub_thighs }
-            onChange={(_, value) => act("dynamic", { type: 'rub_thighs', amount: value })}
+            value={ increase }
+            onChange={(_, value) => act("dynamic", { type: 'increase', amount: value })}
           />
         </LabeledList.Item>
 
-        <LabeledList.Item label="Pussy fuck">
-        <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ fuck_pussy }
-            onChange={(_, value) => act("dynamic", { type: 'fuck_pussy', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Breast Fuck">
-        <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ fuck_breast }
-            onChange={(_, value) => act("dynamic", { type: 'fuck_breast', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Breast Touching">
-        <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ touch_breast }
-            onChange={(_, value) => act("dynamic", { type: 'touch_breast', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Handjob">
-        <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ touch_penis }
-            onChange={(_, value) => act("dynamic", { type: 'touch_penis', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Breast Sucking">
-        <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ suck_breast }
-            onChange={(_, value) => act("dynamic", { type: 'suck_breast', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Blowjob">
-        <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ suck_penis }
-            onChange={(_, value) => act("dynamic", { type: 'suck_penis', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Blowjob - Throat">
-        <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ suck_penis_throat }
-            onChange={(_, value) => act("dynamic", { type: 'suck_penis_throat', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Pussy Licking">
-        <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ lick_pussy }
-            onChange={(_, value) => act("dynamic", { type: 'lick_pussy', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Penis Licking">
-        <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ lick_penis }
-            onChange={(_, value) => act("dynamic", { type: 'lick_penis', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Mood Multiplier">
-        <Slider
-            minValue={0}
-            maxValue={300}
-            ranges={{
-              bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
-            }}
-            step={1}
-            value={ mood }
-            onChange={(_, value) => act("dynamic", { type: 'mood', amount: value })}
-          />
-        </LabeledList.Item>
-
-        <LabeledList.Item label="Moaning Multiplier">
+        <LabeledList.Item label="Moaning Chance">
         <Slider
             minValue={0}
             maxValue={100}
             ranges={{
               bad: [-Infinity, 25],
-              average: [26, 79],
-              good: [80, Infinity],
+              average: [26, 49],
+              good: [50, Infinity],
             }}
+            unit="%"
             step={1}
             value={ moan }
             onChange={(_, value) => act("dynamic", { type: 'moan', amount: value })}

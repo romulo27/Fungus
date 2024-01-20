@@ -39,22 +39,10 @@
 	var/datum/interaction/lewd/last_lewd_datum	//Recording our last lewd datum allows us to do stuff like custom cum messages.
 												//Yes i feel like an idiot writing this.
 	var/cleartimer //Timer for clearing the "last_lewd_datum". This prevents some oddities.
-	// Life edits
-	var/arousal_rub_pussy = 100 // Those are multipliers
-	var/arousal_rub_pussy_penis = 100
-	var/arousal_rub_thighs = 100
-	var/arousal_fuck_pussy = 100
-	var/arousal_fuck_breast = 100
-	var/arousal_touch_breast = 100
-	var/arousal_touch_penis = 100
-	var/arousal_suck_breast = 100
-	var/arousal_suck_penis = 100
-	var/arousal_suck_penis_throat = 100
-	var/arousal_lick_pussy = 100
-	var/arousal_lick_penis = 100
-	var/arousal_mood = 100 // This one is a global multiplier for now.
-	var/arousal_moan = 50 // This one is a probability.
-	var/interact_cooldown_override = 0.6 // admemeing ;3
+
+	var/arousal_multiplier = 100
+	var/arousal_moan = 50
+	var/arousal_increase = 0
 
 /mob/living/proc/clear_lewd_datum()
 	last_partner = null
@@ -862,37 +850,8 @@
 	if(stat != CONSCIOUS)
 		return FALSE
 
-	if (amount)
-		if (act)
-			var/new_amount = amount + (arousal_mood/10)
-			switch(act)
-				if("rub_pussy")
-					new_amount *= (arousal_rub_pussy/100) * (arousal_mood/100)
-				if("rub_pussy_penis")
-					new_amount *= (arousal_rub_pussy_penis/100) * (arousal_mood/100)
-				if("rub_thighs")
-					new_amount *= (arousal_rub_thighs/100) * (arousal_mood/100)
-				if("fuck_pussy")
-					new_amount *= (arousal_fuck_pussy/100) * (arousal_mood/100)
-				if("fuck_breast")
-					new_amount *= (arousal_fuck_breast/100) * (arousal_mood/100)
-				if("touch_breast")
-					new_amount *= (arousal_touch_breast/100) * (arousal_mood/100)
-				if("touch_penis")
-					new_amount *= (arousal_touch_penis/100) * (arousal_mood/100)
-				if("suck_breast")
-					new_amount *= (arousal_suck_breast/100) * (arousal_mood/100)
-				if("suck_penis")
-					new_amount *= (arousal_suck_penis/100) * (arousal_mood/100)
-				if("suck_penis_throat")
-					new_amount *= (arousal_suck_penis_throat/100) * (arousal_mood/100)
-				if("lick_pussy")
-					new_amount *= (arousal_lick_pussy/100) * (arousal_mood/100)
-				if("lick_penis")
-					new_amount *= (arousal_lick_penis/100) * (arousal_mood/100)
-			add_lust(new_amount)
-		else
-			add_lust(amount)
+	if(amount)
+		add_lust((amount + arousal_increase) * (arousal_multiplier/100))
 	var/lust = get_lust()
 	var/lust_tolerance = get_lust_tolerance()
 	if(lust >= lust_tolerance)
