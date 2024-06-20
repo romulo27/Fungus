@@ -371,14 +371,13 @@ const ArousalPrefsTab = (props, context) => {
 
         <LabeledList.Item label="Global Increase">
         <Slider
-            minValue={-1}
-            maxValue={10}
+            minValue={0}
+            maxValue={20}
             ranges={{
-              bad: [-Infinity, 0],
-              average: [1, 2],
-              good: [3, Infinity],
+              bad: [-Infinity, -1],
+              average: [0, 1],
+              good: [2, Infinity],
             }}
-            unit="%"
             step={1}
             value={ increase }
             onChange={(_, value) => act("dynamic", { type: 'increase', amount: value })}

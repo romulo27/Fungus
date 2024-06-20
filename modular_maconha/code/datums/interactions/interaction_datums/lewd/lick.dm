@@ -11,8 +11,8 @@
 		"<b>\The [user]</b> licks \the <b>[partner]</b>'s tool",
 		"<b>\The [user]</b> licks \the <b>[partner]</b>'s penis",
 		"<b>\The [user]</b> licks \the <b>[partner]</b>'s shaft",
-		"<b>\The [user]</b> licks across \the <b>[partner]</b>'s penis"
-		"<b>\The [user]</b> traces her tongue across \the <b>[partner]</b>'s penis",
+		"<b>\The [user]</b> licks across \the <b>[partner]</b>'s penis",
+		"<b>\The [user]</b> traces her tongue across \the <b>[partner]</b>'s penis"
 	)]" // I'm not the best on writing these messages.
 	user.visible_message(span_lewd(message))
 	user.handle_post_sex(LOW_LUST, null, partner, null, dynamic_act_name)

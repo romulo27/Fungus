@@ -39,7 +39,7 @@
 	var/datum/interaction/lewd/last_lewd_datum	//Recording our last lewd datum allows us to do stuff like custom cum messages.
 												//Yes i feel like an idiot writing this.
 	var/cleartimer //Timer for clearing the "last_lewd_datum". This prevents some oddities.
-
+	var/interact_cooldown_override = 0.6
 	var/arousal_multiplier = 100
 	var/arousal_moan = 50
 	var/arousal_increase = 0
@@ -54,9 +54,6 @@
 	. = ..()
 	sexual_potency = rand(10,25)
 	lust_tolerance = rand(75,200)
-	if (gender != MALE)
-		arousal_suck_penis = 0
-		arousal_suck_penis_throat = 0
 
 /mob/living/proc/get_lust_tolerance()
 	. = lust_tolerance
