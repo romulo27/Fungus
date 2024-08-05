@@ -365,12 +365,6 @@
 			if(istype(C.handcuffed, /obj/item/restraints/bondage_rope) || istype(C.legcuffed, /obj/item/restraints/bondage_rope))
 				.["theyHaveBondage"] = TRUE
 		//SPLURT EDIT END
-
-	//Getting dynamic arousal info
-	.["increase"] = self.arousal_increase
-	.["multiplier"] = self.arousal_multiplier
-	.["moan"] = self.arousal_moan
-
 	//Get their genitals
 	var/list/genitals = list()
 	var/mob/living/carbon/get_genitals = self
@@ -420,6 +414,11 @@
 
 	var/datum/preferences/prefs = self?.client.prefs
 	if(prefs)
+	//Lust stuff, appears at the very top
+		.["use_arousal_multiplier"] = 	prefs.use_arousal_multiplier
+		.["arousal_multiplier"] =		prefs.arousal_multiplier
+		.["use_moaning_multiplier"] = 	prefs.use_moaning_multiplier
+		.["moaning_multiplier"] = 		prefs.moaning_multiplier
 	//Let's get their favorites!
 		.["favorite_interactions"] = SANITIZE_LIST(prefs.favorite_interactions)
 
@@ -513,15 +512,6 @@
 		return
 	var/mob/living/parent_mob = parent
 	switch(action)
-		if("dynamic") // Maleable arousal - Life edits.
-			var/mob/living/carbon/self = parent_mob
-			switch(params["type"])
-				if("multiplier")
-					self.arousal_multiplier = params["amount"]
-				if("moan")
-					self.arousal_moan = params["amount"]
-				if("increase")
-					self.arousal_increase = params["amount"]
 		if("interact")
 			var/datum/interaction/o = SSinteractions.interactions[params["interaction"]]
 			if(o)
@@ -623,6 +613,14 @@
 		if("pref")
 			var/datum/preferences/prefs = parent_mob.client.prefs
 			switch(params["pref"])
+				if("use_arousal_multiplier")
+					prefs.use_arousal_multiplier = !prefs.use_arousal_multiplier
+				if("arousal_multiplier")
+					prefs.arousal_multiplier = params["amount"]
+				if("use_moaning_multiplier")
+					prefs.use_moaning_multiplier = !prefs.use_moaning_multiplier
+				if("moaning_multiplier")
+					prefs.moaning_multiplier = params["amount"]
 				if("verb_consent")
 					TOGGLE_BITFIELD(prefs.toggles, VERB_CONSENT)
 				if("lewd_verb_sounds")

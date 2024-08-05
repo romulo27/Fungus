@@ -6,13 +6,11 @@
 	write_log_target = "was given head by"
 	interaction_sound = null
 	var/fucktarget = "vagina"
-	dynamic_act_name = "lick_pussy"
 
 /datum/interaction/lewd/oral/blowjob
 	description = "Suck them off."
 	required_from_target_exposed = INTERACTION_REQUIRE_PENIS
 	fucktarget = "penis"
-	dynamic_act_name = "suck_penis"
 
 /datum/interaction/lewd/oral/display_interaction(mob/living/user, mob/living/partner)
 	var/message

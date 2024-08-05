@@ -8,7 +8,6 @@
 	max_distance = 0
 	write_log_user = "groped own breasts"
 	write_log_target = null
-	dynamic_act_name = "touch_breast"
 
 	additional_details = list(
 		list(
@@ -64,8 +63,6 @@
 		if(milkers && milktype)
 			liquid_container.reagents.add_reagent(milktype, rand(1,3 * milkers.get_lactation_amount_modifier()))
 
-	if (user.arousal_touch_breast > 0)
-		user.handle_post_sex(LOW_LUST, null, null, null, dynamic_act_name)
 	user.visible_message(message = span_lewd("<b>\The [user]</b> [message]."), ignored_mobs = user.get_unconsenting())
 	playlewdinteractionsound(get_turf(user), 'modular_sand/sound/interactions/squelch1.ogg', 50, 1, -1)
 
@@ -78,7 +75,6 @@
 	max_distance = 0
 	write_log_user = "sucked their own nips"
 	write_log_target = null
-	dynamic_act_name = "suck_breast"
 
 /datum/interaction/lewd/self_nipsuck/display_interaction(mob/living/user, mob/living/target)
 	var/message
@@ -99,10 +95,6 @@
 		"takes a big sip of [u_His] own fresh [lowertext(milktext)].",
 		"fills [u_His] own mouth with a big gulp of [u_His] warm [lowertext(milktext)]."
 	)
-
-	if (user.arousal_suck_breast > 0)
-		user.handle_post_sex(LOW_LUST, null, null, null, dynamic_act_name)
-
 	message = span_lewd("\The <b>[user]</b> [pick(lines)]")
 	user.visible_message(message, ignored_mobs = user.get_unconsenting())
 	playlewdinteractionsound(get_turf(user), pick('modular_sand/sound/interactions/oral1.ogg',
