@@ -74,6 +74,3 @@
 			AM.forceMove(goodspot)
 			reagents.trans_to(AM, wanted_amount)
 			return
-		if(istype(AM, /obj/item/slimecross/industrial)) ///no need to move slimecross industrial things
-			reagents.trans_to(AM, wanted_amount)
-			return
