@@ -677,7 +677,7 @@
 	to_chat(H, "<span class='warning'><b>You crumple in agony as your flesh wildly morphs into new forms!</b></span>")
 	H.visible_message("<b>[H]</b> falls to the ground and screams as [H.p_their()] skin bubbles and froths!") //'froths' sounds painful when used with SKIN.
 	H.DefaultCombatKnockdown(60)
-	addtimer(CALLBACK(src, .proc/mutate, H), 30)
+	addtimer(CALLBACK(src, PROC_REF(mutate), H), 30)
 	return
 
 /datum/reagent/mutationtoxin/proc/mutate(mob/living/carbon/human/H)
@@ -1249,7 +1249,7 @@
 		to_chat(M, "<span class='warning'>You feel unstable...</span>")
 		M.Jitter(2)
 		current_cycle = 1
-		addtimer(CALLBACK(M, /mob/living/proc/bluespace_shuffle), 30)
+		addtimer(CALLBACK(M, TYPE_PROC_REF(/mob/living, bluespace_shuffle)), 30)
 	..()
 
 /mob/living/proc/bluespace_shuffle()
@@ -2494,7 +2494,7 @@
 /datum/reagent/gravitum/reaction_obj(obj/O, volume)
 	O.AddElement(/datum/element/forced_gravity, 0)
 
-	addtimer(CALLBACK(O, .proc/_RemoveElement, /datum/element/forced_gravity, 0), volume * time_multiplier)
+	addtimer(CALLBACK(O, PROC_REF(_RemoveElement), /datum/element/forced_gravity, 0), volume * time_multiplier)
 
 /datum/reagent/gravitum/on_mob_add(mob/living/L)
 	L.AddElement(/datum/element/forced_gravity, 0) //0 is the gravity, and in this case weightless
@@ -2518,19 +2518,26 @@
 	nutriment_factor = 0.5 * REAGENTS_METABOLISM
 	var/decal_path = /obj/effect/decal/cleanable/semen
 
-/datum/reagent/consumable/semen/reaction_turf(turf/T, reac_volume)
+/datum/reagent/consumable/semen/reaction_turf(turf/location, reac_volume)
 	..()
-	if(!istype(T))
-		return
-	if(reac_volume < 10)
+	if(!istype(location))
 		return
 
-	var/obj/effect/decal/cleanable/semen/S = locate() in T
-	if(!S)
-		S = new decal_path(T)
-	// Sandstorm edit - cum carries your genetic info (all of it)
-	if(data)
-		S.add_blood_DNA(data)
+	var/obj/effect/decal/cleanable/semen/S = locate(/obj/effect/decal/cleanable/semen) in location
+	if(S)
+		if(S.reagents.add_reagent(type, volume, data))
+			S.update_icon()
+			return
+
+	var/obj/effect/decal/cleanable/semendrip/drip = (locate(/obj/effect/decal/cleanable/semendrip) in location) || new(location)
+	if(drip.reagents.add_reagent(type, volume, data))
+		drip.update_icon()
+		if(drip.reagents.total_volume >= 10)
+			S = new(location)
+			drip.reagents.trans_to(S, drip.reagents.total_volume)
+			S.update_icon()
+			qdel(drip)
+		return
 
 /obj/effect/decal/cleanable/semen
 	name = "semen"
@@ -2541,16 +2548,29 @@
 	icon = 'icons/obj/genitals/effects.dmi'
 	icon_state = "semen1"
 	random_icon_states = list("semen1", "semen2", "semen3", "semen4")
+	var/datum/reagent/my_liquid_type = /datum/reagent/consumable/semen
 
 /obj/effect/decal/cleanable/semen/Initialize(mapload)
 	. = ..()
 	dir = GLOB.cardinals
-	add_blood_DNA(list("Non-human DNA" = "A+"))
+	if(mapload)
+		reagents.add_reagent(/datum/reagent/consumable/semen, 10)
+		add_blood_DNA(list("Non-human DNA" = "A+"))
+	update_icon()
 
 /obj/effect/decal/cleanable/semen/replace_decal(obj/effect/decal/cleanable/semen/S)
-	if(S.blood_DNA)
-		blood_DNA |= S.blood_DNA
+	if(reagents.total_volume > 0)
+		reagents.trans_to(S.reagents, reagents.total_volume)
+	if(blood_DNA)
+		S.blood_DNA |= blood_DNA
+		S.update_icon()
 	return ..()
+
+/obj/effect/decal/cleanable/semen/update_icon()
+	. = ..()
+	if(QDELETED(src) || !reagents)
+		return
+	add_atom_colour(mix_color_from_reagents(reagents.reagent_list), FIXED_COLOUR_PRIORITY)
 
 /datum/reagent/consumable/semen/femcum
 	name = "Female Ejaculate"
@@ -2565,6 +2585,7 @@
 	random_icon_states = list("fem1", "fem2", "fem3", "fem4")
 	blood_state = null
 	bloodiness = null
+	my_liquid_type = /datum/reagent/consumable/semen/femcum
 
 /datum/reagent/determination
 	name = "Determination"
@@ -2688,7 +2709,7 @@
 /datum/reagent/red_ichor
 	name = "Red Ichor"
 	can_synth = FALSE
-	description = "A unknown red liquid, linked to healing of most moral wounds."
+	description = "An unknown red liquid, linked to healing of most moral wounds."
 	color = "#c10000"
 	metabolization_rate = REAGENTS_METABOLISM * 2.5
 	chemical_flags = REAGENT_ALL_PROCESS
@@ -2706,7 +2727,7 @@
 /datum/reagent/green_ichor
 	name = "Green Ichor"
 	can_synth = FALSE
-	description = "A unknown green liquid, linked to healing of most internal wounds."
+	description = "An unknown green liquid, linked to healing of most internal wounds."
 	color = "#158c00"
 	metabolization_rate = REAGENTS_METABOLISM * 2.5
 	chemical_flags = REAGENT_ALL_PROCESS
@@ -2724,7 +2745,7 @@
 /datum/reagent/blue_ichor
 	name = "Blue Ichor"
 	can_synth = FALSE
-	description = "A unknown blue liquid, linked to healing the mind."
+	description = "An unknown blue liquid, linked to healing the mind."
 	color = "#0914e0"
 	metabolization_rate = REAGENTS_METABOLISM * 2.5
 	chemical_flags = REAGENT_ALL_PROCESS

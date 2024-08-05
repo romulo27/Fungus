@@ -74,6 +74,9 @@
 	var/obj/item/kitchen/knife/bayonet
 	var/mutable_appearance/knife_overlay
 	var/can_bayonet = FALSE
+	//SPLURT EDIT ADD
+	var/bayonet_diagonal = FALSE
+	//SPKURT EDIT ADD END
 	var/datum/action/item_action/toggle_gunlight/alight
 	var/mutable_appearance/flashlight_overlay
 
@@ -137,12 +140,12 @@
 
 	burst_size = 1
 
-	sortList(fire_select_modes, /proc/cmp_numeric_asc)
+	sort_list(fire_select_modes, GLOBAL_PROC_REF(cmp_numeric_asc))
 
 	if(fire_select_modes.len > 1)
 		firemode_action = new(src)
 		firemode_action.button_icon_state = "fireselect_[fire_select]"
-		firemode_action.UpdateButtonIcon()
+		firemode_action.UpdateButtons()
 
 /obj/item/gun/ComponentInitialize()
 	. = ..()
@@ -221,7 +224,7 @@
 	playsound(user, 'sound/weapons/empty.ogg', 100, TRUE)
 	update_appearance()
 	firemode_action.button_icon_state = "fireselect_[fire_select]"
-	firemode_action.UpdateButtonIcon()
+	firemode_action.UpdateButtons()
 	return TRUE
 
 /obj/item/gun/equipped(mob/living/user, slot)
@@ -350,7 +353,7 @@
 				bonus_spread += 24 * G.weapon_weight * G.dualwield_spread_mult
 				loop_counter++
 				var/stam_cost = G.getstamcost(user)
-				addtimer(CALLBACK(G, /obj/item/gun.proc/process_fire, target, user, TRUE, params, null, bonus_spread, stam_cost), loop_counter)
+				addtimer(CALLBACK(G, TYPE_PROC_REF(/obj/item/gun, process_fire), target, user, TRUE, params, null, bonus_spread, stam_cost), loop_counter)
 
 	var/stam_cost = getstamcost(user)
 	process_fire(target, user, TRUE, params, null, bonus_spread, stam_cost)
@@ -681,7 +684,7 @@
 	update_icon()
 	for(var/X in actions)
 		var/datum/action/A = X
-		A.UpdateButtonIcon()
+		A.UpdateButtons()
 
 /obj/item/gun/update_overlays()
 	. = ..()
@@ -701,6 +704,11 @@
 		if(bayonet.icon_state in icon_states('icons/obj/guns/bayonets.dmi'))		//Snowflake state?
 			state = bayonet.icon_state
 		var/icon/bayonet_icons = 'icons/obj/guns/bayonets.dmi'
+		//SPLURT EDIT ADD
+		if(bayonet_diagonal == TRUE )
+			state = "bayonet_diagonal"
+			bayonet_icons = 'modular_splurt/icons/obj/guns/bayonets.dmi'
+		//SPLURT EDIT ADD END
 		knife_overlay = mutable_appearance(bayonet_icons, state)
 		knife_overlay.pixel_x = knife_x_offset
 		knife_overlay.pixel_y = knife_y_offset
@@ -765,6 +773,18 @@
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
 
+/datum/action/item_action/toggle_scope_zoom/IsAvailable(silent = FALSE)
+	. = ..()
+	if(!. && owner)
+		var/obj/item/gun/G = target
+		G.zoom(owner, owner.dir, FALSE)
+
+/datum/action/item_action/toggle_scope_zoom/Trigger()
+	. = ..()
+	if(.)
+		var/obj/item/gun/G = target
+		G.zoom(owner, owner.dir)
+
 /datum/action/item_action/toggle_scope_zoom/Remove(mob/living/L)
 	var/obj/item/gun/G = target
 	G.zoom(L, L.dir, FALSE)
@@ -787,7 +807,7 @@
 		zoomed = !zoomed
 
 	if(zoomed)
-		RegisterSignal(user, COMSIG_ATOM_DIR_CHANGE, .proc/rotate)
+		RegisterSignal(user, COMSIG_ATOM_DIR_CHANGE, PROC_REF(rotate))
 		user.client.view_size.zoomOut(zoom_out_amt, zoom_amt, direct)
 	else
 		UnregisterSignal(user, COMSIG_ATOM_DIR_CHANGE)
@@ -806,7 +826,7 @@
 	return ..()
 
 /obj/item/gun/proc/getinaccuracy(mob/living/user, bonus_spread, stamloss)
-	return 0		// Replacement TBD: Exponential curved aim instability system.
+	return FALSE		// Replacement TBD: Exponential curved aim instability system.
 
 /*
 	if(inaccuracy_modifier == 0)

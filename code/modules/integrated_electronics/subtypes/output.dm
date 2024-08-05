@@ -226,14 +226,27 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/output/sound/vox
-	name = "ai vox sound circuit"
+	name = "Female ai vox sound circuit"
 	desc = "Takes a sound name as an input, and will play said sound when pulsed. This circuit is often found in AI announcement systems."
 	spawn_flags = IC_SPAWN_RESEARCH
+	var/voice_type = "Female"
 
 /obj/item/integrated_circuit/output/sound/vox/Initialize(mapload)
-	.= ..()
-	sounds = GLOB.vox_sounds
+	sounds = GLOB.vox_types[voice_type]
+	. = ..()
 	extended_desc = "The first input pin determines which sound is used. It uses the AI Vox Broadcast word list. So either experiment to find words that work, or ask the AI to help in figuring them out. The second pin determines the volume of sound that is played, and the third determines if the frequency of the sound will vary with each activation."
+
+/obj/item/integrated_circuit/output/sound/vox/male
+	name = "Male ai vox sound circuit"
+	desc = "Takes a sound name as an input, and will play said sound when pulsed. This circuit is often found in AI announcement systems."
+	spawn_flags = IC_SPAWN_RESEARCH
+	voice_type = "Male"
+
+/obj/item/integrated_circuit/output/sound/vox/military
+	name = "Military ai vox sound circuit"
+	desc = "Takes a sound name as an input, and will play said sound when pulsed. This circuit is often found in AI announcement systems."
+	spawn_flags = IC_SPAWN_RESEARCH
+	voice_type = "Military"
 
 /obj/item/integrated_circuit/output/text_to_speech
 	name = "text-to-speech circuit"
@@ -269,9 +282,10 @@
 	inputs = list(
 		"camera name" = IC_PINTYPE_STRING,
 		"camera active" = IC_PINTYPE_BOOLEAN,
+		"camera fast mode" = IC_PINTYPE_BOOLEAN,
 		"camera network" = IC_PINTYPE_LIST
 		)
-	inputs_default = list("1" = "video camera circuit", "3" = list("rd"))
+	inputs_default = list("1" = "video camera circuit", "4" = list("rd"))
 	outputs = list()
 	activators = list()
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
@@ -279,6 +293,8 @@
 	power_draw_idle = 0 // Raises to 20 when on.
 	var/obj/machinery/camera/camera
 	var/updating = FALSE
+
+	var/update_speed = 10 // How often to update the camera
 
 /obj/item/integrated_circuit/output/video_camera/New()
 	..()
@@ -290,11 +306,11 @@
 	QDEL_NULL(camera)
 	return ..()
 
-/obj/item/integrated_circuit/output/video_camera/proc/set_camera_status(var/status)
+/obj/item/integrated_circuit/output/video_camera/proc/set_camera_status(status)
 	if(camera)
 		camera.status = status
 		GLOB.cameranet.updatePortableCamera(camera)
-		power_draw_idle = camera.status ? 20 : 0
+		power_draw_idle = camera.status ? (20 / (update_speed * 0.1)) : 0
 		if(camera.status) // Ensure that there's actually power.
 			if(!draw_idle_power())
 				power_fail()
@@ -303,7 +319,8 @@
 	if(camera)
 		var/cam_name = get_pin_data(IC_INPUT, 1)
 		var/cam_active = get_pin_data(IC_INPUT, 2)
-		var/list/new_network = get_pin_data(IC_INPUT, 3)
+		update_speed = get_pin_data(IC_INPUT, 3) ? 5 : 10
+		var/list/new_network = get_pin_data(IC_INPUT, 4)
 		if(!isnull(cam_name))
 			camera.c_tag = cam_name
 		if(!isnull(new_network))
@@ -319,13 +336,11 @@
 	. = ..()
 	update_camera_location(oldLoc)
 
-#define VIDEO_CAMERA_BUFFER 10
 /obj/item/integrated_circuit/output/video_camera/proc/update_camera_location(oldLoc)
 	oldLoc = get_turf(oldLoc)
 	if(!QDELETED(camera) && !updating && oldLoc != get_turf(src))
 		updating = TRUE
-		addtimer(CALLBACK(src, .proc/do_camera_update, oldLoc), VIDEO_CAMERA_BUFFER)
-#undef VIDEO_CAMERA_BUFFER
+		addtimer(CALLBACK(src, PROC_REF(do_camera_update), oldLoc), update_speed)
 
 /obj/item/integrated_circuit/output/video_camera/proc/do_camera_update(oldLoc)
 	if(!QDELETED(camera) && oldLoc != get_turf(src))

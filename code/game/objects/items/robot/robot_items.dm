@@ -366,7 +366,7 @@
 	if(charging)
 		return
 	if(candy < candymax)
-		addtimer(CALLBACK(src, .proc/charge_lollipops), charge_delay)
+		addtimer(CALLBACK(src, PROC_REF(charge_lollipops)), charge_delay)
 		charging = TRUE
 
 /obj/item/borg/lollipop/proc/charge_lollipops()
@@ -916,11 +916,14 @@
 	. = ..()
 
 /obj/item/gripper/mining
-	name = "shelter capsule deployer"
-	desc = "A simple grasping tool for carrying and deploying shelter capsules."
+	name = "mining gripper" // Original name = "shelter capsule deployer"
+	desc = "A simple grasping tool for carrying and deploying shelter capsules. You can also carry and use regenerative cores and survival medipens on your fellow miners."
 	icon_state = "gripper_mining"
 	can_hold = list(
-		/obj/item/survivalcapsule
+		/obj/item/survivalcapsule,
+		/obj/item/hivelordstabilizer,
+		/obj/item/organ/regenerative_core,
+		/obj/item/reagent_containers/hypospray/medipen/survival
 		)
 
 /obj/item/gripper/medical

@@ -16,12 +16,13 @@
 	var/datum/track/selectedtrack = null
 	var/list/queuedplaylist = list()
 	var/queuecooldown //This var exists solely to prevent accidental repeats of John Mulaney's 'What's New Pussycat?' incident. Intentional, however......
+	var/area_limited = FALSE //SPLURT ADDITION: variable to let the jukebox only be hearable in the specific area it's located.
 
 /obj/machinery/jukebox/disco
 	name = "radiant dance machine mark IV"
 	desc = "The first three prototypes were discontinued after mass casualty incidents."
 	icon_state = "disco"
-	req_one_access = list(ACCESS_ENGINE)
+	// req_one_access = list(ACCESS_ENGINE) SPLURT EDIT
 	anchored = FALSE
 	var/list/spotlights = list()
 	var/list/sparkles = list()
@@ -186,7 +187,7 @@
 	if(playing || !queuedplaylist.len)
 		return FALSE
 	playing = queuedplaylist[1]
-	var/jukeboxslottotake = SSjukeboxes.addjukebox(src, playing, volume/35)
+	var/jukeboxslottotake = SSjukeboxes.addjukebox(src, playing, volume/35, area_limited) //SPLURT EDIT: area_limited
 	if(jukeboxslottotake)
 		active = TRUE
 		update_icon()
@@ -350,7 +351,7 @@
 				glow.update_light()
 				continue
 		if(prob(2))  // Unique effects for the dance floor that show up randomly to mix things up
-			INVOKE_ASYNC(src, .proc/hierofunk)
+			INVOKE_ASYNC(src, PROC_REF(hierofunk))
 		sleep(playing.song_beat)
 
 #undef DISCO_INFENO_RANGE

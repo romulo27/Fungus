@@ -79,7 +79,7 @@ GLOBAL_LIST_INIT(anus_traits, list("[TRAIT_HYPERSENS_ANUS]" = 3, "[TRAIT_OVERSTI
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/handle_post_sex(amount, orifice, mob/living/partner, organ = null, act = null)
+/mob/living/carbon/handle_post_sex(amount, orifice, mob/living/partner, organ = null, cum_inside = FALSE, anonymous = FALSE)
 	if(organ)
 		amount = check_stimulation(amount, organ)
 

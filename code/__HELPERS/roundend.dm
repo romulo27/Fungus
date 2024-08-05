@@ -275,7 +275,7 @@
 		if(CONFIG_GET(string/chat_reboot_role))
 			broadcastmessage += "\n\n<@&[CONFIG_GET(string/chat_reboot_role)]>, the server will reboot shortly!"
 
-		send2chat(broadcastmessage, CONFIG_GET(string/chat_roundend_notice_tag))
+		send2chat(new /datum/tgs_message_content(broadcastmessage), CONFIG_GET(string/chat_roundend_notice_tag))
 
 	CHECK_TICK
 
@@ -621,7 +621,7 @@
 	var/currrent_category
 	var/datum/antagonist/previous_category
 
-	sortTim(all_antagonists, /proc/cmp_antag_category)
+	sortTim(all_antagonists, GLOBAL_PROC_REF(cmp_antag_category))
 
 	for(var/datum/antagonist/A in all_antagonists)
 		if(!A.show_in_roundend)
@@ -668,7 +668,7 @@
 		SSticker.show_roundend_report(owner.client)
 
 /datum/action/report/IsAvailable()
-	return 1
+	return TRUE
 
 /datum/action/report/Topic(href,href_list)
 	if(usr != owner)
@@ -682,9 +682,15 @@
 	var/jobtext = ""
 	if(ply.assigned_role)
 		jobtext = " the <b>[ply.assigned_role]</b>"
-	var/text = (ply.hide_ckey ? \
-		"<b>[ply.key]</b> was <b>[ply.name]</b>[jobtext] and" \
-		:  "<b>[ply.name]</b>[jobtext]")
+	var/text
+	if(ply.hide_ckey)
+		text = (
+			"<b>[ply.name]</b>[jobtext] and"
+			)
+	else
+		text = (
+			"<b>[ply.key]</b> was <b>[ply.name]</b>[jobtext] and"
+			)
 	if(ply.current)
 		if(ply.current.stat == DEAD)
 			text += " <span class='redtext'>died</span>"

@@ -199,7 +199,8 @@ Temporary Items
 tools/UnstandardnessTestForDM/UnstandardnessTestForDM/obj/x86/Debug/UnstandardnessTestForDM.csproj.AssemblyReference.cache
 tools/UnstandardnessTestForDM/UnstandardnessTestForDM/obj/x86/Debug/.NETFramework,Version=v4.0,Profile=Client.AssemblyAttributes.cs
 
-prof.dll
+#Tracy profiler DLL
+/prof.dll
 
 tools/procmanifest/bin/
 

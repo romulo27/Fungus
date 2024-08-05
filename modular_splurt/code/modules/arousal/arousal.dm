@@ -1,4 +1,4 @@
-/mob/living/carbon/human/mob_climax_partner(obj/item/organ/genital/G, mob/living/L, spillage, mb_time, obj/item/organ/genital/Lgen, forced = FALSE)
+/mob/living/carbon/human/mob_climax_partner(obj/item/organ/genital/G, mob/living/L, spillage = TRUE, mb_time = 30, obj/item/organ/genital/Lgen = null, forced = FALSE, anonymous = FALSE)
 	. = ..()
 	L.receive_climax(src, Lgen, G, spillage, forced = forced)
 	if(iswendigo(L))
@@ -43,13 +43,13 @@
 		eggo.forceMove(container)
 		eggo.AddComponent(/datum/component/pregnancy, src, partner, baby_type)
 
-/mob/living/carbon/human/do_climax(datum/reagents/R, atom/target, obj/item/organ/genital/sender, spill, cover = FALSE, obj/item/organ/genital/receiver)
+/mob/living/carbon/human/do_climax(datum/reagents/R, atom/target, obj/item/organ/genital/sender, spill, cover = FALSE, obj/item/organ/genital/receiver, anonymous = FALSE)
 	if(!sender)
 		return
 	if(!target || !R)
 		return
 
-	if(SEND_SIGNAL(src, COMSIG_MOB_CLIMAX, R, target, sender, receiver, spill))
+	if(SEND_SIGNAL(src, COMSIG_MOB_CLIMAX, R, target, sender, receiver, spill, anonymous))
 		return
 
 	var/cached_fluid
@@ -84,7 +84,7 @@
 	var/datum/reagents/fluid_source = G.climaxable(src)
 	if(!fluid_source)
 		return
-	var/main_fluid = lowertext(fluid_source.get_master_reagent_name())
+	var/main_fluid = lowertext(G.get_fluid_name())
 	if(mb_time)
 		visible_message(span_love("You hear a strong suction sound coming from the [M.name] on [src]'s [G.name]."), \
 							span_userlove("The [M.name] pumps faster, trying to get you over the edge."), \
@@ -114,18 +114,21 @@
     var/percentage = ((get_lust() / (get_lust_tolerance() * 3)) * 100)
     return percentage
 
-/atom/proc/add_cum_overlay() //This can go in a better spot, for now its here.
-	cum_splatter_icon = icon(initial(icon), initial(icon_state), dir = 1)
-	cum_splatter_icon.Blend("#fff", ICON_ADD)
-	cum_splatter_icon.Blend(icon('modular_splurt/icons/effects/cumoverlay.dmi', "cum_obj"), ICON_MULTIPLY)
+/atom/proc/add_cum_overlay(cum_color) //This can go in a better spot, for now its here.
+	wash_cum()
+	cum_splatter_icon = mutable_appearance('modular_splurt/icons/effects/cumoverlay.dmi', "cum_obj", color = cum_color)
+	add_overlay(cum_splatter_icon)
+
+/mob/living/carbon/human/add_cum_overlay(cum_color, large = FALSE)
+	wash_cum()
+	cum_splatter_icon = mutable_appearance('modular_splurt/icons/effects/cumoverlay.dmi', large ? "cum_large" : "cum_normal", color = cum_color)
 	add_overlay(cum_splatter_icon)
 
 /atom/proc/wash_cum()
-	cut_overlay(mutable_appearance('modular_splurt/icons/effects/cumoverlay.dmi', "cum_normal"))
-	cut_overlay(mutable_appearance('modular_splurt/icons/effects/cumoverlay.dmi', "cum_large"))
 	if(cum_splatter_icon)
 		cut_overlay(cum_splatter_icon)
-	return TRUE
+		QDEL_NULL(cum_splatter_icon)
+		return TRUE
 
 //arousal hud display
 
@@ -139,7 +142,7 @@
 	. = ..()
 	if(!istype(owner))
 		return INITIALIZE_HINT_QDEL
-	RegisterSignal(owner, COMSIG_MOB_LUST_UPDATED, .proc/update_lust)
+	RegisterSignal(owner, COMSIG_MOB_LUST_UPDATED, PROC_REF(update_lust))
 
 /atom/movable/screen/arousal/Click()
 	if(!ishuman(usr))

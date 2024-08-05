@@ -18,13 +18,21 @@
 	paycheck_department = ACCOUNT_CIV
 
 	display_order = JOB_DISPLAY_ORDER_CHAPLAIN
+	departments = DEPARTMENT_BITFLAG_SERVICE
 	threat = 0.5
-	
+
 	family_heirlooms = list(
 		/obj/item/toy/windupToolbox,
 		/obj/item/reagent_containers/food/drinks/bottle/holywater
 	)
 
+	mail_goodies = list(
+		/obj/item/reagent_containers/food/drinks/bottle/holywater = 30,
+		/obj/item/toy/plush/awakenedplushie = 10,
+		/obj/item/grenade/chem_grenade/holy = 5,
+		/obj/item/toy/plush/narplush = 2,
+//		/obj/item/toy/plush/ratplush = 1
+	)
 
 /datum/job/chaplain/after_spawn(mob/living/H, client/C)
 	. = ..()
@@ -40,9 +48,6 @@
 		B.item_state = GLOB.bible_item_state
 		to_chat(H, "There is already an established religion onboard the station. You are an acolyte of [GLOB.deity]. Defer to the Chaplain.")
 		H.equip_to_slot_or_del(B, ITEM_SLOT_BACKPACK)
-		var/nrt = GLOB.holy_weapon_type || /obj/item/nullrod
-		var/obj/item/nullrod/N = new nrt(H)
-		H.put_in_hands(N)
 		return
 
 	var/new_religion = DEFAULT_RELIGION
@@ -125,6 +130,10 @@
 	belt = /obj/item/pda/chaplain
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/chaplain
-	backpack_contents = list(/obj/item/camera/spooky = 1)
+	backpack_contents = list(
+		/obj/item/nullrod = 1,
+		/obj/item/choice_beacon/holy = 1,
+		/obj/item/camera/spooky = 1
+	)
 	backpack = /obj/item/storage/backpack/cultpack
 	satchel = /obj/item/storage/backpack/cultpack

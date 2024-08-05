@@ -1,12 +1,10 @@
 /datum/interaction/lewd/do_breastfeed
-	description = "Breastfeed them."
-	require_user_breasts = REQUIRE_EXPOSED
-	require_target_mouth = TRUE
-	max_distance = 1
+	description = "Breastfeed them"
+	required_from_user_exposed = INTERACTION_REQUIRE_BREASTS
+	required_from_target = INTERACTION_REQUIRE_MOUTH
 	write_log_user = "breastfed"
 	write_log_target = "was breastfed by"
 	interaction_sound = null
-	dynamic_act_name = "suck_breast"
 
 /datum/interaction/lewd/do_breastfeed/display_interaction(mob/living/user, mob/living/target)
 	var/message
@@ -15,7 +13,6 @@
 	var/t_His = target.p_their()
 	var/obj/item/organ/genital/breasts/milkers = user.getorganslot(ORGAN_SLOT_BREASTS)
 	var/milktype = milkers?.fluid_id
-	var/modifier
 	var/list/lines
 
 	if(!milkers || !milktype)
@@ -26,9 +23,9 @@
 	var/milktext = milk.name
 
 	lines = list(
-		"pushes [u_His] breasts against \the <b>[target]</b>'s mouth, squirting [u_His] warm [lowertext(milktext)] into [t_His] mouth",
-		"fills \the <b>[target]</b>'s mouth with warm, sweet [lowertext(milktext)] as [u_He] squeezes [u_His] boobs, panting",
-		"	a large stream of [u_His] own abundant [lowertext(milktext)] coat the back of \the <b>[target]</b>'s throat"
+		"pushes [u_His] breasts against \the <b>[target]</b>'s mouth, squirting [u_His] warm [lowertext(milktext)] into [t_His] mouth.",
+		"fills \the <b>[target]</b>'s mouth with warm, sweet [lowertext(milktext)] as [u_He] squeezes [u_His] boobs, panting.",
+		"lets a large stream of [u_His] own abundant [lowertext(milktext)] coat the back of \the <b>[target]</b>'s throat."
 	)
 
 	message = span_lewd("\The <b>[user]</b> [pick(lines)]")
@@ -36,32 +33,16 @@
 	playlewdinteractionsound(get_turf(user), pick('modular_sand/sound/interactions/oral1.ogg',
 						'modular_sand/sound/interactions/oral2.ogg'), 70, 1, -1)
 
-	if (user.arousal_suck_breast > 0)
-		user.handle_post_sex(LOW_LUST, null, target, null, dynamic_act_name)
-	if (target.arousal_suck_breast > 0)
-		target.handle_post_sex(LOW_LUST, null, user, null, dynamic_act_name)
-
-	switch(milkers.size)
-		if("c", "d", "e")
-			modifier = 2
-		if("f", "g", "h")
-			modifier = 3
-		else
-			if(milkers.size in GLOB.breast_values)
-				modifier = clamp(GLOB.breast_values[milkers.size] - 5, 0, INFINITY)
-			else
-				modifier = 1
-	target.reagents.add_reagent(milktype, rand(1,3 * modifier))
+	target.reagents.add_reagent(milktype, rand(1,3 * milkers.get_lactation_amount_modifier()))
 
 /datum/interaction/lewd/titgrope
 	description = "Grope their breasts."
-	require_user_hands = TRUE
-	require_target_breasts = REQUIRE_ANY
+	required_from_user = INTERACTION_REQUIRE_HANDS
+	required_from_target_exposed = INTERACTION_REQUIRE_BREASTS
+	required_from_target_unexposed = INTERACTION_REQUIRE_BREASTS
 	write_log_user = "groped"
 	write_log_target = "was groped by"
 	interaction_sound = null
-	max_distance = 1
-	dynamic_act_name = "touch_breast"
 
 	additional_details = list(
 		list(
@@ -87,18 +68,7 @@
 		var/milktype = milkers?.fluid_id
 
 		if(milkers && milktype)
-			var/modifier
-			switch(milkers.size)
-				if("c", "d", "e")
-					modifier = 2
-				if("f", "g", "h")
-					modifier = 3
-				else
-					if(milkers.size in GLOB.breast_values) //SPLURT edit - global breast values
-						modifier = clamp(GLOB.breast_values[milkers.size] - 5, 0, INFINITY)
-					else
-						modifier = 1
-			liquid_container.reagents.add_reagent(milktype, rand(1,3 * modifier))
+			liquid_container.reagents.add_reagent(milktype, rand(1,3 * milkers.get_lactation_amount_modifier()))
 
 			user.visible_message(span_lewd("<b>\The [user]</b> milks <b>[target]</b>'s breasts into \the [liquid_container]."), ignored_mobs = user.get_unconsenting())
 			playlewdinteractionsound(get_turf(user), 'modular_sand/sound/interactions/squelch1.ogg', 50, 1, -1)
@@ -157,8 +127,4 @@
 					span_lewd("\The <b>[target]</b> fiercely struggles against <b>[user]</b>."),
 					span_lewd("\The <b>[target]</b> claws <b>[user]</b>'s forearm, drawing blood."),
 					span_lewd("\The <b>[target]</b> slaps <b>[user]</b>'s hand away.")))
-		if (user.arousal_touch_breast > 0)
-			user.handle_post_sex(LOW_LUST, null, target, null, dynamic_act_name)
-		if (target.arousal_touch_breast > 0)
-			target.handle_post_sex(LOW_LUST, null, user, null, dynamic_act_name)
 

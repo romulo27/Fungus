@@ -141,7 +141,7 @@
 			H.visible_message("<span class='warning'>[H]'s suit automatically extinguishes [H.p_them()]!</span>","<span class='warning'>Your suit automatically extinguishes you.</span>")
 			H.ExtinguishMob()
 			new /obj/effect/particle_effect/water(get_turf(H))
-	return 0
+	return FALSE
 
 /obj/item/clothing/under/plasmaman/attackby(obj/item/E, mob/user, params)
 	..()
@@ -225,7 +225,7 @@
 	name = "pink stripper outfit"
 	icon_state = "stripper_p"
 	item_state = "stripper_p"
-	body_parts_covered = CHEST|GROIN
+	body_parts_covered = CHEST
 	can_adjust = FALSE
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 

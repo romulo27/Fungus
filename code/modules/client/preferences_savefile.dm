@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	58
+#define SAVEFILE_VERSION_MAX	59.1
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -47,7 +47,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		outline_color = COLOR_THEME_MIDNIGHT
 	if(current_version < 46)	//If you remove this, remove force_reset_keybindings() too.
 		force_reset_keybindings_direct(TRUE)
-		addtimer(CALLBACK(src, .proc/force_reset_keybindings), 30)	//No mob available when this is run, timer allows user choice.
+		addtimer(CALLBACK(src, PROC_REF(force_reset_keybindings)), 30)	//No mob available when this is run, timer allows user choice.
 	if(current_version < 55) //Bitflag toggles don't set their defaults when they're added, always defaulting to off instead.
 		toggles |= SOUND_BARK
 	if(current_version < 56)
@@ -62,6 +62,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		else
 			// Let's give it a little chance okay, change if you don't like still.
 			screentip_pref = SCREENTIP_PREFERENCE_CONTEXT_ONLY
+	// Input had a bad reception anyways, this way people won't even have to look into it.
+	if(current_version < 59)
+		hotkeys = TRUE
 
 /datum/preferences/proc/update_character(current_version, savefile/S)
 	if(current_version < 19)
@@ -401,7 +404,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			if(istype(parent))
 				to_chat(parent, "<span class='warning'>You're attempting to load your preferences a little too fast. Wait half a second, then try again.</span>")
 			return FALSE
-		loadprefcooldown = world.time + PREF_SAVELOAD_COOLDOWN
+		COOLDOWN_START(src, loadprefcooldown, PREF_LOAD_COOLDOWN)
 	if(!fexists(path))
 		return FALSE
 
@@ -438,7 +441,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["tgui_input_mode"]		>> tgui_input_mode
 	S["tgui_large_buttons"]		>> tgui_large_buttons
 	S["tgui_swapped_buttons"]	>> tgui_swapped_buttons
-	S["buttons_locked"] >> buttons_locked
 	S["windowflash"] >> windowflashing
 	S["be_special"] 		>> be_special
 
@@ -530,7 +532,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	tgui_input_mode	= sanitize_integer(tgui_input_mode, 0, 1, initial(tgui_input_mode))
 	tgui_large_buttons	= sanitize_integer(tgui_large_buttons, 0, 1, initial(tgui_large_buttons))
 	tgui_swapped_buttons	= sanitize_integer(tgui_swapped_buttons, 0, 1, initial(tgui_swapped_buttons))
-	buttons_locked = sanitize_integer(buttons_locked, 0, 1, initial(buttons_locked))
 	windowflashing = sanitize_integer(windowflashing, 0, 1, initial(windowflashing))
 	default_slot = sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
 	toggles = sanitize_integer(toggles, 0, 16777215, initial(toggles))
@@ -600,7 +601,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		max_save_slots = old_max_save_slots
 		save_preferences(TRUE)
 
-	return TRUE
+	return S
 
 /datum/preferences/proc/verify_keybindings_valid()
 	// Sanitize the actual keybinds to make sure they exist.
@@ -620,18 +621,20 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(!GLOB.keybindings_by_name[bindname])
 			modless_key_bindings -= key
 
-/datum/preferences/proc/save_preferences(bypass_cooldown = FALSE)
+/datum/preferences/proc/save_preferences(bypass_cooldown = FALSE, silent = FALSE)
 	if(!path)
-		return 0
+		return FALSE
 	if(!bypass_cooldown)
 		if(world.time < saveprefcooldown)
 			if(istype(parent))
-				to_chat(parent, "<span class='warning'>You're attempting to save your preferences a little too fast. Wait half a second, then try again.</span>")
-			return 0
-		saveprefcooldown = world.time + PREF_SAVELOAD_COOLDOWN
+				queue_save_pref(PREF_SAVE_COOLDOWN, silent)
+			return FALSE
+		COOLDOWN_START(src, saveprefcooldown, PREF_SAVE_COOLDOWN)
+	if(pref_queue)
+		deltimer(pref_queue)
 	var/savefile/S = new /savefile(path)
 	if(!S)
-		return 0
+		return FALSE
 	S.cd = "/"
 
 	WRITE_FILE(S["version"] , SAVEFILE_VERSION_MAX)		//updates (or failing that the sanity checks) will ensure data is not invalid at load. Assume up-to-date
@@ -654,7 +657,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["tgui_input_mode"], tgui_input_mode)
 	WRITE_FILE(S["tgui_large_buttons"], tgui_large_buttons)
 	WRITE_FILE(S["tgui_swapped_buttons"], tgui_swapped_buttons)
-	WRITE_FILE(S["buttons_locked"], buttons_locked)
 	WRITE_FILE(S["windowflash"], windowflashing)
 	WRITE_FILE(S["be_special"], be_special)
 	WRITE_FILE(S["default_slot"], default_slot)
@@ -721,22 +723,54 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	else
 		WRITE_FILE(S["unlockable_loadout"], safe_json_encode(list()))
 
-	return 1
+	if(parent && !silent)
+		to_chat(parent, span_notice("Saved preferences!"))
 
-/datum/preferences/proc/load_character(slot, bypass_cooldown = FALSE)
-	if(!path)
-		return FALSE
+	return S
+
+/datum/preferences/proc/queue_save_pref(save_in, silent)
+	if(parent && !silent)
+		to_chat(parent, span_notice("Saving preferences in [save_in * 0.1] second\s."))
+	if(pref_queue)
+		deltimer(pref_queue)
+	pref_queue = addtimer(CALLBACK(src, PROC_REF(save_preferences), TRUE, silent), save_in, TIMER_STOPPABLE)
+
+/datum/preferences/proc/load_character(slot, bypass_cooldown = FALSE, savefile/provided)
+	if(!provided)
+		if(!path)
+			return FALSE
 	if(!bypass_cooldown)
 		if(world.time < loadcharcooldown) //This is before the check to see if the filepath exists to ensure that BYOND can't get hung up on read attempts when the hard drive is a little slow
 			if(istype(parent))
 				to_chat(parent, "<span class='warning'>You're attempting to load your character a little too fast. Wait half a second, then try again.</span>")
 			return "SLOW THE FUCK DOWN" //the reason this isn't null is to make sure that people don't have their character slots overridden by random chars if they accidentally double-click a slot
-		loadcharcooldown = world.time + PREF_SAVELOAD_COOLDOWN
+		COOLDOWN_START(src, loadcharcooldown, PREF_LOAD_COOLDOWN)
 	if(!fexists(path))
 		return FALSE
-	var/savefile/S = new /savefile(path)
+	var/savefile/S
+	if(provided)
+		S = provided
+	else
+		S = new /savefile(path)
 	if(!S)
 		return FALSE
+
+	S.cd = "/"
+	if(!slot)
+		slot = default_slot
+	slot = sanitize_integer(slot, 1, max_save_slots, initial(default_slot))
+	if(slot != default_slot)
+		default_slot = slot
+		WRITE_FILE(S["default_slot"] , slot)
+
+	if(!provided)
+		S.cd = "/character[slot]"
+	var/needs_update = savefile_needs_update(S)
+	if(needs_update == -2)		//fatal, can't load any data
+		return FALSE
+
+	. = TRUE
+
 	features = list(
 "mcolor" = "FFFFFF",
 "mcolor2" = "FFFFFF",
@@ -814,6 +848,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 "butt_stuffing" = FALSE,
 "anus_stuffing" = FALSE,
 "belly_stuffing" = FALSE,
+"breasts_accessible" = FALSE,
+"cock_accessible" = FALSE,
+"balls_accessible" = FALSE,
+"vag_accessible" = FALSE,
+"butt_accessible" = FALSE,
+"anus_accessible" = FALSE,
+"belly_accessible" = FALSE,
 "inert_eggs" = FALSE,
 "ipc_screen" = "Sunburst",
 "ipc_antenna" = "None",
@@ -828,22 +869,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 "neckfire" = FALSE,
 "neckfire_color" = "ffffff"
 )
-
-
-	S.cd = "/"
-	if(!slot)
-		slot = default_slot
-	slot = sanitize_integer(slot, 1, max_save_slots, initial(default_slot))
-	if(slot != default_slot)
-		default_slot = slot
-		WRITE_FILE(S["default_slot"] , slot)
-
-	S.cd = "/character[slot]"
-	var/needs_update = savefile_needs_update(S)
-	if(needs_update == -2)		//fatal, can't load any data
-		return FALSE
-
-	. = TRUE
 
 	//Species
 	var/species_id
@@ -992,6 +1017,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_cock_diameter"] >> features["cock_diameter"]
 	S["feature_cock_taur"] >> features["cock_taur"]
 	S["feature_cock_visibility"] >> features["cock_visibility"]
+	S["feature_cock_accessible"] >> features["cock_accessible"]
 	//balls features
 	S["feature_has_balls"] >> features["has_balls"]
 	S["feature_balls_color"] >> features["balls_color"]
@@ -999,6 +1025,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_balls_size"] >> features["balls_size"]
 	S["feature_balls_visibility"] >> features["balls_visibility"]
 	S["feature_balls_fluid"] >> features["balls_fluid"]
+	S["feature_balls_accessible"] >> features["balls_accessible"]
 	//breasts features
 	S["feature_has_breasts"] >> features["has_breasts"]
 	S["feature_breasts_size"] >> features["breasts_size"]
@@ -1007,11 +1034,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_breasts_producing"] >> features["breasts_producing"]
 	S["feature_breasts_fluid"] >> features["breasts_fluid"]
 	S["feature_breasts_visibility"] >> features["breasts_visibility"]
+	S["feature_breasts_accessible"] >> features["breasts_accessible"]
 	//vagina features
 	S["feature_has_vag"] >> features["has_vag"]
 	S["feature_vag_shape"] >> features["vag_shape"]
 	S["feature_vag_color"] >> features["vag_color"]
 	S["feature_vag_visibility"] >> features["vag_visibility"]
+	S["feature_vag_accessible"] >> features["vag_accessible"]
 	//womb features
 	S["feature_has_womb"] >> features["has_womb"]
 	S["feature_womb_fluid"] >> features["womb_fluid"]
@@ -1020,16 +1049,19 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_butt_color"] >> features["butt_color"]
 	S["feature_butt_size"] >> features["butt_size"]
 	S["feature_butt_visibility"] >> features["butt_visibility"]
+	S["feature_butt_accessible"] >> features["butt_accessible"]
 	//belly features
 	S["feature_has_belly"] >> features["has_belly"]
 	S["feature_belly_size"] >> features["belly_size"]
 	S["feature_belly_color"] >> features["belly_color"]
 	S["feature_belly_visibility"] >> features["belly_visibility"]
+	S["feature_belly_accessible"] >> features["belly_accessible"]
 	//anus features
 	S["feature_has_anus"] >> features["has_anus"]
 	S["feature_anus_color"] >> features["anus_color"]
 	S["feature_anus_shape"] >> features["anus_shape"]
 	S["feature_anus_visibility"] >> features["anus_visibility"]
+	S["feature_anus_accessible"] >> features["anus_accessible"]
 
 	// Flavor texts, Made into a standard.
 	S["feature_flavor_text"] >> features["flavor_text"]
@@ -1092,6 +1124,30 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//gear loadout
 	if(S["loadout"])
 		loadout_data = safe_json_decode(S["loadout"])
+		var/list/sanitize_current_slot = loadout_data["SAVE_[loadout_slot]"]
+		if(LAZYLEN(sanitize_current_slot))
+			for(var/list/entry in sanitize_current_slot)
+				for(var/setting in entry)
+					switch(setting)
+						if(LOADOUT_ITEM)
+							if(!ispath(entry[setting]))
+								continue
+						if(LOADOUT_COLOR)
+							if(islist(entry[setting]))
+								for(var/polychromic in entry[setting])
+									if(!findtext(polychromic, GLOB.is_color))
+										polychromic = "#FFFFFF"
+							else
+								entry -= setting
+
+						if(LOADOUT_CUSTOM_NAME)
+							entry[setting] = trim(html_encode(entry[setting]), MAX_NAME_LEN)
+						if(LOADOUT_CUSTOM_DESCRIPTION)
+							entry[setting] = trim(html_encode(entry[setting]), 500)
+
+			loadout_data["SAVE_[loadout_slot]"] = sanitize_current_slot.Copy()
+		else
+			loadout_data["SAVE_[loadout_slot]"] = list()
 	else
 		loadout_data = list()
 
@@ -1204,10 +1260,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		max_diameter_ratio = CONFIG_GET(number/diameter_ratio_max_size_prefs)
 
 
-	var/static/safe_visibilities
-	if(!safe_visibilities)
-		var/list/L = CONFIG_GET(keyed_list/safe_visibility_toggles)
-		safe_visibilities = L.Copy()
+	var/safe_visibilities = CONFIG_GET(str_list/safe_visibility_toggles)
 
 	features["breasts_size"] = sanitize_inlist(features["breasts_size"], B_sizes, BREASTS_SIZE_DEF)
 	features["cock_length"] = sanitize_integer(features["cock_length"], min_D, max_D, COCK_SIZE_DEF)
@@ -1291,6 +1344,33 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	all_quirks = SANITIZE_LIST(all_quirks)
 
+	language = SANITIZE_LIST(language)
+
+	if(length(language))
+		// This line, prevents wiping their languages because the subsystem was not ready
+		var/list/all_possible_languages = SSlanguage.initialized ? SSlanguage.languages_by_name : typesof(/datum/language)
+		var/list/lang_names
+		// Subsystem ready, let's do it with our cached stuff
+		if(length(SSlanguage.languages_by_name))
+			for(var/language_sanitization in all_possible_languages)
+				var/datum/language/language_sanitization_datum = all_possible_languages[language_sanitization]
+				// Don't check for existance, at this point, if it doesn't exist, we need a runtime.
+				if(!language_sanitization_datum.key)
+					continue
+				LAZYADD(lang_names, language_sanitization_datum.name)
+		// Subsystem NOT ready, let's do it the annoying way.
+		else
+			for(var/datum/language/language_sanitization as anything in all_possible_languages)
+				if(!initial(language_sanitization.key))
+					continue
+				LAZYADD(lang_names, initial(language_sanitization.name))
+		for(var/language_entry in language)
+			// Valid language, just ignore it
+			if(LAZYFIND(lang_names, language_entry))
+				continue
+			// Remove the entry if the language does not exist in the codebase
+			LAZYREMOVE(language, language_entry)
+
 	vore_flags = sanitize_integer(vore_flags, 0, MAX_VORE_FLAG, 0)
 	vore_taste = copytext(vore_taste, 1, MAX_TASTE_LEN)
 	vore_smell = copytext(vore_smell, 1, MAX_TASTE_LEN)
@@ -1309,21 +1389,24 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	splurt_character_pref_load(S)
 
-	return 1
+	return S
 
-/datum/preferences/proc/save_character(bypass_cooldown = FALSE)
+/datum/preferences/proc/save_character(bypass_cooldown = FALSE, silent = FALSE, export = FALSE)
 	if(!path)
-		return 0
+		return FALSE
 	if(!bypass_cooldown)
 		if(world.time < savecharcooldown)
 			if(istype(parent))
-				to_chat(parent, "<span class='warning'>You're attempting to save your character a little too fast. Wait half a second, then try again.</span>")
-			return 0
-		savecharcooldown = world.time + PREF_SAVELOAD_COOLDOWN
-	var/savefile/S = new /savefile(path)
+				queue_save_char(PREF_SAVE_COOLDOWN, silent)
+			return FALSE
+		COOLDOWN_START(src, savecharcooldown, PREF_SAVE_COOLDOWN)
+	if(char_queue)
+		deltimer(char_queue)
+	var/savefile/S = new /savefile(export ? null : path)
 	if(!S)
-		return 0
-	S.cd = "/character[default_slot]"
+		return FALSE
+	if(!export)
+		S.cd = "/character[default_slot]"
 
 	WRITE_FILE(S["version"]			, SAVEFILE_VERSION_MAX)	//load_character will sanitize any bad data, so assume up-to-date.)
 
@@ -1397,6 +1480,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_cock_taur"], features["cock_taur"])
 	WRITE_FILE(S["feature_cock_visibility"], features["cock_visibility"])
 	WRITE_FILE(S["feature_cock_stuffing"], features["cock_stuffing"])
+	WRITE_FILE(S["feature_cock_accessible"], features["cock_accessible"])
 
 	WRITE_FILE(S["feature_has_balls"], features["has_balls"])
 	WRITE_FILE(S["feature_balls_color"], features["balls_color"])
@@ -1405,6 +1489,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_balls_visibility"], features["balls_visibility"])
 	WRITE_FILE(S["feature_balls_stuffing"], features["balls_stuffing"])
 	WRITE_FILE(S["feature_balls_fluid"], features["balls_fluid"])
+	WRITE_FILE(S["feature_balls_accessible"], features["balls_accessible"])
 
 	WRITE_FILE(S["feature_has_breasts"], features["has_breasts"])
 	WRITE_FILE(S["feature_breasts_size"], features["breasts_size"])
@@ -1414,12 +1499,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_breasts_producing"], features["breasts_producing"])
 	WRITE_FILE(S["feature_breasts_visibility"], features["breasts_visibility"])
 	WRITE_FILE(S["feature_breasts_stuffing"], features["breasts_stuffing"])
+	WRITE_FILE(S["feature_breasts_accessible"], features["breasts_accessible"])
 
 	WRITE_FILE(S["feature_has_vag"], features["has_vag"])
 	WRITE_FILE(S["feature_vag_shape"], features["vag_shape"])
 	WRITE_FILE(S["feature_vag_color"], features["vag_color"])
 	WRITE_FILE(S["feature_vag_visibility"], features["vag_visibility"])
 	WRITE_FILE(S["feature_vag_stuffing"], features["vag_stuffing"])
+	WRITE_FILE(S["feature_vag_accessible"], features["vag_accessible"])
 
 	WRITE_FILE(S["feature_has_womb"], features["has_womb"])
 	WRITE_FILE(S["feature_womb_fluid"], features["womb_fluid"])
@@ -1429,12 +1516,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_butt_size"], features["butt_size"])
 	WRITE_FILE(S["feature_butt_visibility"], features["butt_visibility"])
 	WRITE_FILE(S["feature_butt_stuffing"], features["butt_stuffing"])
+	WRITE_FILE(S["feature_butt_accessible"], features["butt_accessible"])
 
 	WRITE_FILE(S["feature_has_belly"], features["has_belly"])
 	WRITE_FILE(S["feature_belly_color"], features["belly_color"])
 	WRITE_FILE(S["feature_belly_size"], features["belly_size"])
 	WRITE_FILE(S["feature_belly_visibility"], features["belly_visibility"])
 	WRITE_FILE(S["feature_belly_stuffing"], features["belly_stuffing"])
+	WRITE_FILE(S["feature_belly_accessible"], features["belly_accessible"])
 
 	WRITE_FILE(S["feature_has_anus"], features["has_anus"])
 	WRITE_FILE(S["feature_anus_color"], features["anus_color"])
@@ -1463,6 +1552,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_ooc_notes"], features["ooc_notes"])
 
 	WRITE_FILE(S["feature_color_scheme"], features["color_scheme"])
+
+	WRITE_FILE(S["feature_anus_accessible"], features["anus_accessible"])
 
 	//save every advanced coloring mode thing in one go
 	for(var/feature in features)
@@ -1556,8 +1647,17 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	splurt_character_pref_save(S)
 
-	return 1
+	if(parent && !silent)
+		to_chat(parent, span_notice("Saved character slot!"))
 
+	return S
+
+/datum/preferences/proc/queue_save_char(save_in, silent)
+	if(parent && !silent)
+		to_chat(parent, span_notice("Saving character in [save_in * 0.1] second\s."))
+	if(char_queue)
+		deltimer(char_queue)
+	char_queue = addtimer(CALLBACK(src, PROC_REF(save_character), TRUE, silent), save_in, TIMER_STOPPABLE)
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN

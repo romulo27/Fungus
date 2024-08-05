@@ -125,7 +125,7 @@
 			to_chat(user, span_notice("\the [src] is recharging."))
 			return
 		var/mob/living/silicon/robot/R = loc
-		var/static/list/module_icons = sortList(list(
+		var/static/list/module_icons = sort_list(list(
 		"Standard" = image(icon = 'icons/mob/robots.dmi', icon_state = "robot"),
 		"Medical" = image(icon = 'icons/mob/robots.dmi', icon_state = "medical"),
 		"Engineer" = image(icon = 'icons/mob/robots.dmi', icon_state = "engineer"),
@@ -136,16 +136,16 @@
 		"Clown" = image(icon = 'icons/mob/robots.dmi', icon_state = "clown"),
 		"Syndicate" = image(icon = 'icons/mob/robots.dmi', icon_state = "synd_sec")
 		))
-		var/module_selection = show_radial_menu(R, R , module_icons, custom_check = CALLBACK(src, .proc/check_menu, R), radius = 42, require_near = TRUE)
+		var/module_selection = show_radial_menu(R, R , module_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), R), radius = 42, require_near = TRUE)
 		if(!module_selection)
 			return FALSE
 
 		switch(module_selection)
 			if("Standard")
-				var/static/list/standard_icons = sortList(list(
+				var/static/list/standard_icons = sort_list(list(
 					"Default" = image(icon = 'icons/mob/robots.dmi', icon_state = "robot")
 				))
-				var/borg_icon = show_radial_menu(R, R , standard_icons, custom_check = CALLBACK(src, .proc/check_menu, R), radius = 42, require_near = TRUE)
+				var/borg_icon = show_radial_menu(R, R , standard_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), R), radius = 42, require_near = TRUE)
 				if(!borg_icon)
 					return FALSE
 				switch(borg_icon)
@@ -170,8 +170,8 @@
 					var/image/wide = image(icon = 'modular_citadel/icons/mob/widerobot.dmi', icon_state = L[a])
 					wide.pixel_x = -16
 					med_icons[a] = wide
-				med_icons = sortList(med_icons)
-				var/borg_icon = show_radial_menu(R, R , med_icons, custom_check = CALLBACK(src, .proc/check_menu, R), radius = 42, require_near = TRUE)
+				med_icons = sort_list(med_icons)
+				var/borg_icon = show_radial_menu(R, R , med_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), R), radius = 42, require_near = TRUE)
 				if(!borg_icon)
 					return FALSE
 				switch(borg_icon)
@@ -234,8 +234,8 @@
 					var/image/wide = image(icon = 'modular_citadel/icons/mob/widerobot.dmi', icon_state = L[a])
 					wide.pixel_x = -16
 					engi_icons[a] = wide
-				engi_icons = sortList(engi_icons)
-				var/borg_icon = show_radial_menu(R, R , engi_icons, custom_check = CALLBACK(src, .proc/check_menu, R), radius = 42, require_near = TRUE)
+				engi_icons = sort_list(engi_icons)
+				var/borg_icon = show_radial_menu(R, R , engi_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), R), radius = 42, require_near = TRUE)
 				if(!borg_icon)
 					return FALSE
 				switch(borg_icon)
@@ -304,8 +304,8 @@
 					var/image/wide = image(icon = 'modular_citadel/icons/mob/widerobot.dmi', icon_state = L[a])
 					wide.pixel_x = -16
 					sec_icons[a] = wide
-				sec_icons = sortList(sec_icons)
-				var/borg_icon = show_radial_menu(R, R , sec_icons, custom_check = CALLBACK(src, .proc/check_menu, R), radius = 42, require_near = TRUE)
+				sec_icons = sort_list(sec_icons)
+				var/borg_icon = show_radial_menu(R, R , sec_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), R), radius = 42, require_near = TRUE)
 				if(!borg_icon)
 					return FALSE
 				switch(borg_icon)
@@ -379,8 +379,8 @@
 					var/image/wide = image(icon = 'modular_citadel/icons/mob/widerobot.dmi', icon_state = L[a])
 					wide.pixel_x = -16
 					service_icons[a] = wide
-				service_icons = sortList(service_icons)
-				var/borg_icon = show_radial_menu(R, R , service_icons, custom_check = CALLBACK(src, .proc/check_menu, R), radius = 42, require_near = TRUE)
+				service_icons = sort_list(service_icons)
+				var/borg_icon = show_radial_menu(R, R , service_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), R), radius = 42, require_near = TRUE)
 				if(!borg_icon)
 					return FALSE
 				switch(borg_icon)
@@ -463,8 +463,8 @@
 					var/image/wide = image(icon = 'modular_citadel/icons/mob/widerobot.dmi', icon_state = L[a])
 					wide.pixel_x = -16
 					mining_icons[a] = wide
-				mining_icons = sortList(mining_icons)
-				var/borg_icon = show_radial_menu(R, R , mining_icons, custom_check = CALLBACK(src, .proc/check_menu, R), radius = 42, require_near = TRUE)
+				mining_icons = sort_list(mining_icons)
+				var/borg_icon = show_radial_menu(R, R , mining_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), R), radius = 42, require_near = TRUE)
 				if(!borg_icon)
 					return FALSE
 				switch(borg_icon)
@@ -510,13 +510,13 @@
 					else
 						return FALSE
 			if("Peacekeeper")
-				var/static/list/peace_icons = sortList(list(
+				var/static/list/peace_icons = sort_list(list(
 					"Default" = image(icon = 'icons/mob/robots.dmi', icon_state = "peace"),
 					"Borgi" = image(icon = 'modular_citadel/icons/mob/robots.dmi', icon_state = "borgi"),
 					"Spider" = image(icon = 'modular_citadel/icons/mob/robots.dmi', icon_state = "whitespider"),
 					"Drake" = image(icon = 'modular_sand/icons/mob/cyborg/drakemech.dmi', icon_state = "drakepeacebox")
 				))
-				var/borg_icon = show_radial_menu(R, R , peace_icons, custom_check = CALLBACK(src, .proc/check_menu, R), radius = 42, require_near = TRUE)
+				var/borg_icon = show_radial_menu(R, R , peace_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), R), radius = 42, require_near = TRUE)
 				if(!borg_icon)
 					return FALSE
 				switch(borg_icon)
@@ -537,10 +537,10 @@
 					else
 						return FALSE
 			if("Clown")
-				var/static/list/clown_icons = sortList(list(
+				var/static/list/clown_icons = sort_list(list(
 					"Default" = image(icon = 'icons/mob/robots.dmi', icon_state = "clown")
 				))
-				var/borg_icon = show_radial_menu(R, R , clown_icons, custom_check = CALLBACK(src, .proc/check_menu, R), radius = 42, require_near = TRUE)
+				var/borg_icon = show_radial_menu(R, R , clown_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), R), radius = 42, require_near = TRUE)
 				if(!borg_icon)
 					return FALSE
 				switch(borg_icon)
@@ -550,12 +550,12 @@
 					else
 						return FALSE
 			if("Syndicate")
-				var/static/list/syndicatejack_icons = sortList(list(
+				var/static/list/syndicatejack_icons = sort_list(list(
 					"Saboteur" = image(icon = 'icons/mob/robots.dmi', icon_state = "synd_engi"),
 					"Medical" = image(icon = 'icons/mob/robots.dmi', icon_state = "synd_medical"),
 					"Assault" = image(icon = 'icons/mob/robots.dmi', icon_state = "synd_sec")
 				))
-				var/borg_icon = show_radial_menu(R, R , syndicatejack_icons, custom_check = CALLBACK(src, .proc/check_menu, R), radius = 42, require_near = TRUE)
+				var/borg_icon = show_radial_menu(R, R , syndicatejack_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), R), radius = 42, require_near = TRUE)
 				if(!borg_icon)
 					return FALSE
 				switch(borg_icon)
@@ -589,7 +589,7 @@
 			f = user.filters[start+i]
 			animate(f, offset=f:offset, time=0, loop=3, flags=ANIMATION_PARALLEL)
 			animate(offset=f:offset-1, time=rand()*20+10)
-		if (do_after(user, 50, target=user) && user.cell.use(activationCost))
+		if (do_after(user, 5 SECONDS, user) && user.cell.use(activationCost))
 			playsound(src, 'sound/effects/bamf.ogg', 100, TRUE, -6)
 			to_chat(user, span_notice("You are now disguised as the Nanotrasen cyborg \"[friendlyName]\"."))
 			activate(user, module_selection)
@@ -632,7 +632,7 @@
 		return
 	if(listeningTo)
 		UnregisterSignal(listeningTo, signalCache)
-	RegisterSignal(user, signalCache, .proc/disrupt)
+	RegisterSignal(user, signalCache, PROC_REF(disrupt))
 	listeningTo = user
 
 /obj/item/borg_shapeshifter/proc/deactivate(mob/living/silicon/robot/user)

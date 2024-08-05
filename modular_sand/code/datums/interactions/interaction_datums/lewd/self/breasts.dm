@@ -1,8 +1,9 @@
 /datum/interaction/lewd/titgrope_self
 	description = "Grope your own breasts."
-	require_user_hands = TRUE
-	require_user_breasts = REQUIRE_ANY
-	user_is_target = TRUE
+	required_from_user = INTERACTION_REQUIRE_HANDS
+	required_from_user_exposed = INTERACTION_REQUIRE_BREASTS
+	required_from_user_unexposed = INTERACTION_REQUIRE_BREASTS
+	interaction_flags = INTERACTION_FLAG_OOC_CONSENT | INTERACTION_FLAG_USER_IS_TARGET
 	interaction_sound = null
 	max_distance = 0
 	write_log_user = "groped own breasts"
@@ -61,18 +62,7 @@
 		var/milktype = milkers?.fluid_id
 
 		if(milkers && milktype)
-			var/modifier
-			switch(milkers.size)
-				if(3 to 5)
-					modifier = 2
-				if(6 to 8)
-					modifier = 3
-				else
-					if(milkers.size_to_state() in GLOB.breast_values)
-						modifier = clamp(GLOB.breast_values[milkers.size_to_state()] - 5, 0, INFINITY)
-					else
-						modifier = 1
-			liquid_container.reagents.add_reagent(milktype, rand(1,3 * modifier))
+			liquid_container.reagents.add_reagent(milktype, rand(1,3 * milkers.get_lactation_amount_modifier()))
 
 	if (user.arousal_touch_breast > 0)
 		user.handle_post_sex(LOW_LUST, null, null, null, dynamic_act_name)
@@ -81,9 +71,9 @@
 
 /datum/interaction/lewd/self_nipsuck
 	description = "Suck your own nips."
-	require_user_breasts = REQUIRE_EXPOSED
-	require_user_mouth = TRUE
-	user_is_target = TRUE
+	required_from_user = INTERACTION_REQUIRE_MOUTH
+	required_from_user_exposed = INTERACTION_REQUIRE_BREASTS
+	interaction_flags = INTERACTION_FLAG_OOC_CONSENT | INTERACTION_FLAG_USER_IS_TARGET
 	interaction_sound = null
 	max_distance = 0
 	write_log_user = "sucked their own nips"
@@ -95,7 +85,6 @@
 	var/u_His = user.p_their()
 	var/obj/item/organ/genital/breasts/milkers = user.getorganslot(ORGAN_SLOT_BREASTS)
 	var/milktype = milkers?.fluid_id
-	var/modifier
 	var/list/lines
 
 	if(!milkers || !milktype)
@@ -106,9 +95,9 @@
 	var/milktext = milk.name
 
 	lines = list(
-		"brings [u_His] own milk tanks to [u_His] mouth and sucks deeply into them",
-		"takes a big sip of [u_His] own fresh [lowertext(milktext)]",
-		"fills [u_His] own mouth with a big gulp of [u_His] warm [lowertext(milktext)]"
+		"brings [u_His] own milk tanks to [u_His] mouth and sucks deeply into them.",
+		"takes a big sip of [u_His] own fresh [lowertext(milktext)].",
+		"fills [u_His] own mouth with a big gulp of [u_His] warm [lowertext(milktext)]."
 	)
 
 	if (user.arousal_suck_breast > 0)
@@ -119,14 +108,4 @@
 	playlewdinteractionsound(get_turf(user), pick('modular_sand/sound/interactions/oral1.ogg',
 						'modular_sand/sound/interactions/oral2.ogg'), 70, 1, -1)
 
-	switch(milkers.size)
-		if("c", "d", "e")
-			modifier = 2
-		if("f", "g", "h")
-			modifier = 3
-		else
-			if(milkers.size in GLOB.breast_values)
-				modifier = clamp(GLOB.breast_values[milkers.size] - 5, 0, INFINITY)
-			else
-				modifier = 1
-	user.reagents.add_reagent(milktype, rand(1,3 * modifier) * user.get_fluid_mod(milkers)) //SPLURT edit
+	user.reagents.add_reagent(milktype, rand(1,3 * milkers.get_lactation_amount_modifier()) * user.get_fluid_mod(milkers)) //SPLURT edit

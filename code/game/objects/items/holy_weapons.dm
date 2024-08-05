@@ -73,14 +73,9 @@
 	return holy_item_list
 
 /obj/item/choice_beacon/holy/spawn_option(obj/choice,mob/living/M)
-	if(!GLOB.holy_armor_type)
-		..()
-		playsound(src, 'sound/effects/pray_chaplain.ogg', 40, 1)
-		SSblackbox.record_feedback("tally", "chaplain_armor", 1, "[choice]")
-		GLOB.holy_armor_type = choice
-	else
-		to_chat(M, "<span class='warning'>A selection has already been made. Self-Destructing...</span>")
-		return
+	..()
+	playsound(src, 'sound/effects/pray_chaplain.ogg', 40, 1)
+	SSblackbox.record_feedback("tally", "chaplain_armor", 1, "[choice]")
 
 /obj/item/storage/box/holy
 	name = "Templar Kit"
@@ -248,8 +243,6 @@
   * * M The mob choosing a nullrod reskin
   */
 /obj/item/nullrod/proc/reskin_holy_weapon(mob/living/L)
-	if(GLOB.holy_weapon_type)
-		return
 	var/obj/item/holy_weapon
 	var/list/holy_weapons_list = subtypesof(/obj/item/nullrod) + list(HOLY_WEAPONS)
 	var/list/display_names = list()
@@ -260,16 +253,14 @@
 			display_names[initial(rodtype.name)] = rodtype
 			nullrod_icons += list(initial(rodtype.name) = image(icon = initial(rodtype.icon), icon_state = initial(rodtype.icon_state)))
 
-	nullrod_icons = sortList(nullrod_icons)
+	nullrod_icons = sort_list(nullrod_icons)
 
-	var/choice = show_radial_menu(L, src , nullrod_icons, custom_check = CALLBACK(src, .proc/check_menu, L), radius = 42, require_near = TRUE)
+	var/choice = show_radial_menu(L, src , nullrod_icons, custom_check = CALLBACK(src, PROC_REF(check_menu), L), radius = 42, require_near = TRUE)
 	if(!choice || !check_menu(L))
 		return
 
 	var/A = display_names[choice] // This needs to be on a separate var as list member access is not allowed for new
 	holy_weapon = new A
-
-	GLOB.holy_weapon_type = holy_weapon.type
 
 	SSblackbox.record_feedback("tally", "chaplain_weapon", 1, "[choice]")
 
@@ -742,7 +733,7 @@
 		playsound(get_turf(user), 'sound/effects/woodhit.ogg', 75, 1, -1)
 		H.adjustStaminaLoss(rand(12,18))
 		if(prob(25))
-			(INVOKE_ASYNC(src, .proc/jedi_spin, user))
+			(INVOKE_ASYNC(src, PROC_REF(jedi_spin), user))
 	else
 		return ..()
 

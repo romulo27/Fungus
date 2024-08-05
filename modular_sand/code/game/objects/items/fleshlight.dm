@@ -56,7 +56,7 @@
 	if(ishuman(M) && (M?.client?.prefs?.toggles & VERB_CONSENT))
 		switch(user.zone_selected)
 			if(BODY_ZONE_PRECISE_GROIN)
-				if(M.has_penis(REQUIRE_EXPOSED) || M.has_strapon(REQUIRE_EXPOSED))
+				if(M.has_penis() == HAS_EXPOSED_GENITAL || M.has_strapon() == HAS_EXPOSED_GENITAL)
 					var/genital_name = (user == M) ? user.get_penetrating_genital_name() : M.get_penetrating_genital_name()
 					message = (user == M) ? "pumps [src] on [possessive_verb] [genital_name]" : "pumps \the [src] on [M]'s [genital_name]"
 					lust_amt = NORMAL_LUST
@@ -116,6 +116,8 @@
 	updatesleeve()
 
 /obj/item/portallight/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
+	if(portalunderwear == null)
+		return
 	var/user_message = ""
 	var/target_message = ""
 	var/user_lust_amt = NONE
@@ -143,7 +145,7 @@
 			if(BODY_ZONE_PRECISE_GROIN)
 				switch(targetting)
 					if(CUM_TARGET_PENIS)
-						if(M.has_penis(REQUIRE_EXPOSED) || M.has_strapon(REQUIRE_EXPOSED))
+						if(M.has_penis() == HAS_EXPOSED_GENITAL || M.has_strapon() == HAS_EXPOSED_GENITAL)
 							switch(portalunderwear.targetting)
 								if(CUM_TARGET_PENIS)
 									user_message = (user == M) ? "frots with the [penis_names[3]] [name]" : "forces \the [M] to frot with the [penis_names[3]] [name]"
@@ -178,7 +180,7 @@
 						else
 							to_chat(user, "<span class='warning'>The penis is covered or there is none!</span>")
 					if(CUM_TARGET_VAGINA)
-						if(M.has_vagina(REQUIRE_EXPOSED))
+						if(M.has_vagina() == HAS_EXPOSED_GENITAL)
 							switch(portalunderwear.targetting)
 								if(CUM_TARGET_PENIS)
 									user_message = (user == M) ? "fucks the [penis_names[3]] [name]" : "fucks \the [M] with the [penis_names[3]] [name]"
@@ -215,7 +217,7 @@
 						else
 							to_chat(user, "<span class='warning'>The vagina is covered or there is none!</span>")
 					if(CUM_TARGET_ANUS)
-						if(M.has_anus(REQUIRE_EXPOSED))
+						if(M.has_anus() == HAS_EXPOSED_GENITAL)
 							switch(portalunderwear.targetting)
 								if(CUM_TARGET_PENIS)
 									user_message = (user == M) ? "uses the [penis_names[3]] [name] to fuck [M.p_them()]self anally" : "fucks \the [M] anally with the [penis_names[3]] [name]"
@@ -252,7 +254,7 @@
 						else
 							to_chat(user, "<span class='warning'>The anus is covered or there is none!</span>")
 					if(CUM_TARGET_URETHRA)
-						if(M.has_penis(REQUIRE_EXPOSED) || M.has_strapon(REQUIRE_EXPOSED))
+						if(M.has_penis() == HAS_EXPOSED_GENITAL || M.has_strapon() == HAS_EXPOSED_GENITAL)
 							switch(portalunderwear.targetting)
 								if(CUM_TARGET_PENIS)
 									user_message = (user == M) ? "fuck your urethra with dick" : "fuck someone elses urethra with dick"
@@ -420,7 +422,7 @@
 	if(user_message)
 		if(portal_target && (portal_target?.client?.prefs.toggles & VERB_CONSENT || !portal_target.ckey))
 			user.visible_message("<span class='lewd'>[user] [user_message].</span>")
-			if(M.can_penetrating_genital_cum() && M.handle_post_sex(user_lust_amt, target, portal_target, target)) //SPLURT edit
+			if(M.can_penetrating_genital_cum() && M.handle_post_sex(user_lust_amt, portalunderwear.targetting, portal_target, null, TRUE, TRUE)) //SPLURT edit
 				switch(target)
 					if(CUM_TARGET_PENIS)
 						switch(portalunderwear.targetting)
@@ -464,7 +466,7 @@
 					playlewdinteractionsound(loc, 'modular_sand/sound/interactions/champ_fingering.ogg', 50, 1, -1)
 
 			to_chat(portal_target, "<span class='lewd'>Someone uses the linked [name], they [target_message].</span>")
-			if(portal_target.handle_post_sex(target_lust_amt, portalunderwear.targetting, M, portalunderwear.targetting)) //SPLURT edit
+			if(portal_target.handle_post_sex(target_lust_amt, portalunderwear.targetting, M, null, TRUE, TRUE)) //SPLURT edit
 				switch(portalunderwear.targetting)
 					if(CUM_TARGET_VAGINA)
 						switch(target)
@@ -625,7 +627,6 @@
 	var/targetting = CUM_TARGET_VAGINA
 	equip_delay_self = 2 SECONDS
 	equip_delay_other = 5 SECONDS
-	is_edible = 0
 
 /obj/item/clothing/underwear/briefs/panties/portalpanties/attack_self(mob/user)
 	. = ..()
@@ -667,7 +668,7 @@
 			playsound(src, 'sound/machines/ping.ogg', 50, FALSE)
 			to_chat(user, "<span class='notice'>[P] has been linked up successfully.</span>")
 			update_portal()
-			RegisterSignal(user, COMSIG_PARENT_QDELETING, .proc/drop_out)
+			RegisterSignal(user, COMSIG_PARENT_QDELETING, PROC_REF(drop_out))
 		else
 			to_chat(user, "<span class='notice'>One of these pieces has already been paired.</span>")
 	else
@@ -680,19 +681,19 @@
 		var/mob/living/carbon/human/human = M
 		switch(targetting)
 			if(CUM_TARGET_VAGINA)
-				if(!human.has_vagina(REQUIRE_EXPOSED))
+				if(!human.has_vagina() == HAS_EXPOSED_GENITAL)
 					to_chat(human, span_warning("The vagina is covered or there is none!"))
 					return FALSE
 			if(CUM_TARGET_ANUS)
-				if(!human.has_anus(REQUIRE_EXPOSED))
+				if(!human.has_anus() == HAS_EXPOSED_GENITAL)
 					to_chat(human, span_warning("The anus is covered or there is none!"))
 					return FALSE
 			if(CUM_TARGET_PENIS)
-				if(!human.has_penis(REQUIRE_EXPOSED) && !human.has_strapon(REQUIRE_EXPOSED))
+				if(!human.has_penis() == HAS_EXPOSED_GENITAL && !human.has_strapon() == HAS_EXPOSED_GENITAL)
 					to_chat(human, "<span class='warning'>The penis is covered or there is none!</span>")
 					return FALSE
 			if(CUM_TARGET_URETHRA)
-				if(!human.has_penis(REQUIRE_EXPOSED) && !human.has_strapon(REQUIRE_EXPOSED))
+				if(!human.has_penis() == HAS_EXPOSED_GENITAL && !human.has_strapon() == HAS_EXPOSED_GENITAL)
 					to_chat(human, "<span class='warning'>The urethra is covered or there is none!</span>")
 					return FALSE
 			if(CUM_TARGET_MOUTH)
@@ -711,7 +712,7 @@
 				to_chat(user, span_notice("The panties are not linked to a portal fleshlight."))
 			else
 				update_portal()
-				RegisterSignal(user, COMSIG_PARENT_QDELETING, .proc/drop_out)
+				RegisterSignal(user, COMSIG_PARENT_QDELETING, PROC_REF(drop_out))
 		else
 			update_portal()
 			UnregisterSignal(user, COMSIG_PARENT_QDELETING)
@@ -754,6 +755,7 @@
 	desc = "A small silver box with Silver Love Co embossed."
 	icon_state = "box"
 	custom_price = 15
+	illustration = null
 
 // portal fleshlight box
 /obj/item/storage/box/portallight/PopulateContents()
@@ -764,7 +766,7 @@
 /obj/item/paper/fluff/portallight
 	name = "Portal Fleshlight Instructions"
 	info = "Thank you for purchasing the Silver Love Portal Fleshlight!<BR>\
-	To use, simply register your new portal fleshlight with the provided underwear to link them together. The ask your lover to wear the underwear.<BR>\
+	To use, simply register your new portal fleshlight with the provided underwear to link them together. Then ask your lover to wear the underwear.<BR>\
 	Have fun lovers,<BR>\
 	<BR>\
 	Wilhelmina Steiner."

@@ -23,8 +23,14 @@
 GLOBAL_LIST_INIT(metal_recipes, list ( \
 	new/datum/stack_recipe("stool", /obj/structure/chair/stool, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("bar stool", /obj/structure/chair/stool/bar, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("bed", /obj/structure/bed, 2, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("double bed", /obj/structure/bed/double, 4, one_per_turf = TRUE, on_floor = TRUE), \
+	//SPLURT CHANGE: Add beds list and pod beds
+	new/datum/stack_recipe_list("beds", list( \
+		new/datum/stack_recipe("bed", /obj/structure/bed, 2, one_per_turf = TRUE, on_floor = TRUE), \
+		new/datum/stack_recipe("double bed", /obj/structure/bed/double, 4, one_per_turf = TRUE, on_floor = TRUE), \
+		new/datum/stack_recipe("pod bed", /obj/structure/bed/pod, 2, one_per_turf = TRUE, on_floor = TRUE), \
+		new/datum/stack_recipe("double pod bed", /obj/structure/bed/double/pod, 4, one_per_turf = TRUE, on_floor = TRUE), \
+	)), \
+		//SPLURT CHANGE END
 	//CIT CHANGE - adds sofas to metal recipe list
 	new/datum/stack_recipe_list("sofas", list( \
 		new /datum/stack_recipe("sofa (middle)", /obj/structure/chair/sofa, one_per_turf = TRUE, on_floor = TRUE), \
@@ -66,7 +72,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	new/datum/stack_recipe("wall girders", /obj/structure/girder, 2, time = 40, one_per_turf = TRUE, on_floor = TRUE, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75), \
 	null, \
 	new/datum/stack_recipe("computer frame", /obj/structure/frame/computer, 5, time = 25, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("modular console", /obj/machinery/modular_computer/console/buildable/, 10, time = 25, one_per_turf = TRUE, on_floor = TRUE), \
+	new/datum/stack_recipe("modular console", /obj/machinery/modular_computer/console/buildable, 10, time = 25, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("machine frame", /obj/structure/frame/machine, 5, time = 25, one_per_turf = TRUE, on_floor = TRUE), \
 	null, \
 	new /datum/stack_recipe_list("airlock assemblies", list( \
@@ -165,8 +171,9 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 
 /obj/item/stack/sheet/metal/cyborg
 	custom_materials = null
-	is_cyborg = 1
-	cost = 500
+	is_cyborg = TRUE
+	source = /datum/robot_energy_storage/metal
+	cost = MINERAL_MATERIAL_AMOUNT * 0.25
 
 /obj/item/stack/sheet/metal/get_main_recipes()
 	. = ..()
@@ -180,7 +187,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
  * Plasteel
  */
 GLOBAL_LIST_INIT(plasteel_recipes, list ( \
-	new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = TRUE), \
+	new/datum/stack_recipe("AI core", /obj/structure/ai_core, 4, time = 50, one_per_turf = TRUE), \
 	new/datum/stack_recipe("bomb assembly", /obj/machinery/syndicatebomb/empty, 10, time = 50), \
 	new/datum/stack_recipe("plasteel keg", /obj/structure/custom_keg, 10, time = 50), \
 	new/datum/stack_recipe("pressure tank", /obj/machinery/atmospherics/components/unary/tank, 15, time = 60, one_per_turf = TRUE, on_floor = TRUE), \
@@ -259,7 +266,7 @@ GLOBAL_LIST_INIT(wood_recipes, list ( \
 	new/datum/stack_recipe("wooden buckler", /obj/item/shield/riot/buckler, 20, time = 40), \
 	new/datum/stack_recipe("baseball bat", /obj/item/melee/baseball_bat, 5, time = 15),\
 	null, \
-	new/datum/stack_recipe("wooden chair", /obj/structure/chair/wood/, 3, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
+	new/datum/stack_recipe("wooden chair", /obj/structure/chair/wood, 3, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("winged wooden chair", /obj/structure/chair/wood/wings, 3, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("plywood chair", /obj/structure/chair/comfy/plywood, 4, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
 	null, \
@@ -309,7 +316,7 @@ GLOBAL_LIST_INIT(wood_recipes, list ( \
 				 "<span class='notice'>You begin whittling [src] into a sharp point at one end.</span>", \
 				 "<span class='italics'>You hear wood carving.</span>")
 		// 8 Second Timer
-		if(!do_after(user, 80, TRUE, src))
+		if(!do_after(user, 8 SECONDS,  src))
 			return
 		// Make Stake
 		var/obj/item/stake/basic/new_item = new(user.loc)
@@ -387,6 +394,13 @@ GLOBAL_LIST_INIT(cloth_recipes, list ( \
 	new/datum/stack_recipe("loincloth", /obj/item/clothing/under/costume/loincloth/cloth/sensor, 2), \
 	new/datum/stack_recipe("sensorless loincloth", /obj/item/clothing/under/costume/loincloth/cloth, 2), \
 	new/datum/stack_recipe("tunic", /obj/item/clothing/under/tunic, 3), \
+	//SPLURT CHANGE: ADD MATTRESSES
+	new/datum/stack_recipe_list("matresses", list( \
+		new/datum/stack_recipe("mattress (random)", /obj/structure/bed/matress, 2, one_per_turf = TRUE, on_floor = TRUE), \
+		new/datum/stack_recipe("mattress (clean)", /obj/structure/bed/matress/clean, 2, one_per_turf = TRUE, on_floor = TRUE), \
+		new/datum/stack_recipe("mattress (clean, pillowed)", /obj/structure/bed/matress/clean_pillowed, 2, one_per_turf = TRUE, on_floor = TRUE), \
+	)), \
+	//SPLURT CHANGE END
 	null, \
 	new/datum/stack_recipe("backpack", /obj/item/storage/backpack, 4), \
 	new/datum/stack_recipe("duffel bag", /obj/item/storage/backpack/duffelbag, 6), \
@@ -609,6 +623,8 @@ GLOBAL_LIST_INIT(runed_metal_recipes, list ( \
 		return
 	var/turf/T = get_turf(user) //we may have moved. adjust as needed...
 	var/area/A = get_area(user)
+	if(A?.area_flags & CULTMAGIC_BYPASS) //Bypass code so areas that aren't on-station can still use cult magics.
+		return ..()
 	if((!is_station_level(T.z) && !is_mining_level(T.z)) || !(A?.area_flags & CULT_PERMITTED))
 		to_chat(user, "<span class='warning'>The veil is not weak enough here.</span>")
 		return FALSE

@@ -1,3 +1,4 @@
+@You can wrap portions of your messages with |, + or _ characters to <i>italicize</i>, <b>embolden</b> or <u>underline</u> them respectively. You can also escape these modifiers by adding backslashes before the mentioned characters.
 Where the space map levels connect is randomized every round, but are otherwise kept consistent within rounds. Remember that they are not necessarily bidirectional!
 You can catch thrown items by toggling on your throw mode with an empty hand active.
 To crack the safe in the vault, have a stethoscope in one of your hands and fiddle with the tumbler or use a couple C4s on it. Remember the latter option may result in the contents of the safe becoming non-existant.
@@ -320,3 +321,4 @@ EMPs can be created by mixing uranium and iron. The power of the pulse is determ
 Some lizardpeople start with an unactivated mutation that allows them to breath fire. This can be unlocked through the usage of genetics!
 Some loadout items can be unlocked through progress in parts of the game. The progress for these can be tracked in the loadout menu.
 It's easy to forget that everyone else you're playing with is a real person trying to have as much fun as you are. Be nice to your fellow spacemen.
+Sleeping can be used to recover from minor injuries. Tables, beds, and bedsheets affect the healing rate.

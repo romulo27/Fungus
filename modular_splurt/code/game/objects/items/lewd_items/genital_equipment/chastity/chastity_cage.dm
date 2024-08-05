@@ -99,8 +99,8 @@
 	is_overlay_on = TRUE
 
 	H.update_genitals()
-	RegisterSignal(H, COMSIG_MOB_ITEM_EQUIPPED, .proc/mob_equipped_item)
-	RegisterSignal(H, COMSIG_MOB_ITEM_DROPPED, .proc/mob_dropped_item)
+	RegisterSignal(H, COMSIG_MOB_ITEM_EQUIPPED, PROC_REF(mob_equipped_item))
+	RegisterSignal(H, COMSIG_MOB_ITEM_DROPPED, PROC_REF(mob_dropped_item))
 
 /obj/item/genital_equipment/chastity_cage/item_removing(datum/source, obj/item/organ/genital/G, mob/user)
 	. = TRUE
@@ -134,10 +134,10 @@
 		if(!do_mob(user, H, break_time))
 			return FALSE
 	else
-		to_chat(user, "<span class='warning'>You can't take it off with \the [I.name]</span>")
+		to_chat(user, span_warning("You can't take \the [src] off with \the [I.name]!"))
 		return FALSE
 
-	to_chat(user, "<span class='warning'>You manage to break \the [src] with \the [I.name]!</span>")
+	to_chat(user, span_warning("You manage to break \the [src] with \the [I.name]!"))
 	qdel(src)
 	return FALSE
 
@@ -164,7 +164,7 @@
 /obj/item/genital_equipment/chastity_cage/proc/equip(mob/user, mob/living/carbon/target, obj/item/organ/genital/penor)
 	. = TRUE
 
-	if(target.has_penis(REQUIRE_EXPOSED) && CHECK_BITFIELD(penor?.genital_flags, HAS_EQUIPMENT))
+	if(target.has_penis() == HAS_EXPOSED_GENITAL && CHECK_BITFIELD(penor?.genital_flags, HAS_EQUIPMENT))
 		if(locate(/obj/item/genital_equipment/chastity_cage) in penor.contents)
 			to_chat(user, "<span class='notice'>\The [target] already have a cage on them!</span>")
 			return FALSE

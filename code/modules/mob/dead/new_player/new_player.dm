@@ -172,10 +172,10 @@
 
 /mob/dead/new_player/Topic(href, href_list[])
 	if(src != usr)
-		return 0
+		return FALSE
 
 	if(!client)
-		return 0
+		return FALSE
 
 	//don't let people get to this unless they are specifically not verified
 	if(href_list["Month"] && (CONFIG_GET(flag/age_verification) && !check_rights_for(client, R_ADMIN) && !(client.ckey in GLOB.bunker_passthrough)))
@@ -544,7 +544,7 @@
 
 	if(humanc && CONFIG_GET(flag/roundstart_traits))
 		SSquirks.AssignQuirks(humanc, humanc.client, TRUE, FALSE, job, FALSE)
-	//skyrat change
+	//sandstorm change
 	if(humanc)
 		SSlanguage.AssignLanguage(humanc, humanc.client, TRUE, FALSE, job, FALSE)
 
@@ -715,9 +715,9 @@
 	. = H
 	new_character = .
 	if(transfer_after)
-		transfer_character()
+		transfer_character(TRUE)
 
-/mob/dead/new_player/proc/transfer_character()
+/mob/dead/new_player/proc/transfer_character(late_transfer = FALSE)
 	. = new_character
 	if(.)
 		new_character.key = key		//Manually transfer the key to log them in
@@ -727,6 +727,7 @@
 			ADD_TRAIT(new_character, TRAIT_PACIFISM, "pacification ban")
 		//
 		new_character.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+		SEND_SIGNAL(new_character, COMSIG_MOB_CLIENT_JOINED_FROM_LOBBY, new_character?.client, late_transfer)
 		new_character = null
 		qdel(src)
 
@@ -737,14 +738,13 @@
 		return
 	client.crew_manifest_delay = world.time + (1 SECONDS)
 
-	var/dat = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head><body>"
-	dat += "<h4>Crew Manifest</h4>"
-	dat += GLOB.data_core.get_manifest(OOC = 1)
+	if(!GLOB.crew_manifest_tgui)
+		GLOB.crew_manifest_tgui = new /datum/crew_manifest(src)
 
-	src << browse(dat, "window=manifest;size=387x420;can_close=1")
+	GLOB.crew_manifest_tgui.ui_interact(src)
 
 /mob/dead/new_player/Move()
-	return 0
+	return FALSE
 
 
 /mob/dead/new_player/proc/close_spawn_windows()

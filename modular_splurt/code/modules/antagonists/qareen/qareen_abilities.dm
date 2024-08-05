@@ -33,12 +33,12 @@
 	face_atom(target)
 	draining = TRUE
 	to_chat(src, span_revennotice("You search for the lifespring of [target]."))
-	if(do_after(src, rand(10, 20), 0, target)) //did they get deleted in that second?
+	if(do_after(src, rand(10, 20), target)) //did they get deleted in that second?
 		for(var/obj/item/organ/genital/G in target.internal_organs)
 			if(!(G.genital_flags & GENITAL_FUID_PRODUCTION))
 				continue
 			// var/datum/reagents/fluid_source = G.climaxable(target)
-			if(do_after(src, rand(10, 20), 0, target)) //did they get deleted in that second?
+			if(do_after(src, rand(10, 20), target)) //did they get deleted in that second?
 				// var/main_fluid = lowertext(fluid_source.get_master_reagent_name())  // doesn't work no more (should delete probably)
 				var/main_fluid = G.get_fluid_name()
 				var/fluid_ammount = G.get_fluid()
@@ -57,7 +57,7 @@
 
 
 
-		if(do_after(src, rand(15, 20), 0, target)) //did they get deleted NOW?
+		if(do_after(src, rand(15, 20), target)) //did they get deleted NOW?
 			switch(essence_drained)
 				if(0 to 4)
 					to_chat(src, span_revennotice("[target] is almost barren of essence. Still, every bit counts."))
@@ -67,7 +67,7 @@
 					to_chat(src, span_revenboldnotice("Such a feast! [target] will yield much essence to you."))
 				if(30 to INFINITY)
 					to_chat(src, span_revenbignotice("Ah, a sexually furstrated person. [target] will yield massive amounts of essence to you."))
-			if(do_after(src, rand(15, 25), 0, target)) //how about now
+			if(do_after(src, rand(15, 25), target)) //how about now
 				if(target.stat)
 					to_chat(src, span_revenwarning("[target.p_theyre(TRUE)] now too weak to provide anything of worth."))
 					to_chat(target, span_boldannounce("You feel something tugging across your body before subsiding."))
@@ -90,7 +90,7 @@
 					draining = FALSE
 					return
 				var/datum/beam/B = Beam(target,icon_state="drain_life",time=INFINITY)
-				if(do_after(src, 46, 0, target)) //As one cannot prove the existance of ghosts, ghosts cannot prove the existance of the target they were draining.
+				if(do_after(src, 46, target)) //As one cannot prove the existance of ghosts, ghosts cannot prove the existance of the target they were draining.
 					change_essence_amount(essence_drained, FALSE, target)
 					for(var/obj/item/organ/genital/G in target.internal_organs)
 						var/datum/reagents/fluid_source = G.climaxable(target)
@@ -200,7 +200,7 @@
 	user.reveal(reveal)
 	user.stun(stun)
 	if(action)
-		action.UpdateButtonIcon()
+		action.UpdateButtons()
 	return TRUE
 
 //Overload Light: Breaks a light that's online and sends out lightning bolts to all nearby people.
@@ -219,7 +219,7 @@
 /obj/effect/proc_holder/spell/aoe_turf/qareen/overload/cast(list/targets, mob/living/simple_animal/qareen/user = usr)
 	if(attempt_cast(user))
 		for(var/turf/T in targets)
-			INVOKE_ASYNC(src, .proc/overload, T, user)
+			INVOKE_ASYNC(src, PROC_REF(overload), T, user)
 
 /obj/effect/proc_holder/spell/aoe_turf/qareen/overload/proc/overload(turf/T, mob/user)
 	for(var/obj/machinery/light/L in T)
@@ -232,7 +232,7 @@
 		s.set_up(4, 0, L)
 		s.start()
 		new /obj/effect/temp_visual/revenant(get_turf(L))
-		addtimer(CALLBACK(src, .proc/overload_shock, L, user), 20)
+		addtimer(CALLBACK(src, PROC_REF(overload_shock), L, user), 20)
 
 /obj/effect/proc_holder/spell/aoe_turf/qareen/overload/proc/overload_shock(obj/machinery/light/L, mob/user)
 	if(!L.on) //wait, wait, don't shock me
@@ -264,7 +264,7 @@
 /obj/effect/proc_holder/spell/aoe_turf/qareen/defile/cast(list/targets, mob/living/simple_animal/qareen/user = usr)
 	if(attempt_cast(user))
 		for(var/turf/T in targets)
-			INVOKE_ASYNC(src, .proc/defile, T)
+			INVOKE_ASYNC(src, PROC_REF(defile), T)
 
 /obj/effect/proc_holder/spell/aoe_turf/qareen/defile/proc/defile(turf/T)
 	for(var/obj/effect/blessing/B in T)
@@ -319,7 +319,7 @@
 /obj/effect/proc_holder/spell/aoe_turf/qareen/malfunction/cast(list/targets, mob/living/simple_animal/qareen/user = usr)
 	if(attempt_cast(user))
 		for(var/turf/T in targets)
-			INVOKE_ASYNC(src, .proc/malfunction, T, user)
+			INVOKE_ASYNC(src, PROC_REF(malfunction), T, user)
 
 /obj/effect/proc_holder/spell/aoe_turf/qareen/malfunction/proc/malfunction(turf/T, mob/user)
 	for(var/mob/living/simple_animal/bot/bot in T)
@@ -372,7 +372,7 @@
 /obj/effect/proc_holder/spell/aoe_turf/qareen/bliss/cast(list/targets, mob/living/simple_animal/qareen/user = usr)
 	if(attempt_cast(user))
 		for(var/turf/T in targets)
-			INVOKE_ASYNC(src, .proc/bliss, T, user)
+			INVOKE_ASYNC(src, PROC_REF(bliss), T, user)
 
 /obj/effect/proc_holder/spell/aoe_turf/qareen/bliss/proc/bliss(turf/T, mob/user)
 	for(var/mob/living/mob in T)

@@ -42,12 +42,21 @@ GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 		/obj/effect/buildmode_line,
 		//Spawns it in the wall and shuttle controller runtimes (actually not caught in unit test)
 		/obj/effect/landmark/latejoin,
+		// This spawns a map during this test. BAD.
+		/obj/effect/landmark/mapGenerator,
 		//Those DAMN SWARMERS ARE EATING EVERYTHING WHILE TEST IS RUNNING
 		/mob/living/simple_animal/hostile/megafauna/swarmer_swarm_beacon,
 		// Randomly causes test to fail because of random movement
 		/obj/item/grenade/clusterbuster/segment,
 		// With 10% Spawns `while() ... sleep()` proc that causes her hat to harddel // TODO rewrite helmet code attack_self() and port modern /tg/ helmet code
 		/mob/living/carbon/monkey/angry,
+		// Literally ends the world.
+		/obj/singularity/narsie/large/cult,
+		// These are base/template types.
+		/obj/item/gun/energy/plasma,
+		/obj/item/gun/energy/pumpaction,
+		/obj/item/gun/ballistic/automatic,
+		/obj/item/gun/ballistic/automatic/shotgun,
 	)
 	//Say it with me now, type template
 	ignore += typesof(/obj/effect/mapping_helpers)
@@ -133,6 +142,8 @@ GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 	ignore += typesof(/obj/machinery/rnd/production)
 	// This one sleeps too in it's AI code
 	ignore += typesof(/mob/living/simple_animal/hostile/swarmer)
+	// Some stack objects can't be initialized outside a borg module
+	ignore += typesof(/obj/item/stack)
 
 	var/list/cached_contents = spawn_at.contents.Copy()
 	var/original_turf_type = spawn_at.type

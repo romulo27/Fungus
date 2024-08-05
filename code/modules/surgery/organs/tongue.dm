@@ -37,6 +37,7 @@
 		/datum/language/modular_sand/solcommon, //Skyrat change - sol common blah blah
 		/datum/language/modular_sand/technorussian, //Skyrat change - russian stereotype language
 		/datum/language/modular_sand/sergal, //Sandstorm change
+		/datum/language/modular_splurt/avian, //SPLURT change - peep peep!
 	))
 	healing_factor = STANDARD_ORGAN_HEALING*5 //Fast!!
 	decay_factor = STANDARD_ORGAN_DECAY/2
@@ -69,15 +70,15 @@
 	if(say_mod && M.dna && M.dna.species)
 		M.dna.species.say_mod = say_mod
 	if(length(initial_accents) || length(accents))
-		RegisterSignal(M, COMSIG_MOB_SAY, .proc/handle_speech)
+		RegisterSignal(M, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	M.UnregisterSignal(M, COMSIG_MOB_SAY)
 
 /obj/item/organ/tongue/Remove(special = FALSE)
 	if(!QDELETED(owner))
 		if(say_mod && owner.dna?.species)
 			owner.dna.species.say_mod = initial(owner.dna.species.say_mod)
-		UnregisterSignal(owner, COMSIG_MOB_SAY, .proc/handle_speech)
-		owner.RegisterSignal(owner, COMSIG_MOB_SAY, /mob/living/carbon/.proc/handle_tongueless_speech)
+		UnregisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+		owner.RegisterSignal(owner, COMSIG_MOB_SAY, TYPE_PROC_REF(/mob/living/carbon, handle_tongueless_speech))
 	return ..()
 
 /obj/item/organ/tongue/could_speak_language(language)

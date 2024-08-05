@@ -43,7 +43,7 @@
 	item_state = "jacket_yellow"
 	body_parts_covered = CHEST|ARMS
 	cold_protection = CHEST|ARMS
-	mutantrace_variation = NONE
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 
 /obj/item/clothing/suit/toggle/rp_jacket/orange
@@ -212,7 +212,7 @@
 
 /obj/item/clothing/suit/goner/Initialize(mapload)
 	. = ..()
-	allowed = GLOB.detective_vest_allowed // I am probably gonna get fire-line'd for this... But suggestion is a suggestion. Can always revert the changes, right?
+	allowed = GLOB.detective_vest_allowed + typecacheof(/obj/item/toy) // As per suggestion 1913 (06/07/2022). Now able to hold toys!
 
 /obj/item/clothing/suit/goner/fake
 	name = "trencher coat replica"
@@ -272,3 +272,4 @@
 	icon_state = "jacket_transparent"
 	// I feel REALLY bad about doing this, but the default overlay is not transparent (null does not work either).
 	item_state = "jacket_transparent"
+	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON

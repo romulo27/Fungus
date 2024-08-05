@@ -103,7 +103,7 @@
 
 	var/research_scanner = 0 //For research scanner equipped mobs. Enable to show research data when examining.
 
-	var/in_throw_mode = 0
+	var/throw_mode = 0
 
 	var/job = null//Living
 
@@ -148,8 +148,6 @@
 	var/datum/click_intercept
 
 	var/registered_z
-
-	var/canloadappearance = FALSE
 
 	var/list/alerts = list() // contains /atom/movable/screen/alert only // On /mob so clientless mobs will throw alerts properly
 	var/list/client_colours = list()

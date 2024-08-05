@@ -13,6 +13,18 @@
 	ckeywhitelist = list()
 	donator_group_id = DONATOR_GROUP_TIER_1
 
+/datum/gear/donator/uniform/chameleon
+	name = "Chameleon suit"
+	path = /obj/item/clothing/under/chameleon
+	ckeywhitelist = list()
+	donator_group_id = DONATOR_GROUP_TIER_1
+
+/datum/gear/donator/uniform/victorian_purple
+	name = "Purple Victorian Suit"
+	path = /obj/item/clothing/under/rank/civilian/victorian_purple
+	ckeywhitelist = list()
+	donator_group_id = DONATOR_GROUP_TIER_1
+
 //Head
 /datum/gear/donator/head/crown/fancy
 	name = "magnificent crown"
@@ -55,6 +67,12 @@
 /datum/gear/donator/backpack/plushbox/deluxe
 	name = "Deluxe Plushie Choice Box"
 	path = /obj/item/choice_beacon/box/plushie/deluxe
+	ckeywhitelist = list()
+	donator_group_id = DONATOR_GROUP_TIER_1
+
+/datum/gear/donator/backpack/riding_crop
+	name = "Riding Crop"
+	path = /obj/item/bdsm_whip/ridingcrop
 	ckeywhitelist = list()
 	donator_group_id = DONATOR_GROUP_TIER_1
 
