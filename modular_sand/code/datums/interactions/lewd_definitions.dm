@@ -776,3 +776,9 @@
 		else
 			nope += M
 	return nope
+
+/mob/living/proc/can_penetrating_genital_cum()
+	return has_penis()
+
+/mob/living/proc/get_penetrating_genital_name(long = FALSE)
+	return has_penis() ? (long ? pick(GLOB.dick_nouns) : pick("cock", "dick")) : "strapon"

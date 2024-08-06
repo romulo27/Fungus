@@ -256,10 +256,10 @@
 /obj/item/slime_extract/yellow
 	colour = "yellow"
 
-/obj/item/slime_extract/dark_purple
+/obj/item/slime_extract/darkpurple
 	colour = "dark purple"
 
-/obj/item/slime_extract/dark_blue
+/obj/item/slime_extract/darkblue
 	colour = "dark blue"
 
 /obj/item/slime_extract/silver
@@ -295,7 +295,7 @@
 /obj/item/slime_extract/black
 	colour = "black"
 
-/obj/item/slime_extract/light_pink
+/obj/item/slime_extract/lightpink
 	colour = "light pink"
 
 /obj/item/slime_extract/adamantine
